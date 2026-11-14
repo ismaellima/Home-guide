@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Molly's Home Guide</title>
-<meta name="description" content="Everything our guests need: Wi-Fi, Molly the cat, plants, cleaning and garbage days.">
+<meta name="description" content="Everything our guests need: Wi-Fi, Molly the cat, plants, cleaning and garbage days. / Tout pour nos invités.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,8 +62,12 @@ a { color: var(--terracotta); }
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
-.nav .wrap { display: flex; gap: 6px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
-.nav .wrap::-webkit-scrollbar { display: none; }
+.navbar { display: flex; gap: 8px; align-items: center; padding-top: 10px; padding-bottom: 10px; }
+.links { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+.links::-webkit-scrollbar { display: none; }
+.lang { display: flex; flex: none; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.lang button { padding: 5px 10px; font-size: 13px; background: transparent; color: var(--ink); }
+.lang button[aria-pressed="true"] { background: var(--terracotta); color: #fff; }
 .nav a {
   flex: none; text-decoration: none; color: var(--ink); font-weight: 700; font-size: 14px;
   padding: 7px 12px; border-radius: 999px; background: var(--card); border: 1px solid var(--line);
@@ -209,7 +213,10 @@ footer button { background: transparent; color: var(--muted); border: 1px solid 
 </head>
 <body>
 
-<nav class="nav" aria-label="Sections"><div class="wrap" id="nav"></div></nav>
+<nav class="nav" aria-label="Sections"><div class="wrap navbar">
+  <div class="lang" id="lang" role="group" aria-label="Language / Langue"><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="fr" aria-pressed="false">FR</button></div>
+  <div class="links" id="nav"></div>
+</div></nav>
 
 <main class="wrap">
   <header class="hero">
@@ -236,7 +243,7 @@ footer button { background: transparent; color: var(--muted); border: 1px solid 
   </header>
 
   <div class="today" aria-live="polite">
-    <h2>Today at home <small id="today-date"></small></h2>
+    <h2><span id="today-title"></span> <small id="today-date"></small></h2>
     <ul id="today-list"></ul>
   </div>
 
@@ -246,7 +253,7 @@ footer button { background: transparent; color: var(--muted); border: 1px solid 
 
   <footer>
     <div id="signoff"></div>
-    <button type="button" id="theme-btn">🌓 Switch light / dark</button>
+    <button type="button" id="theme-btn"></button>
   </footer>
 </main>
 
@@ -254,139 +261,238 @@ footer button { background: transparent; color: var(--muted); border: 1px solid 
 
 <script>
 /* =====================================================================
-   ✏️  EDIT EVERYTHING HERE. Anything starting with "TODO" shows up
-   highlighted in yellow on the page so you can spot what's missing.
+   ✏️  EDIT EVERYTHING HERE.
+   Text that guests read is written as { en: "...", fr: "..." }.
+   Plain "text" (no en/fr) is shown the same in both languages.
+   Anything starting with "TODO" shows up highlighted in yellow on the
+   page so you can spot what's missing.
    Days of the week: 0 = Sunday, 1 = Monday ... 6 = Saturday.
    ===================================================================== */
 const HOME = {
   hosts: "TODO: your names",
-  title: "Make yourself at home",
-  intro: "Everything you need for your stay: Wi-Fi, Molly's routine, the plants and where things live. Tap a tile to jump to it.",
-  signoff: "Thank you for looking after our home (and Molly)! 💛",
+  title: { en: "Make yourself at home", fr: "Faites comme chez vous" },
+  intro: {
+    en: "Everything you need for your stay: Wi-Fi, Molly's routine, the plants and where things live. Tap a tile to jump to it.",
+    fr: "Tout ce qu'il vous faut pour votre séjour : le Wi-Fi, la routine de Molly, les plantes et où trouver les choses. Touchez une tuile pour y aller."
+  },
+  signoff: {
+    en: "Thank you for looking after our home (and Molly)! 💛",
+    fr: "Merci de prendre soin de notre appartement (et de Molly) ! 💛"
+  },
 
   wifi: {
     network: "TODO: network name",
     password: "TODO: password",
-    note: "The router is TODO: where the router is. If the internet drops, unplug it for 10 seconds and plug it back in."
+    note: {
+      en: "The router is TODO: where the router is. If the internet drops, unplug it for 10 seconds and plug it back in.",
+      fr: "Le routeur est TODO: où se trouve le routeur. Si internet coupe, débranchez-le 10 secondes puis rebranchez-le."
+    }
   },
 
   apartment: {
     address: "TODO: street, number, apartment",
     details: [
-      ["Door / building", "TODO: code or how the keys work"],
-      ["Heating / AC", "TODO: how to use it"],
-      ["Hot water", "TODO: boiler / instructions"],
-      ["Fuse box", "TODO: location"],
-      ["Water shut-off", "TODO: location"]
+      [{ en: "Door / building", fr: "Porte / immeuble" }, { en: "TODO: code or how the keys work", fr: "TODO: code ou fonctionnement des clés" }],
+      [{ en: "Heating / AC", fr: "Chauffage / clim" }, { en: "TODO: how to use it", fr: "TODO: mode d'emploi" }],
+      [{ en: "Hot water", fr: "Eau chaude" }, { en: "TODO: boiler / instructions", fr: "TODO: chauffe-eau / instructions" }],
+      [{ en: "Fuse box", fr: "Tableau électrique" }, { en: "TODO: location", fr: "TODO: emplacement" }],
+      [{ en: "Water shut-off", fr: "Arrivée d'eau" }, { en: "TODO: location", fr: "TODO: emplacement" }]
     ],
     tips: [
-      "Please keep windows on the cat-safe setting (tilted or with the screen) so Molly can't get out.",
-      "Shoes off at the door, please 👟",
-      "TODO: quiet hours / neighbor tips",
-      "TODO: anything else guests should know (washing machine, dishwasher, TV…)"
+      { en: "Please keep windows on the cat-safe setting (tilted or with the screen) so Molly can't get out.",
+        fr: "Merci de laisser les fenêtres en mode « sécurité chat » (entrouvertes en oscillo-battant ou avec la moustiquaire) pour que Molly ne sorte pas." },
+      { en: "Shoes off at the door, please 👟", fr: "On enlève ses chaussures à l'entrée, s'il vous plaît 👟" },
+      { en: "TODO: quiet hours / neighbor tips", fr: "TODO: heures calmes / infos voisins" },
+      { en: "TODO: anything else guests should know (washing machine, dishwasher, TV…)", fr: "TODO: autres infos utiles (lave-linge, lave-vaisselle, télé…)" }
     ]
   },
 
   cat: {
     name: "Molly",
-    about: "TODO: a sentence about Molly, e.g. shy at first, loves chin scratches, hides under the bed when the doorbell rings.",
+    about: {
+      en: "TODO: a sentence about Molly, e.g. shy at first, loves chin scratches, hides under the bed when the doorbell rings.",
+      fr: "TODO: une phrase sur Molly, ex. timide au début, adore les grattouilles sous le menton, se cache sous le lit quand on sonne."
+    },
     meals: [
-      { time: "07:30", label: "Breakfast", what: "TODO: food and amount (e.g. ½ pouch wet food)" },
-      { time: "13:00", label: "Snack",     what: "TODO: e.g. a small handful of dry food" },
-      { time: "19:30", label: "Dinner",    what: "TODO: food and amount" }
+      { time: "07:30", label: { en: "Breakfast", fr: "Petit-déjeuner" }, what: { en: "TODO: food and amount (e.g. ½ pouch wet food)", fr: "TODO: nourriture et quantité (ex. ½ sachet de pâtée)" } },
+      { time: "13:00", label: { en: "Snack", fr: "Goûter" },             what: { en: "TODO: e.g. a small handful of dry food", fr: "TODO: ex. une petite poignée de croquettes" } },
+      { time: "19:30", label: { en: "Dinner", fr: "Dîner" },             what: { en: "TODO: food and amount", fr: "TODO: nourriture et quantité" } }
     ],
     daily: [
-      "Breakfast 🍽️",
-      "Fresh water in her bowl 💧",
-      "Scoop the litter box 🪣",
-      "Playtime, 10 minutes with the wand toy 🪶",
-      "Dinner 🍽️"
+      { en: "Breakfast 🍽️", fr: "Petit-déjeuner 🍽️" },
+      { en: "Fresh water in her bowl 💧", fr: "Eau fraîche dans sa gamelle 💧" },
+      { en: "Scoop the litter box 🪣", fr: "Nettoyer la litière 🪣" },
+      { en: "Playtime, 10 minutes with the wand toy 🪶", fr: "Jeu : 10 minutes avec la canne à plumes 🪶" },
+      { en: "Dinner 🍽️", fr: "Dîner 🍽️" }
     ],
     where: [
-      ["Food", "TODO: cupboard / shelf"],
-      ["Treats", "TODO: location (max 3 a day 😉)"],
-      ["Litter & bags", "TODO: location"],
-      ["Carrier", "TODO: location"]
+      [{ en: "Food", fr: "Nourriture" }, { en: "TODO: cupboard / shelf", fr: "TODO: placard / étagère" }],
+      [{ en: "Treats", fr: "Friandises" }, { en: "TODO: location (max 3 a day 😉)", fr: "TODO: emplacement (3 max par jour 😉)" }],
+      [{ en: "Litter & bags", fr: "Litière et sacs" }, { en: "TODO: location", fr: "TODO: emplacement" }],
+      [{ en: "Carrier", fr: "Caisse de transport" }, { en: "TODO: location", fr: "TODO: emplacement" }]
     ],
     dont: [
-      "No human food, especially onions, garlic, chocolate or milk.",
-      "Don't let her out on the balcony or into the stairwell.",
-      "TODO: anything else (toxic plants, closed doors…)"
+      { en: "No human food, especially onions, garlic, chocolate or milk.", fr: "Pas de nourriture humaine, surtout pas d'oignon, d'ail, de chocolat ni de lait." },
+      { en: "Don't let her out on the balcony or into the stairwell.", fr: "Ne la laissez pas sortir sur le balcon ni dans la cage d'escalier." },
+      { en: "TODO: anything else (toxic plants, closed doors…)", fr: "TODO: autre chose (plantes toxiques, portes fermées…)" }
     ],
     vet: { name: "TODO: vet clinic name", phone: "TODO: +00 000 000 000", address: "TODO: vet address" }
   },
 
   // water: which days of the week to water. 0=Sun … 6=Sat
   plants: [
-    { emoji: "🪴", name: "TODO: plant name (e.g. Monstera)", where: "Living room", water: [3, 6], tip: "Water when the top 2 cm of soil is dry." },
-    { emoji: "🌵", name: "TODO: cactus / succulents", where: "Window sill", water: [0], tip: "Just a little, every week or two." },
-    { emoji: "🌿", name: "TODO: herbs", where: "Kitchen", water: [1, 3, 5], tip: "They like a drink every other day." }
+    { emoji: "🪴", name: "TODO: plant name (e.g. Monstera)", where: { en: "Living room", fr: "Salon" }, water: [3, 6],
+      tip: { en: "Water when the top 2 cm of soil is dry.", fr: "Arroser quand les 2 premiers cm de terre sont secs." } },
+    { emoji: "🌵", name: "TODO: cactus / succulents", where: { en: "Window sill", fr: "Rebord de fenêtre" }, water: [0],
+      tip: { en: "Just a little, every week or two.", fr: "Juste un peu, toutes les une ou deux semaines." } },
+    { emoji: "🌿", name: { en: "TODO: herbs", fr: "TODO: herbes aromatiques" }, where: { en: "Kitchen", fr: "Cuisine" }, water: [1, 3, 5],
+      tip: { en: "They like a drink every other day.", fr: "Elles aiment être arrosées un jour sur deux." } }
   ],
-  plantsNote: "Molly sometimes chews leaves, so please keep plants where they already are.",
+  plantsNote: {
+    en: "Molly sometimes chews leaves, so please keep plants where they already are.",
+    fr: "Molly mâchouille parfois les feuilles, merci de laisser les plantes là où elles sont."
+  },
 
   supplies: [
-    { emoji: "🧴", name: "Cleaning sprays", where: "TODO: under the kitchen sink" },
-    { emoji: "🧹", name: "Broom & mop", where: "TODO: location" },
-    { emoji: "🌀", name: "Vacuum cleaner", where: "TODO: location" },
-    { emoji: "🧻", name: "Toilet paper & paper towels", where: "TODO: location" },
-    { emoji: "🛏️", name: "Fresh sheets & towels", where: "TODO: location" },
-    { emoji: "🗑️", name: "Garbage bags", where: "TODO: location" },
-    { emoji: "🧺", name: "Laundry detergent", where: "TODO: location" },
-    { emoji: "💡", name: "Light bulbs & batteries", where: "TODO: location" }
+    { emoji: "🧴", name: { en: "Cleaning sprays", fr: "Produits ménagers" }, where: { en: "TODO: under the kitchen sink", fr: "TODO: sous l'évier de la cuisine" } },
+    { emoji: "🧹", name: { en: "Broom & mop", fr: "Balai et serpillière" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { emoji: "🌀", name: { en: "Vacuum cleaner", fr: "Aspirateur" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { emoji: "🧻", name: { en: "Toilet paper & paper towels", fr: "Papier toilette et essuie-tout" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { emoji: "🛏️", name: { en: "Fresh sheets & towels", fr: "Draps et serviettes propres" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { emoji: "🗑️", name: { en: "Garbage bags", fr: "Sacs poubelle" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { emoji: "🧺", name: { en: "Laundry detergent", fr: "Lessive" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { emoji: "💡", name: { en: "Light bulbs & batteries", fr: "Ampoules et piles" }, where: { en: "TODO: location", fr: "TODO: emplacement" } }
   ],
 
   cleaning: {
     weekly: [
-      "Vacuum the floors (Molly sheds, sorry! 🐈‍⬛)",
-      "Wipe kitchen counters and stove",
-      "Clean the bathroom sink and toilet",
-      "Take out recycling"
+      { en: "Vacuum the floors (Molly sheds, sorry! 🐈‍⬛)", fr: "Passer l'aspirateur (Molly perd ses poils, désolés ! 🐈‍⬛)" },
+      { en: "Wipe kitchen counters and stove", fr: "Nettoyer le plan de travail et les plaques" },
+      { en: "Clean the bathroom sink and toilet", fr: "Nettoyer le lavabo et les toilettes" },
+      { en: "Take out recycling", fr: "Sortir le recyclage" }
     ],
     beforeYouGo: [
-      "Strip the bed and put sheets in the laundry basket",
-      "Run and empty the dishwasher",
-      "Empty all bins",
-      "Fill Molly's water and scoop the litter",
-      "Water any plants due that day",
-      "Close the windows and turn off lights & heating",
-      "TODO: leave the keys…"
+      { en: "Strip the bed and put sheets in the laundry basket", fr: "Défaire le lit et mettre les draps dans le panier à linge" },
+      { en: "Run and empty the dishwasher", fr: "Lancer et vider le lave-vaisselle" },
+      { en: "Empty all bins", fr: "Vider toutes les poubelles" },
+      { en: "Fill Molly's water and scoop the litter", fr: "Remplir l'eau de Molly et nettoyer la litière" },
+      { en: "Water any plants due that day", fr: "Arroser les plantes prévues ce jour-là" },
+      { en: "Close the windows and turn off lights & heating", fr: "Fermer les fenêtres, éteindre les lumières et le chauffage" },
+      { en: "TODO: leave the keys…", fr: "TODO: laisser les clés…" }
     ]
   },
 
   // Bins: days = pickup days (0=Sun … 6=Sat). Put them out the evening before.
   garbage: {
-    note: "TODO: where the building bins are, and what time to take them down.",
+    note: {
+      en: "TODO: where the building bins are, and what time to take them down.",
+      fr: "TODO: où sont les poubelles de l'immeuble et à quelle heure les descendre."
+    },
     bins: [
-      { emoji: "🗑️", name: "General waste", color: "var(--soft-plum)",    days: [2, 5], what: "Everything that isn't recyclable" },
-      { emoji: "♻️", name: "Recycling",     color: "var(--soft-mustard)", days: [3],    what: "Plastic, cans, cartons" },
-      { emoji: "📦", name: "Paper",         color: "var(--soft-sky)",     days: [1],    what: "Flatten the boxes, please" },
-      { emoji: "🍂", name: "Organic",       color: "var(--soft-sage)",    days: [4],    what: "Food scraps (not cat litter!)" }
+      { emoji: "🗑️", name: { en: "General waste", fr: "Ordures ménagères" }, color: "var(--soft-plum)", days: [2, 5],
+        what: { en: "Everything that isn't recyclable", fr: "Tout ce qui ne se recycle pas" } },
+      { emoji: "♻️", name: { en: "Recycling", fr: "Recyclage" }, color: "var(--soft-mustard)", days: [3],
+        what: { en: "Plastic, cans, cartons", fr: "Plastique, canettes, briques" } },
+      { emoji: "📦", name: { en: "Paper", fr: "Papier" }, color: "var(--soft-sky)", days: [1],
+        what: { en: "Flatten the boxes, please", fr: "Aplatissez les cartons, s'il vous plaît" } },
+      { emoji: "🍂", name: { en: "Organic", fr: "Biodéchets" }, color: "var(--soft-sage)", days: [4],
+        what: { en: "Food scraps (not cat litter!)", fr: "Restes alimentaires (pas la litière !)" } }
     ]
   },
 
   contacts: [
-    { name: "TODO: Host 1", role: "Owner", phone: "TODO: +00 000 000 000" },
-    { name: "TODO: Host 2", role: "Owner", phone: "TODO: +00 000 000 000" },
-    { name: "TODO: neighbor / friend nearby", role: "Has a spare key", phone: "TODO: +00 000 000 000" },
-    { name: "Emergency", role: "Police, fire, ambulance", phone: "112" }
+    { name: "TODO: Host 1", role: { en: "Owner", fr: "Propriétaire" }, phone: "TODO: +00 000 000 000" },
+    { name: "TODO: Host 2", role: { en: "Owner", fr: "Propriétaire" }, phone: "TODO: +00 000 000 000" },
+    { name: { en: "TODO: neighbor / friend nearby", fr: "TODO: voisin·e / ami·e proche" }, role: { en: "Has a spare key", fr: "A un double des clés" }, phone: "TODO: +00 000 000 000" },
+    { name: { en: "Emergency", fr: "Urgences" }, role: { en: "Police, fire, ambulance", fr: "Police, pompiers, SAMU" }, phone: "112" }
   ]
 };
 /* ===================== end of things to edit ===================== */
 
-const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const DAYS_LONG = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-// Escape text, and highlight anything still marked TODO
-const t = s => {
-  const v = esc(s);
-  return /^TODO/.test(String(s)) ? `<span class="todo">✏️ ${v.replace(/^TODO:?\s*/, "")}</span>`
-    : v.replace(/TODO:?\s*([^.]*)/g, '<span class="todo">✏️ $1</span>');
+/* Interface text (buttons, headings, live messages) */
+const UI = {
+  en: {
+    locale: "en-GB",
+    greet: ["Good morning & welcome! 👋", "Good afternoon & welcome! 👋", "Good evening & welcome! 👋"],
+    todayTitle: "Today at home",
+    theme: "🌓 Switch light / dark",
+    days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    daysLong: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    today: "Today", tomorrow: "Tomorrow", and: " & ",
+    dur: m => m < 60 ? `${m} min` : `${Math.floor(m / 60)}h ${String(m % 60).padStart(2, "0")}m`,
+    labels: { wifi: "Wi-Fi", plants: "Plants", garbage: "Garbage", supplies: "Supplies", cleaning: "Cleaning", home: "Apartment", contacts: "Contacts" },
+    catTitle: n => `${n} the cat`,
+    sub: {
+      wifi: "Tap to copy", molly: "Meals, daily routine and house rules",
+      plants: d => `Highlighted days = watering days. Today is ${d}.`,
+      garbage: "Put the bins out the evening before pickup", supplies: "Where to find things",
+      cleaning: "Keeping things cozy", home: "The practical stuff", contacts: "Call or message anytime"
+    },
+    network: "Network", password: "Password", copy: "Copy", copied: "Copied! 📋", copyFail: "Couldn't copy, please type it in",
+    feeding: "🍽️ Feeding times", checklist: n => `✅ ${n}'s checklist for today`, whereHer: "📍 Where her things are",
+    dont: "🚫 Please don't", vet: "🩺 Vet:", next: d => `next · in ${d}`,
+    weekly: "🗓️ Once a week", beforeGo: "👋 Before you leave",
+    address: "Address", goodToKnow: "💡 Good to know", call: "Call",
+    progress: (d, n) => d === n ? "All done, thank you! 🎉" : `${d} of ${n} done`,
+    liveMeal: (n, l, t) => `${n}'s next meal: ${l} at ${t}`, liveIn: d => `in ${d}`,
+    tonight: b => `Tonight: take out the ${b}`, pickupTomorrow: "Pickup is tomorrow",
+    pickupToday: b => `Pickup today: ${b}`, stillTime: "If it's still early, there's time!",
+    water: p => `Water today: ${p}`, waterTap: "Tap Plants for details",
+    noWater: "No plants to water today", dayOff: "Enjoy the day off",
+    liveCheck: (n, d, t) => `${n}'s checklist: ${d} of ${t} done`, purrfect: "Purrfect 🎉", tickOff: "Tick things off as you go",
+    meow: "Meow! 🐾", thanks: n => `${n} says thank you! 🐾`
+  },
+  fr: {
+    locale: "fr-FR",
+    greet: ["Bonjour et bienvenue ! 👋", "Bon après-midi et bienvenue ! 👋", "Bonsoir et bienvenue ! 👋"],
+    todayTitle: "Aujourd'hui à la maison",
+    theme: "🌓 Mode clair / sombre",
+    days: ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"],
+    daysLong: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+    today: "Aujourd'hui", tomorrow: "Demain", and: " et ",
+    dur: m => m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")}`,
+    labels: { wifi: "Wi-Fi", plants: "Plantes", garbage: "Poubelles", supplies: "Rangements", cleaning: "Ménage", home: "Appartement", contacts: "Contacts" },
+    catTitle: n => `${n}, notre chatte`,
+    sub: {
+      wifi: "Touchez pour copier", molly: "Repas, routine et règles de la maison",
+      plants: d => `Jours en vert = jours d'arrosage. Aujourd'hui, c'est ${d}.`,
+      garbage: "Sortez les poubelles la veille au soir du ramassage", supplies: "Où trouver les choses",
+      cleaning: "Pour que tout reste agréable", home: "Les infos pratiques", contacts: "Appelez ou écrivez-nous quand vous voulez"
+    },
+    network: "Réseau", password: "Mot de passe", copy: "Copier", copied: "Copié ! 📋", copyFail: "Copie impossible, tapez-le à la main",
+    feeding: "🍽️ Heures des repas", checklist: n => `✅ La liste de ${n} pour aujourd'hui`, whereHer: "📍 Où sont ses affaires",
+    dont: "🚫 À éviter", vet: "🩺 Vétérinaire :", next: d => `prochain · dans ${d}`,
+    weekly: "🗓️ Une fois par semaine", beforeGo: "👋 Avant de partir",
+    address: "Adresse", goodToKnow: "💡 Bon à savoir", call: "Appeler",
+    progress: (d, n) => d === n ? "Tout est fait, merci ! 🎉" : `${d} sur ${n} fait${d > 1 ? "s" : ""}`,
+    liveMeal: (n, l, t) => `Prochain repas de ${n} : ${l.toLowerCase()} à ${t.replace(":", "h")}`, liveIn: d => `dans ${d}`,
+    tonight: b => `Ce soir, à sortir : ${b}`, pickupTomorrow: "Ramassage demain",
+    pickupToday: b => `Ramassage aujourd'hui : ${b}`, stillTime: "S'il est encore tôt, il est encore temps !",
+    water: p => `À arroser aujourd'hui : ${p}`, waterTap: "Voir Plantes pour les détails",
+    noWater: "Pas d'arrosage aujourd'hui", dayOff: "Profitez de la journée",
+    liveCheck: (n, d, t) => `Liste de ${n} : ${d} sur ${t}`, purrfect: "Parfait, ronron 🎉", tickOff: "Cochez au fur et à mesure",
+    meow: "Miaou ! 🐾", thanks: n => `${n} vous dit merci ! 🐾`
+  }
 };
+
 const store = {
   get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 };
+
+let lang = store.get("lang") || ((navigator.language || "").toLowerCase().startsWith("fr") ? "fr" : "en");
+const U = () => UI[lang];
+// Pick the current language from a { en, fr } value; plain strings pass through
+const L = v => (v && typeof v === "object") ? (v[lang] ?? v.en) : v;
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+// Translate, escape, and highlight anything still marked TODO
+const t = raw => {
+  const s = String(L(raw)), v = esc(s);
+  return /^TODO/.test(s) ? `<span class="todo">✏️ ${v.replace(/^TODO:?\s*/, "")}</span>`
+    : v.replace(/TODO:?\s*([^.]*)/g, '<span class="todo">✏️ $1</span>');
+};
+const plain = raw => String(L(raw)).replace(/^TODO:?\s*/, "");
 const toast = msg => {
   const el = document.getElementById("toast");
   el.textContent = msg; el.classList.add("show");
@@ -394,29 +500,30 @@ const toast = msg => {
 };
 const toMin = hhmm => { const [h, m] = hhmm.split(":").map(Number); return h * 60 + m; };
 const nowMin = () => { const d = new Date(); return d.getHours() * 60 + d.getMinutes(); };
-const fmtDur = mins => mins < 60 ? `${mins} min` : `${Math.floor(mins / 60)}h ${String(mins % 60).padStart(2, "0")}m`;
 const daysUntil = days => {
   const today = new Date().getDay();
   return Math.min(...days.map(d => (d - today + 7) % 7));
 };
-const whenLabel = n => n === 0 ? "Today" : n === 1 ? "Tomorrow" : DAYS_LONG[(new Date().getDay() + n) % 7];
+const whenLabel = n => n === 0 ? U().today : n === 1 ? U().tomorrow : U().daysLong[(new Date().getDay() + n) % 7];
 const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; };
 
 const SECTIONS = [
-  { id: "wifi", emoji: "📶", label: "Wi-Fi", tone: "sky" },
-  { id: "molly", emoji: "🐱", label: HOME.cat.name, tone: "terracotta" },
-  { id: "plants", emoji: "🌿", label: "Plants", tone: "sage" },
-  { id: "garbage", emoji: "🗑️", label: "Garbage", tone: "plum" },
-  { id: "supplies", emoji: "🧴", label: "Supplies", tone: "mustard" },
-  { id: "cleaning", emoji: "🧹", label: "Cleaning", tone: "sky" },
-  { id: "home", emoji: "🏠", label: "Apartment", tone: "terracotta" },
-  { id: "contacts", emoji: "📞", label: "Contacts", tone: "sage" }
+  { id: "wifi", emoji: "📶", tone: "sky" },
+  { id: "molly", emoji: "🐱", tone: "terracotta" },
+  { id: "plants", emoji: "🌿", tone: "sage" },
+  { id: "garbage", emoji: "🗑️", tone: "plum" },
+  { id: "supplies", emoji: "🧴", tone: "mustard" },
+  { id: "cleaning", emoji: "🧹", tone: "sky" },
+  { id: "home", emoji: "🏠", tone: "terracotta" },
+  { id: "contacts", emoji: "📞", tone: "sage" }
 ];
+const label = s => s.id === "molly" ? HOME.cat.name : U().labels[s.id];
 
 function sectionShell(s, subtitle, body) {
+  const title = s.id === "molly" ? U().catTitle(HOME.cat.name) : label(s);
   return `<section class="card t-${s.tone}" id="${s.id}">
     <div class="sec-head"><div class="badge">${s.emoji}</div>
-      <div><h2>${esc(s.label === HOME.cat.name ? `${HOME.cat.name} the cat` : s.label)}</h2><p>${subtitle}</p></div></div>
+      <div><h2>${esc(title)}</h2><p>${esc(subtitle)}</p></div></div>
     ${body}</section>`;
 }
 
@@ -429,75 +536,78 @@ function renderChecklist(id, items) {
 }
 
 function render() {
-  const H = HOME, C = H.cat, S = Object.fromEntries(SECTIONS.map(s => [s.id, s]));
+  const H = HOME, C = H.cat, S = Object.fromEntries(SECTIONS.map(s => [s.id, s])), u = U();
+  document.documentElement.lang = lang;
   const hour = new Date().getHours();
-  document.getElementById("greeting").textContent =
-    (hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening") + " & welcome! 👋";
-  document.getElementById("title").textContent = H.title;
-  document.getElementById("intro").textContent = H.intro;
-  document.getElementById("signoff").innerHTML = `${esc(H.signoff)}<br>${t(H.hosts)}`;
-  document.getElementById("nav").innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.emoji} ${esc(s.label)}</a>`).join("");
+  document.getElementById("greeting").textContent = u.greet[hour < 12 ? 0 : hour < 18 ? 1 : 2];
+  document.getElementById("title").textContent = L(H.title);
+  document.getElementById("intro").textContent = L(H.intro);
+  document.getElementById("today-title").textContent = u.todayTitle;
+  document.getElementById("theme-btn").textContent = u.theme;
+  document.getElementById("signoff").innerHTML = `${esc(L(H.signoff))}<br>${t(H.hosts)}`;
+  document.querySelectorAll("#lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+  document.getElementById("nav").innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.emoji} ${esc(label(s))}</a>`).join("");
   document.getElementById("tiles").innerHTML = SECTIONS.map(s =>
-    `<a class="tile" href="#${s.id}"><span class="e">${s.emoji}</span><span>${esc(s.label)}</span></a>`).join("");
+    `<a class="tile" href="#${s.id}"><span class="e">${s.emoji}</span><span>${esc(label(s))}</span></a>`).join("");
 
   const today = new Date().getDay();
   const out = [];
 
-  out.push(sectionShell(S.wifi, "Tap to copy", `
+  out.push(sectionShell(S.wifi, u.sub.wifi, `
     <div class="wifi">
-      <div class="wifi-row"><div><div class="lbl">Network</div><div class="val">${t(H.wifi.network)}</div></div>
-        <button type="button" data-copy="${esc(H.wifi.network)}">Copy</button></div>
-      <div class="wifi-row"><div><div class="lbl">Password</div><div class="val">${t(H.wifi.password)}</div></div>
-        <button type="button" data-copy="${esc(H.wifi.password)}">Copy</button></div>
+      <div class="wifi-row"><div><div class="lbl">${u.network}</div><div class="val">${t(H.wifi.network)}</div></div>
+        <button type="button" data-copy="${esc(H.wifi.network)}">${u.copy}</button></div>
+      <div class="wifi-row"><div><div class="lbl">${u.password}</div><div class="val">${t(H.wifi.password)}</div></div>
+        <button type="button" data-copy="${esc(H.wifi.password)}">${u.copy}</button></div>
     </div>
     <p class="note">${t(H.wifi.note)}</p>`));
 
-  out.push(sectionShell(S.molly, "Meals, daily routine and house rules", `
+  out.push(sectionShell(S.molly, u.sub.molly, `
     <p>${t(C.about)}</p>
-    <h3>🍽️ Feeding times</h3>
+    <h3>${u.feeding}</h3>
     <div class="meals" id="meals"></div>
-    <h3>✅ ${esc(C.name)}'s checklist for today</h3>
+    <h3>${esc(u.checklist(C.name))}</h3>
     ${renderChecklist("cat", C.daily)}
-    <h3>📍 Where her things are</h3>
-    <dl class="kv">${C.where.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${t(v)}</dd>`).join("")}</dl>
-    <h3>🚫 Please don't</h3>
+    <h3>${u.whereHer}</h3>
+    <dl class="kv">${C.where.map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
+    <h3>${u.dont}</h3>
     <ul class="list">${C.dont.map(d => `<li>${t(d)}</li>`).join("")}</ul>
-    <div class="note warn"><b>🩺 Vet:</b> ${t(C.vet.name)} · ${t(C.vet.phone)}<br>${t(C.vet.address)}</div>`));
+    <div class="note warn"><b>${u.vet}</b> ${t(C.vet.name)} · ${t(C.vet.phone)}<br>${t(C.vet.address)}</div>`));
 
-  out.push(sectionShell(S.plants, `Highlighted days = watering days. Today is ${DAYS_LONG[today]}.`, `
+  out.push(sectionShell(S.plants, u.sub.plants(u.daysLong[today]), `
     <div class="grid">${H.plants.map(p => `
       <div class="mini"><div class="e">${p.emoji}</div><b>${t(p.name)}</b><p>📍 ${t(p.where)}</p><p>${t(p.tip)}</p>
-        <div class="chips">${[1,2,3,4,5,6,0].map(d => `<span class="chip ${p.water.includes(d) ? "on" : ""}" ${d === today ? 'style="outline:2px solid var(--ink)"' : ""}>${DAYS[d]}</span>`).join("")}</div>
+        <div class="chips">${[1,2,3,4,5,6,0].map(d => `<span class="chip ${p.water.includes(d) ? "on" : ""}" ${d === today ? 'style="outline:2px solid var(--ink)"' : ""}>${u.days[d]}</span>`).join("")}</div>
       </div>`).join("")}</div>
     <p class="note">${t(H.plantsNote)}</p>`));
 
   const bins = H.garbage.bins.map(b => ({ ...b, n: daysUntil(b.days) })).sort((a, b) => a.n - b.n);
-  out.push(sectionShell(S.garbage, "Put the bins out the evening before pickup", `
+  out.push(sectionShell(S.garbage, u.sub.garbage, `
     <div class="bins">${bins.map(b => `
       <div class="bin ${b.n <= 1 ? "soon" : ""}"><div class="dot" style="background:${b.color}">${b.emoji}</div>
-        <div><b>${esc(b.name)}</b><div style="color:var(--muted);font-size:14px">${t(b.what)}</div></div>
-        <div class="when">${whenLabel(b.n)}<small>${b.days.map(d => DAYS[d]).join(" & ")}</small></div></div>`).join("")}</div>
+        <div><b>${esc(L(b.name))}</b><div style="color:var(--muted);font-size:14px">${t(b.what)}</div></div>
+        <div class="when">${esc(whenLabel(b.n))}<small>${b.days.map(d => u.days[d]).join(u.and)}</small></div></div>`).join("")}</div>
     <p class="note">${t(H.garbage.note)}</p>`));
 
-  out.push(sectionShell(S.supplies, "Where to find things", `
-    <div class="grid">${H.supplies.map(s => `<div class="mini"><div class="e">${s.emoji}</div><b>${esc(s.name)}</b><p>📍 ${t(s.where)}</p></div>`).join("")}</div>`));
+  out.push(sectionShell(S.supplies, u.sub.supplies, `
+    <div class="grid">${H.supplies.map(s => `<div class="mini"><div class="e">${s.emoji}</div><b>${esc(L(s.name))}</b><p>📍 ${t(s.where)}</p></div>`).join("")}</div>`));
 
-  out.push(sectionShell(S.cleaning, "Keeping things cozy", `
-    <h3>🗓️ Once a week</h3>
+  out.push(sectionShell(S.cleaning, u.sub.cleaning, `
+    <h3>${u.weekly}</h3>
     <ul class="list">${H.cleaning.weekly.map(i => `<li>${t(i)}</li>`).join("")}</ul>
-    <h3>👋 Before you leave</h3>
+    <h3>${u.beforeGo}</h3>
     ${renderChecklist("leave", H.cleaning.beforeYouGo)}`));
 
-  out.push(sectionShell(S.home, "The practical stuff", `
-    <dl class="kv"><dt>Address</dt><dd>${t(H.apartment.address)}</dd>
-      ${H.apartment.details.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${t(v)}</dd>`).join("")}</dl>
-    <h3>💡 Good to know</h3>
+  out.push(sectionShell(S.home, u.sub.home, `
+    <dl class="kv"><dt>${u.address}</dt><dd>${t(H.apartment.address)}</dd>
+      ${H.apartment.details.map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
+    <h3>${u.goodToKnow}</h3>
     <ul class="list">${H.apartment.tips.map(i => `<li>${t(i)}</li>`).join("")}</ul>`));
 
-  out.push(sectionShell(S.contacts, "Call or message anytime", H.contacts.map(c => {
+  out.push(sectionShell(S.contacts, u.sub.contacts, H.contacts.map(c => {
     const tel = /^TODO/.test(c.phone) ? "" : c.phone.replace(/[^\d+]/g, "");
-    return `<div class="contact"><div><b>${t(c.name)}</b><small>${esc(c.role)} · ${t(c.phone)}</small></div>
-      ${tel ? `<a class="btn" href="tel:${esc(tel)}">Call</a>` : ""}</div>`;
+    return `<div class="contact"><div><b>${t(c.name)}</b><small>${esc(L(c.role))} · ${t(c.phone)}</small></div>
+      ${tel ? `<a class="btn" href="tel:${esc(tel)}">${u.call}</a>` : ""}</div>`;
   }).join("")));
 
   document.getElementById("sections").innerHTML = out.join("");
@@ -510,13 +620,12 @@ function updateProgress(id) {
   if (!ul) return;
   const boxes = [...ul.querySelectorAll("input")], done = boxes.filter(b => b.checked).length;
   document.getElementById(`prog-${id}`).style.width = `${(done / boxes.length) * 100}%`;
-  document.getElementById(`progt-${id}`).textContent =
-    done === boxes.length ? "All done, thank you! 🎉" : `${done} of ${boxes.length} done`;
+  document.getElementById(`progt-${id}`).textContent = U().progress(done, boxes.length);
 }
 
 // Things that depend on the clock: next meal, today panel
 function updateLive() {
-  const H = HOME, C = H.cat, now = nowMin(), today = new Date().getDay();
+  const H = HOME, C = H.cat, u = U(), now = nowMin(), today = new Date().getDay();
   const meals = C.meals.map(m => ({ ...m, min: toMin(m.time) })).sort((a, b) => a.min - b.min);
   const next = meals.find(m => m.min > now) || meals[0];
   const until = next.min > now ? next.min - now : next.min + 1440 - now;
@@ -524,39 +633,40 @@ function updateLive() {
   const mealsEl = document.getElementById("meals");
   if (mealsEl) mealsEl.innerHTML = meals.map(m => `
     <div class="meal ${m === next ? "next" : ""}"><div class="time">${esc(m.time)}</div>
-      <div><b>${esc(m.label)}${m === next ? `<span class="pill">next · in ${fmtDur(until)}</span>` : ""}</b>
+      <div><b>${esc(L(m.label))}${m === next ? `<span class="pill">${esc(u.next(u.dur(until)))}</span>` : ""}</b>
       <div class="what">${t(m.what)}</div></div></div>`).join("");
 
   document.getElementById("today-date").textContent =
-    new Date().toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
+    new Date().toLocaleDateString(u.locale, { weekday: "long", day: "numeric", month: "long" });
 
   const items = [];
-  items.push(["🐱", `${C.name}'s next meal: ${next.label} at ${next.time}`, `in ${fmtDur(until)}`]);
+  items.push(["🐱", u.liveMeal(C.name, L(next.label), next.time), u.liveIn(u.dur(until))]);
 
+  const binNames = list => list.map(b => L(b.name).toLowerCase()).join(u.and);
   const binsToday = H.garbage.bins.filter(b => b.days.includes(today));
   const binsTomorrow = H.garbage.bins.filter(b => b.days.includes((today + 1) % 7));
-  if (binsTomorrow.length)
-    items.push(["🌙", `Tonight: take out the ${binsTomorrow.map(b => b.name.toLowerCase()).join(" & ")}`, "Pickup is tomorrow"]);
-  if (binsToday.length)
-    items.push(["🚛", `Pickup today: ${binsToday.map(b => b.name.toLowerCase()).join(" & ")}`, "If it's still early, there's time!"]);
+  if (binsTomorrow.length) items.push(["🌙", u.tonight(binNames(binsTomorrow)), u.pickupTomorrow]);
+  if (binsToday.length) items.push(["🚛", u.pickupToday(binNames(binsToday)), u.stillTime]);
 
   const thirsty = H.plants.filter(p => p.water.includes(today));
   items.push(thirsty.length
-    ? ["💧", `Water today: ${thirsty.map(p => String(p.name).replace(/^TODO:?\s*/, "")).join(", ")}`, "Tap Plants for details"]
-    : ["🌿", "No plants to water today", "Enjoy the day off"]);
+    ? ["💧", u.water(thirsty.map(p => plain(p.name)).join(", ")), u.waterTap]
+    : ["🌿", u.noWater, u.dayOff]);
 
   const done = (store.get(`check:cat:${todayKey()}`) || []).length;
-  items.push(["✅", `${C.name}'s checklist: ${done} of ${C.daily.length} done`, done === C.daily.length ? "Purrfect 🎉" : "Tick things off as you go"]);
+  items.push(["✅", u.liveCheck(C.name, done, C.daily.length), done === C.daily.length ? u.purrfect : u.tickOff]);
 
   document.getElementById("today-list").innerHTML = items.map(([e, b, s]) =>
     `<li><span class="e">${e}</span><div><b>${esc(b)}</b><span class="s">${esc(s)}</span></div></li>`).join("");
 }
 
 document.addEventListener("click", async e => {
+  const langBtn = e.target.closest("#lang button");
+  if (langBtn) { lang = langBtn.dataset.lang; store.set("lang", lang); render(); return; }
   const btn = e.target.closest("[data-copy]");
   if (!btn) return;
-  try { await navigator.clipboard.writeText(btn.dataset.copy); toast("Copied! 📋"); }
-  catch (err) { toast("Couldn't copy, please type it in"); }
+  try { await navigator.clipboard.writeText(btn.dataset.copy); toast(U().copied); }
+  catch (err) { toast(U().copyFail); }
 });
 
 document.addEventListener("change", e => {
@@ -566,7 +676,7 @@ document.addEventListener("change", e => {
   store.set(ul.dataset.key, checked);
   updateProgress(ul.dataset.id);
   updateLive();
-  if (e.target.checked && ul.dataset.id === "cat") toast(checked.length === HOME.cat.daily.length ? `${HOME.cat.name} says thank you! 🐾` : "Meow! 🐾");
+  if (e.target.checked && ul.dataset.id === "cat") toast(checked.length === HOME.cat.daily.length ? U().thanks(HOME.cat.name) : U().meow);
 });
 
 const themeBtn = document.getElementById("theme-btn");
