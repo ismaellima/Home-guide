@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Molly's Home Guide</title>
+<meta name="description" content="Everything our guests need: Wi-Fi, Molly the cat, plants, cleaning and garbage days.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fbf5ec;
+  --card: #ffffff;
+  --ink: #2d2a26;
+  --muted: #6f675d;
+  --line: #ece2d3;
+  --terracotta: #d9714e;
+  --sage: #7fa37a;
+  --mustard: #e3b23c;
+  --sky: #6aa6c8;
+  --plum: #a77bb5;
+  --soft-terracotta: #fbe6dd;
+  --soft-sage: #e5efe2;
+  --soft-mustard: #fbf0d3;
+  --soft-sky: #e0eef6;
+  --soft-plum: #f1e7f4;
+  --shadow: 0 2px 0 rgba(45,42,38,.06), 0 8px 24px rgba(45,42,38,.06);
+  --todo-bg: #fff3b0;
+  --todo-ink: #6b5400;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1d1a17; --card: #282420; --ink: #f3ece2; --muted: #b3a999; --line: #3a342e;
+    --soft-terracotta: #3d2a22; --soft-sage: #26332a; --soft-mustard: #3a3220; --soft-sky: #22313a; --soft-plum: #33283a;
+    --shadow: 0 2px 0 rgba(0,0,0,.2), 0 8px 24px rgba(0,0,0,.25);
+    --todo-bg: #4a3f10; --todo-ink: #ffe680;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1d1a17; --card: #282420; --ink: #f3ece2; --muted: #b3a999; --line: #3a342e;
+  --soft-terracotta: #3d2a22; --soft-sage: #26332a; --soft-mustard: #3a3220; --soft-sky: #22313a; --soft-plum: #33283a;
+  --shadow: 0 2px 0 rgba(0,0,0,.2), 0 8px 24px rgba(0,0,0,.25);
+  --todo-bg: #4a3f10; --todo-ink: #ffe680;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.55 "Nunito", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: "Fredoka", "Nunito", sans-serif; line-height: 1.15; margin: 0; }
+a { color: var(--terracotta); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+/* top nav */
+.nav {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap { display: flex; gap: 6px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
+.nav .wrap::-webkit-scrollbar { display: none; }
+.nav a {
+  flex: none; text-decoration: none; color: var(--ink); font-weight: 700; font-size: 14px;
+  padding: 7px 12px; border-radius: 999px; background: var(--card); border: 1px solid var(--line);
+  white-space: nowrap;
+}
+.nav a:hover { border-color: var(--terracotta); }
+
+/* hero */
+.hero { padding: 28px 0 8px; display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; }
+.hero .hi { font-size: 15px; font-weight: 700; color: var(--terracotta); letter-spacing: .02em; }
+.hero h1 { font-size: clamp(30px, 8vw, 46px); margin: 4px 0 8px; }
+.hero p { margin: 0; color: var(--muted); max-width: 46ch; }
+.cat-svg { width: 116px; height: auto; }
+.cat-svg .tail { transform-origin: 78px 92px; animation: wag 2.6s ease-in-out infinite; }
+.cat-svg .eye { transform-origin: center; transform-box: fill-box; animation: blink 5s infinite; }
+@keyframes wag { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(14deg); } }
+@keyframes blink { 0%,94%,100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+@media (prefers-reduced-motion: reduce) { .cat-svg .tail, .cat-svg .eye { animation: none; } }
+
+/* today panel */
+.today {
+  margin: 18px 0 8px; background: var(--ink); color: var(--bg);
+  border-radius: 22px; padding: 18px; box-shadow: var(--shadow);
+}
+.today h2 { font-size: 20px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.today h2 small { font-family: "Nunito"; font-weight: 600; font-size: 14px; opacity: .7; }
+.today ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+.today li { display: flex; gap: 10px; align-items: flex-start; background: color-mix(in srgb, var(--bg) 12%, transparent); border-radius: 14px; padding: 10px 12px; }
+.today li .e { font-size: 20px; line-height: 1.2; }
+.today li b { display: block; }
+.today li span.s { opacity: .75; font-size: 14px; }
+
+/* quick tiles */
+.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 18px 0 6px; }
+@media (max-width: 520px) { .tiles { grid-template-columns: repeat(4, 1fr); gap: 8px; } }
+.tile {
+  text-decoration: none; color: var(--ink); background: var(--card); border: 1px solid var(--line);
+  border-radius: 18px; padding: 12px 4px; text-align: center; box-shadow: var(--shadow);
+  transition: transform .15s ease;
+}
+.tile:hover { transform: translateY(-2px); }
+.tile .e { font-size: 28px; display: block; }
+.tile span { font-size: 13px; font-weight: 700; }
+
+/* sections */
+section.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 24px;
+  padding: 20px; margin: 18px 0; box-shadow: var(--shadow);
+}
+.sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.badge { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 24px; flex: none; }
+.sec-head h2 { font-size: 24px; }
+.sec-head p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+.t-terracotta .badge { background: var(--soft-terracotta); }
+.t-sage .badge { background: var(--soft-sage); }
+.t-mustard .badge { background: var(--soft-mustard); }
+.t-sky .badge { background: var(--soft-sky); }
+.t-plum .badge { background: var(--soft-plum); }
+
+h3 { font-size: 17px; margin: 18px 0 8px; }
+.list { margin: 0; padding-left: 20px; }
+.list li { margin: 4px 0; }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 0; }
+.kv dt { color: var(--muted); font-weight: 600; }
+.kv dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+.note { background: var(--soft-mustard); border-radius: 14px; padding: 10px 14px; margin: 12px 0 0; font-size: 15px; }
+.warn { background: var(--soft-terracotta); }
+
+/* wifi */
+.wifi { display: grid; gap: 10px; }
+.wifi-row {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  background: var(--soft-sky); border-radius: 16px; padding: 12px 14px;
+}
+.wifi-row .lbl { font-size: 13px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+.wifi-row .val { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 18px; font-weight: 700; overflow-wrap: anywhere; }
+button {
+  font: inherit; font-weight: 700; cursor: pointer; border: 0; border-radius: 999px;
+  padding: 9px 14px; background: var(--ink); color: var(--bg); flex: none;
+}
+button:active { transform: scale(.97); }
+
+/* meals timeline */
+.meals { display: grid; gap: 10px; }
+.meal {
+  display: grid; grid-template-columns: 74px 1fr; gap: 12px; align-items: center;
+  border: 1px solid var(--line); border-radius: 16px; padding: 12px;
+}
+.meal.next { border-color: var(--terracotta); background: var(--soft-terracotta); }
+.meal .time { font-family: "Fredoka"; font-size: 22px; font-weight: 600; text-align: center; }
+.meal b { display: block; }
+.meal .what { color: var(--muted); font-size: 15px; }
+.pill { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--terracotta); color: #fff; margin-left: 6px; vertical-align: 2px; }
+
+/* checklist */
+.check { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.check label {
+  display: flex; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 14px;
+  padding: 10px 12px; cursor: pointer; user-select: none;
+}
+.check input { width: 22px; height: 22px; accent-color: var(--sage); flex: none; }
+.check input:checked + span { text-decoration: line-through; color: var(--muted); }
+.progress { height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 10px 0 4px; }
+.progress div { height: 100%; width: 0; background: var(--sage); transition: width .3s ease; }
+.progress-txt { font-size: 14px; color: var(--muted); }
+
+/* grids of small cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.mini { border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; }
+.mini .e { font-size: 26px; }
+.mini b { display: block; margin-top: 2px; }
+.mini p { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.chip { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--soft-sage); }
+.chip.on { background: var(--sage); color: #fff; }
+
+/* garbage */
+.bins { display: grid; gap: 10px; }
+.bin { display: grid; grid-template-columns: 48px 1fr auto; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 16px; padding: 12px; }
+.bin .dot { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-size: 24px; }
+.bin .when { text-align: right; font-weight: 700; font-size: 14px; }
+.bin .when small { display: block; color: var(--muted); font-weight: 600; }
+.bin.soon { border-color: var(--mustard); background: var(--soft-mustard); }
+
+/* contacts */
+.contact { display: flex; justify-content: space-between; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; }
+.contact + .contact { margin-top: 8px; }
+.contact small { display: block; color: var(--muted); }
+.contact a.btn { text-decoration: none; background: var(--sage); color: #fff; border-radius: 999px; padding: 8px 14px; font-weight: 700; flex: none; }
+
+.todo { background: var(--todo-bg); color: var(--todo-ink); border-radius: 6px; padding: 0 4px; font-weight: 700; }
+
+footer { text-align: center; color: var(--muted); padding: 24px 0 48px; font-size: 14px; }
+footer button { background: transparent; color: var(--muted); border: 1px solid var(--line); margin-top: 8px; }
+
+.toast {
+  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(80px);
+  background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 999px; font-weight: 700;
+  transition: transform .25s ease; z-index: 20;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Sections"><div class="wrap" id="nav"></div></nav>
+
+<main class="wrap">
+  <header class="hero">
+    <div>
+      <div class="hi" id="greeting">Welcome!</div>
+      <h1 id="title"></h1>
+      <p id="intro"></p>
+    </div>
+    <svg class="cat-svg" viewBox="0 0 120 120" aria-hidden="true">
+      <circle cx="60" cy="64" r="56" style="fill:var(--soft-terracotta)"/>
+      <path class="tail" d="M78 92 C 104 92, 110 70, 98 58" fill="none" stroke="#3a3530" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="58" cy="90" rx="30" ry="22" fill="#3a3530"/>
+      <path d="M30 40 L36 14 L52 32 Z" fill="#3a3530"/>
+      <path d="M86 40 L80 14 L64 32 Z" fill="#3a3530"/>
+      <circle cx="58" cy="50" r="28" fill="#3a3530"/>
+      <path d="M36 36 L39 22 L47 32 Z" fill="#e8a99a"/>
+      <path d="M80 36 L77 22 L69 32 Z" fill="#e8a99a"/>
+      <ellipse class="eye" cx="47" cy="48" rx="5" ry="6.5" fill="#e3b23c"/>
+      <ellipse class="eye" cx="69" cy="48" rx="5" ry="6.5" fill="#e3b23c"/>
+      <path d="M55 58 L61 58 L58 62 Z" fill="#e8a99a"/>
+      <path d="M58 62 Q 54 67 50 64 M58 62 Q 62 67 66 64" fill="none" stroke="#f3ece2" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M40 60 L24 57 M40 63 L24 65 M76 60 L92 57 M76 63 L92 65" stroke="#f3ece2" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+  </header>
+
+  <div class="today" aria-live="polite">
+    <h2>Today at home <small id="today-date"></small></h2>
+    <ul id="today-list"></ul>
+  </div>
+
+  <div class="tiles" id="tiles"></div>
+
+  <div id="sections"></div>
+
+  <footer>
+    <div id="signoff"></div>
+    <button type="button" id="theme-btn">🌓 Switch light / dark</button>
+  </footer>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* =====================================================================
+   ✏️  EDIT EVERYTHING HERE. Anything starting with "TODO" shows up
+   highlighted in yellow on the page so you can spot what's missing.
+   Days of the week: 0 = Sunday, 1 = Monday ... 6 = Saturday.
+   ===================================================================== */
+const HOME = {
+  hosts: "TODO: your names",
+  title: "Make yourself at home",
+  intro: "Everything you need for your stay: Wi-Fi, Molly's routine, the plants and where things live. Tap a tile to jump to it.",
+  signoff: "Thank you for looking after our home (and Molly)! 💛",
+
+  wifi: {
+    network: "TODO: network name",
+    password: "TODO: password",
+    note: "The router is TODO: where the router is. If the internet drops, unplug it for 10 seconds and plug it back in."
+  },
+
+  apartment: {
+    address: "TODO: street, number, apartment",
+    details: [
+      ["Door / building", "TODO: code or how the keys work"],
+      ["Heating / AC", "TODO: how to use it"],
+      ["Hot water", "TODO: boiler / instructions"],
+      ["Fuse box", "TODO: location"],
+      ["Water shut-off", "TODO: location"]
+    ],
+    tips: [
+      "Please keep windows on the cat-safe setting (tilted or with the screen) so Molly can't get out.",
+      "Shoes off at the door, please 👟",
+      "TODO: quiet hours / neighbor tips",
+      "TODO: anything else guests should know (washing machine, dishwasher, TV…)"
+    ]
+  },
+
+  cat: {
+    name: "Molly",
+    about: "TODO: a sentence about Molly, e.g. shy at first, loves chin scratches, hides under the bed when the doorbell rings.",
+    meals: [
+      { time: "07:30", label: "Breakfast", what: "TODO: food and amount (e.g. ½ pouch wet food)" },
+      { time: "13:00", label: "Snack",     what: "TODO: e.g. a small handful of dry food" },
+      { time: "19:30", label: "Dinner",    what: "TODO: food and amount" }
+    ],
+    daily: [
+      "Breakfast 🍽️",
+      "Fresh water in her bowl 💧",
+      "Scoop the litter box 🪣",
+      "Playtime, 10 minutes with the wand toy 🪶",
+      "Dinner 🍽️"
+    ],
+    where: [
+      ["Food", "TODO: cupboard / shelf"],
+      ["Treats", "TODO: location (max 3 a day 😉)"],
+      ["Litter & bags", "TODO: location"],
+      ["Carrier", "TODO: location"]
+    ],
+    dont: [
+      "No human food, especially onions, garlic, chocolate or milk.",
+      "Don't let her out on the balcony or into the stairwell.",
+      "TODO: anything else (toxic plants, closed doors…)"
+    ],
+    vet: { name: "TODO: vet clinic name", phone: "TODO: +00 000 000 000", address: "TODO: vet address" }
+  },
+
+  // water: which days of the week to water. 0=Sun … 6=Sat
+  plants: [
+    { emoji: "🪴", name: "TODO: plant name (e.g. Monstera)", where: "Living room", water: [3, 6], tip: "Water when the top 2 cm of soil is dry." },
+    { emoji: "🌵", name: "TODO: cactus / succulents", where: "Window sill", water: [0], tip: "Just a little, every week or two." },
+    { emoji: "🌿", name: "TODO: herbs", where: "Kitchen", water: [1, 3, 5], tip: "They like a drink every other day." }
+  ],
+  plantsNote: "Molly sometimes chews leaves, so please keep plants where they already are.",
+
+  supplies: [
+    { emoji: "🧴", name: "Cleaning sprays", where: "TODO: under the kitchen sink" },
+    { emoji: "🧹", name: "Broom & mop", where: "TODO: location" },
+    { emoji: "🌀", name: "Vacuum cleaner", where: "TODO: location" },
+    { emoji: "🧻", name: "Toilet paper & paper towels", where: "TODO: location" },
+    { emoji: "🛏️", name: "Fresh sheets & towels", where: "TODO: location" },
+    { emoji: "🗑️", name: "Garbage bags", where: "TODO: location" },
+    { emoji: "🧺", name: "Laundry detergent", where: "TODO: location" },
+    { emoji: "💡", name: "Light bulbs & batteries", where: "TODO: location" }
+  ],
+
+  cleaning: {
+    weekly: [
+      "Vacuum the floors (Molly sheds, sorry! 🐈‍⬛)",
+      "Wipe kitchen counters and stove",
+      "Clean the bathroom sink and toilet",
+      "Take out recycling"
+    ],
+    beforeYouGo: [
+      "Strip the bed and put sheets in the laundry basket",
+      "Run and empty the dishwasher",
+      "Empty all bins",
+      "Fill Molly's water and scoop the litter",
+      "Water any plants due that day",
+      "Close the windows and turn off lights & heating",
+      "TODO: leave the keys…"
+    ]
+  },
+
+  // Bins: days = pickup days (0=Sun … 6=Sat). Put them out the evening before.
+  garbage: {
+    note: "TODO: where the building bins are, and what time to take them down.",
+    bins: [
+      { emoji: "🗑️", name: "General waste", color: "var(--soft-plum)",    days: [2, 5], what: "Everything that isn't recyclable" },
+      { emoji: "♻️", name: "Recycling",     color: "var(--soft-mustard)", days: [3],    what: "Plastic, cans, cartons" },
+      { emoji: "📦", name: "Paper",         color: "var(--soft-sky)",     days: [1],    what: "Flatten the boxes, please" },
+      { emoji: "🍂", name: "Organic",       color: "var(--soft-sage)",    days: [4],    what: "Food scraps (not cat litter!)" }
+    ]
+  },
+
+  contacts: [
+    { name: "TODO: Host 1", role: "Owner", phone: "TODO: +00 000 000 000" },
+    { name: "TODO: Host 2", role: "Owner", phone: "TODO: +00 000 000 000" },
+    { name: "TODO: neighbor / friend nearby", role: "Has a spare key", phone: "TODO: +00 000 000 000" },
+    { name: "Emergency", role: "Police, fire, ambulance", phone: "112" }
+  ]
+};
+/* ===================== end of things to edit ===================== */
+
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const DAYS_LONG = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+// Escape text, and highlight anything still marked TODO
+const t = s => {
+  const v = esc(s);
+  return /^TODO/.test(String(s)) ? `<span class="todo">✏️ ${v.replace(/^TODO:?\s*/, "")}</span>`
+    : v.replace(/TODO:?\s*([^.]*)/g, '<span class="todo">✏️ $1</span>');
+};
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+const toast = msg => {
+  const el = document.getElementById("toast");
+  el.textContent = msg; el.classList.add("show");
+  clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("show"), 1600);
+};
+const toMin = hhmm => { const [h, m] = hhmm.split(":").map(Number); return h * 60 + m; };
+const nowMin = () => { const d = new Date(); return d.getHours() * 60 + d.getMinutes(); };
+const fmtDur = mins => mins < 60 ? `${mins} min` : `${Math.floor(mins / 60)}h ${String(mins % 60).padStart(2, "0")}m`;
+const daysUntil = days => {
+  const today = new Date().getDay();
+  return Math.min(...days.map(d => (d - today + 7) % 7));
+};
+const whenLabel = n => n === 0 ? "Today" : n === 1 ? "Tomorrow" : DAYS_LONG[(new Date().getDay() + n) % 7];
+const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; };
+
+const SECTIONS = [
+  { id: "wifi", emoji: "📶", label: "Wi-Fi", tone: "sky" },
+  { id: "molly", emoji: "🐱", label: HOME.cat.name, tone: "terracotta" },
+  { id: "plants", emoji: "🌿", label: "Plants", tone: "sage" },
+  { id: "garbage", emoji: "🗑️", label: "Garbage", tone: "plum" },
+  { id: "supplies", emoji: "🧴", label: "Supplies", tone: "mustard" },
+  { id: "cleaning", emoji: "🧹", label: "Cleaning", tone: "sky" },
+  { id: "home", emoji: "🏠", label: "Apartment", tone: "terracotta" },
+  { id: "contacts", emoji: "📞", label: "Contacts", tone: "sage" }
+];
+
+function sectionShell(s, subtitle, body) {
+  return `<section class="card t-${s.tone}" id="${s.id}">
+    <div class="sec-head"><div class="badge">${s.emoji}</div>
+      <div><h2>${esc(s.label === HOME.cat.name ? `${HOME.cat.name} the cat` : s.label)}</h2><p>${subtitle}</p></div></div>
+    ${body}</section>`;
+}
+
+function renderChecklist(id, items) {
+  const key = `check:${id}:${id === "cat" ? todayKey() : "all"}`;
+  const saved = store.get(key) || [];
+  return `<ul class="check" data-key="${key}" data-id="${id}">${items.map((it, i) =>
+    `<li><label><input type="checkbox" data-i="${i}" ${saved.includes(i) ? "checked" : ""}><span>${t(it)}</span></label></li>`).join("")}</ul>
+    <div class="progress"><div id="prog-${id}"></div></div><div class="progress-txt" id="progt-${id}"></div>`;
+}
+
+function render() {
+  const H = HOME, C = H.cat, S = Object.fromEntries(SECTIONS.map(s => [s.id, s]));
+  const hour = new Date().getHours();
+  document.getElementById("greeting").textContent =
+    (hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening") + " & welcome! 👋";
+  document.getElementById("title").textContent = H.title;
+  document.getElementById("intro").textContent = H.intro;
+  document.getElementById("signoff").innerHTML = `${esc(H.signoff)}<br>${t(H.hosts)}`;
+  document.getElementById("nav").innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.emoji} ${esc(s.label)}</a>`).join("");
+  document.getElementById("tiles").innerHTML = SECTIONS.map(s =>
+    `<a class="tile" href="#${s.id}"><span class="e">${s.emoji}</span><span>${esc(s.label)}</span></a>`).join("");
+
+  const today = new Date().getDay();
+  const out = [];
+
+  out.push(sectionShell(S.wifi, "Tap to copy", `
+    <div class="wifi">
+      <div class="wifi-row"><div><div class="lbl">Network</div><div class="val">${t(H.wifi.network)}</div></div>
+        <button type="button" data-copy="${esc(H.wifi.network)}">Copy</button></div>
+      <div class="wifi-row"><div><div class="lbl">Password</div><div class="val">${t(H.wifi.password)}</div></div>
+        <button type="button" data-copy="${esc(H.wifi.password)}">Copy</button></div>
+    </div>
+    <p class="note">${t(H.wifi.note)}</p>`));
+
+  out.push(sectionShell(S.molly, "Meals, daily routine and house rules", `
+    <p>${t(C.about)}</p>
+    <h3>🍽️ Feeding times</h3>
+    <div class="meals" id="meals"></div>
+    <h3>✅ ${esc(C.name)}'s checklist for today</h3>
+    ${renderChecklist("cat", C.daily)}
+    <h3>📍 Where her things are</h3>
+    <dl class="kv">${C.where.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${t(v)}</dd>`).join("")}</dl>
+    <h3>🚫 Please don't</h3>
+    <ul class="list">${C.dont.map(d => `<li>${t(d)}</li>`).join("")}</ul>
+    <div class="note warn"><b>🩺 Vet:</b> ${t(C.vet.name)} · ${t(C.vet.phone)}<br>${t(C.vet.address)}</div>`));
+
+  out.push(sectionShell(S.plants, `Highlighted days = watering days. Today is ${DAYS_LONG[today]}.`, `
+    <div class="grid">${H.plants.map(p => `
+      <div class="mini"><div class="e">${p.emoji}</div><b>${t(p.name)}</b><p>📍 ${t(p.where)}</p><p>${t(p.tip)}</p>
+        <div class="chips">${[1,2,3,4,5,6,0].map(d => `<span class="chip ${p.water.includes(d) ? "on" : ""}" ${d === today ? 'style="outline:2px solid var(--ink)"' : ""}>${DAYS[d]}</span>`).join("")}</div>
+      </div>`).join("")}</div>
+    <p class="note">${t(H.plantsNote)}</p>`));
+
+  const bins = H.garbage.bins.map(b => ({ ...b, n: daysUntil(b.days) })).sort((a, b) => a.n - b.n);
+  out.push(sectionShell(S.garbage, "Put the bins out the evening before pickup", `
+    <div class="bins">${bins.map(b => `
+      <div class="bin ${b.n <= 1 ? "soon" : ""}"><div class="dot" style="background:${b.color}">${b.emoji}</div>
+        <div><b>${esc(b.name)}</b><div style="color:var(--muted);font-size:14px">${t(b.what)}</div></div>
+        <div class="when">${whenLabel(b.n)}<small>${b.days.map(d => DAYS[d]).join(" & ")}</small></div></div>`).join("")}</div>
+    <p class="note">${t(H.garbage.note)}</p>`));
+
+  out.push(sectionShell(S.supplies, "Where to find things", `
+    <div class="grid">${H.supplies.map(s => `<div class="mini"><div class="e">${s.emoji}</div><b>${esc(s.name)}</b><p>📍 ${t(s.where)}</p></div>`).join("")}</div>`));
+
+  out.push(sectionShell(S.cleaning, "Keeping things cozy", `
+    <h3>🗓️ Once a week</h3>
+    <ul class="list">${H.cleaning.weekly.map(i => `<li>${t(i)}</li>`).join("")}</ul>
+    <h3>👋 Before you leave</h3>
+    ${renderChecklist("leave", H.cleaning.beforeYouGo)}`));
+
+  out.push(sectionShell(S.home, "The practical stuff", `
+    <dl class="kv"><dt>Address</dt><dd>${t(H.apartment.address)}</dd>
+      ${H.apartment.details.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${t(v)}</dd>`).join("")}</dl>
+    <h3>💡 Good to know</h3>
+    <ul class="list">${H.apartment.tips.map(i => `<li>${t(i)}</li>`).join("")}</ul>`));
+
+  out.push(sectionShell(S.contacts, "Call or message anytime", H.contacts.map(c => {
+    const tel = /^TODO/.test(c.phone) ? "" : c.phone.replace(/[^\d+]/g, "");
+    return `<div class="contact"><div><b>${t(c.name)}</b><small>${esc(c.role)} · ${t(c.phone)}</small></div>
+      ${tel ? `<a class="btn" href="tel:${esc(tel)}">Call</a>` : ""}</div>`;
+  }).join("")));
+
+  document.getElementById("sections").innerHTML = out.join("");
+  updateLive();
+  ["cat", "leave"].forEach(updateProgress);
+}
+
+function updateProgress(id) {
+  const ul = document.querySelector(`.check[data-id="${id}"]`);
+  if (!ul) return;
+  const boxes = [...ul.querySelectorAll("input")], done = boxes.filter(b => b.checked).length;
+  document.getElementById(`prog-${id}`).style.width = `${(done / boxes.length) * 100}%`;
+  document.getElementById(`progt-${id}`).textContent =
+    done === boxes.length ? "All done, thank you! 🎉" : `${done} of ${boxes.length} done`;
+}
+
+// Things that depend on the clock: next meal, today panel
+function updateLive() {
+  const H = HOME, C = H.cat, now = nowMin(), today = new Date().getDay();
+  const meals = C.meals.map(m => ({ ...m, min: toMin(m.time) })).sort((a, b) => a.min - b.min);
+  const next = meals.find(m => m.min > now) || meals[0];
+  const until = next.min > now ? next.min - now : next.min + 1440 - now;
+
+  const mealsEl = document.getElementById("meals");
+  if (mealsEl) mealsEl.innerHTML = meals.map(m => `
+    <div class="meal ${m === next ? "next" : ""}"><div class="time">${esc(m.time)}</div>
+      <div><b>${esc(m.label)}${m === next ? `<span class="pill">next · in ${fmtDur(until)}</span>` : ""}</b>
+      <div class="what">${t(m.what)}</div></div></div>`).join("");
+
+  document.getElementById("today-date").textContent =
+    new Date().toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
+
+  const items = [];
+  items.push(["🐱", `${C.name}'s next meal: ${next.label} at ${next.time}`, `in ${fmtDur(until)}`]);
+
+  const binsToday = H.garbage.bins.filter(b => b.days.includes(today));
+  const binsTomorrow = H.garbage.bins.filter(b => b.days.includes((today + 1) % 7));
+  if (binsTomorrow.length)
+    items.push(["🌙", `Tonight: take out the ${binsTomorrow.map(b => b.name.toLowerCase()).join(" & ")}`, "Pickup is tomorrow"]);
+  if (binsToday.length)
+    items.push(["🚛", `Pickup today: ${binsToday.map(b => b.name.toLowerCase()).join(" & ")}`, "If it's still early, there's time!"]);
+
+  const thirsty = H.plants.filter(p => p.water.includes(today));
+  items.push(thirsty.length
+    ? ["💧", `Water today: ${thirsty.map(p => String(p.name).replace(/^TODO:?\s*/, "")).join(", ")}`, "Tap Plants for details"]
+    : ["🌿", "No plants to water today", "Enjoy the day off"]);
+
+  const done = (store.get(`check:cat:${todayKey()}`) || []).length;
+  items.push(["✅", `${C.name}'s checklist: ${done} of ${C.daily.length} done`, done === C.daily.length ? "Purrfect 🎉" : "Tick things off as you go"]);
+
+  document.getElementById("today-list").innerHTML = items.map(([e, b, s]) =>
+    `<li><span class="e">${e}</span><div><b>${esc(b)}</b><span class="s">${esc(s)}</span></div></li>`).join("");
+}
+
+document.addEventListener("click", async e => {
+  const btn = e.target.closest("[data-copy]");
+  if (!btn) return;
+  try { await navigator.clipboard.writeText(btn.dataset.copy); toast("Copied! 📋"); }
+  catch (err) { toast("Couldn't copy, please type it in"); }
+});
+
+document.addEventListener("change", e => {
+  const ul = e.target.closest(".check");
+  if (!ul) return;
+  const checked = [...ul.querySelectorAll("input")].filter(b => b.checked).map(b => +b.dataset.i);
+  store.set(ul.dataset.key, checked);
+  updateProgress(ul.dataset.id);
+  updateLive();
+  if (e.target.checked && ul.dataset.id === "cat") toast(checked.length === HOME.cat.daily.length ? `${HOME.cat.name} says thank you! 🐾` : "Meow! 🐾");
+});
+
+const themeBtn = document.getElementById("theme-btn");
+const savedTheme = store.get("theme");
+if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+themeBtn.addEventListener("click", () => {
+  const dark = document.documentElement.dataset.theme
+    ? document.documentElement.dataset.theme === "dark"
+    : matchMedia("(prefers-color-scheme: dark)").matches;
+  const next = dark ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  store.set("theme", next);
+});
+
+render();
+setInterval(updateLive, 60 * 1000);
+</script>
+</body>
+</html>
