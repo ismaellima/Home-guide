@@ -229,6 +229,12 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 .photo-stamp figcaption { text-align: center; margin-top: 12px; font: 900 19px/1.1 "Phudu", sans-serif; text-transform: uppercase; }
 .photo-stamp figcaption::after { content: ""; display: block; width: 60%; height: 3px; background: var(--red); margin: 5px auto 0; }
 
+/* wifi QR */
+.wifi-qr { margin: 14px auto 0; text-align: center; }
+.qr-box { width: 180px; height: 180px; margin: 0 auto; background: #fff; border: 3px solid var(--edge); border-radius: 16px; padding: 8px; box-shadow: 4px 4px 0 var(--edge); }
+.qr-box svg { width: 100%; height: 100%; display: block; }
+.wifi-qr figcaption { margin-top: 10px; font-size: 14px; font-weight: 700; color: var(--muted); }
+
 /* lock */
 .lock-card { background: var(--sun); color: #111; border: 3px solid var(--edge); border-radius: 18px; padding: 16px; box-shadow: 4px 4px 0 var(--edge); }
 .lock-head { display: flex; gap: 12px; align-items: center; }
@@ -881,7 +887,7 @@ const UI = {
     dont: "Please don't", vet: "Vet:", next: d => `next · in ${d}`,
     weekly: "Once a week", beforeGo: "Before you leave",
     address: "Address", goodToKnow: "Good to know", call: "Call", emailBtn: "Email",
-    lockedSub: "Locked: use the code we sent you", lockedTitle: "Private details",
+    qrCap: "Scan with another phone to join the Wi-Fi", lockedSub: "Locked: use the code we sent you", lockedTitle: "Private details",
     lockedText: "The Wi-Fi and the address are locked. Enter the code we sent you to see them.",
     codePh: "Your code", unlock: "Unlock", unlocking: "Unlocking…", wrongCode: "That code doesn't match. Check it and try again?",
     unlocked: "Unlocked! Welcome", relock: "Lock again on this device", addrLocked: "Locked: unlock it in the Wi-Fi section",
@@ -922,7 +928,7 @@ const UI = {
     dont: "À éviter", vet: "Vétérinaire :", next: d => `prochain · dans ${d}`,
     weekly: "Une fois par semaine", beforeGo: "Avant de partir",
     address: "Adresse", goodToKnow: "Bon à savoir", call: "Appeler", emailBtn: "Courriel",
-    lockedSub: "Verrouillé : utilisez le code qu'on vous a envoyé", lockedTitle: "Infos privées",
+    qrCap: "Scannez avec un autre téléphone pour rejoindre le Wi-Fi", lockedSub: "Verrouillé : utilisez le code qu'on vous a envoyé", lockedTitle: "Infos privées",
     lockedText: "Le Wi-Fi et l'adresse sont verrouillés. Entrez le code qu'on vous a envoyé pour les voir.",
     codePh: "Votre code", unlock: "Déverrouiller", unlocking: "Déverrouillage…", wrongCode: "Ce code ne correspond pas. Vérifiez-le et réessayez ?",
     unlocked: "Déverrouillé ! Bienvenue", relock: "Reverrouiller sur cet appareil", addrLocked: "Verrouillé : déverrouillez dans la section Wi-Fi",
@@ -970,7 +976,7 @@ const whenLabel = n => n === 0 ? U().today : n === 1 ? U().tomorrow : U().daysLo
 const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; };
 
 /* Private details: encrypted with the access code (see tools/lock-secrets.mjs) */
-/*LOCKED*/const LOCKED = {"v":1,"iter":600000,"salt":"aJje3/IEeb0hDKTIvIzhfQ==","iv":"e8BSJOufsi6yGrz/","ct":"ODxqsUqSt1uxe22kLAQHlRxHOzPcPuA5zU/s55ojtqy7AxiJG35kVijclRl1oTf3w+wrOupOKsvIPd/5Dm6DVujMo2Z4ZHYbFlxXx51K6+gf3DSWfsjIKtrzbZzv9ZopuQHpV5wnm9ygH66k8kcEhTTYMO+VmWEU2Xwphf/m8b/ZB7RrNukd0pU0Q/52NqhMeCbm/21ptDg7j8Lzpmw5/DM7"};/*/LOCKED*/
+/*LOCKED*/const LOCKED = {"v":1,"iter":600000,"salt":"8rdyGHBTGWk3zrVq+RNjlQ==","iv":"egB5TxKFQA2VQwlQ","ct":"CF5GHan+Fn5e3kV1DvpZusrkfE2OyHmRNULkp1as3tcsGYpPBG4K4J44XaSebnnUxvf8DjHhusohYF9rTobXHfTK8a0EERHAogY1HJWoLT1e02K5RPPzREyA+8gz00IQGt97GyQdN1L+NwZLEBDDfHUlg2jmXJQyNfuxkf9RP0Ro9/hfxGPN08Co3WOI9RpAloZl"};/*/LOCKED*/
 let SECRET = null;
 const normCode = c => String(c || "").trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
 const b64d = s => Uint8Array.from(atob(s), ch => ch.charCodeAt(0));
@@ -1048,6 +1054,7 @@ function render() {
       <div class="wifi-row"><div><div class="lbl">${u.password}</div><div class="val">${t(SECRET.wifi.password)}</div></div>
         <button type="button" data-copy="${esc(SECRET.wifi.password)}">${u.copy}</button></div>
     </div>
+    <figure class="wifi-qr"><div id="wifi-qr" class="qr-box" role="img" aria-label="${esc(u.qrCap)}"></div><figcaption>${esc(u.qrCap)}</figcaption></figure>
     <p class="note">${t(H.wifi.note)}</p>
     <button type="button" class="relock" id="relock">${ic("lock")} ${u.relock}</button>` : `
     <form class="lock-card" id="unlock" autocomplete="off">
@@ -1124,8 +1131,22 @@ function render() {
   }).join("")));
 
   document.getElementById("sections").innerHTML = out.join("");
+  drawWifiQR();
   updateLive();
   ["cat", "leave"].forEach(updateProgress);
+}
+
+// Wi-Fi join QR (built on the guest's device after unlocking; nothing private is stored in the page)
+let qrLib;
+function drawWifiQR() {
+  const box = document.getElementById("wifi-qr");
+  if (!box || !SECRET) return;
+  const escQ = v => String(v).replace(/([\\;,:"])/g, "\\$1");
+  const payload = `WIFI:T:WPA;S:${escQ(SECRET.wifi.network)};P:${escQ(SECRET.wifi.password)};;`;
+  const draw = () => { const qr = qrcode(0, "M"); qr.addData(payload); qr.make(); box.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 2, scalable: true }); };
+  if (window.qrcode) return draw();
+  qrLib = qrLib || new Promise((ok, fail) => { const sc = document.createElement("script"); sc.src = "assets/vendor/qrcode-generator-1.4.4.js"; sc.onload = ok; sc.onerror = fail; document.head.appendChild(sc); });
+  qrLib.then(draw).catch(() => box.closest("figure")?.remove());
 }
 
 function updateProgress(id) {
