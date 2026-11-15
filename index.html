@@ -453,6 +453,18 @@ footer p { margin: 14px auto 6px; max-width: 46ch; font-weight: 600; }
 footer .small { font-size: 13px; color: var(--muted); }
 footer button { margin-top: 16px; }
 
+/* floating WhatsApp button */
+.fab-wrap { position: fixed; z-index: 40; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 10px; pointer-events: none; }
+.fab { pointer-events: auto; width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: var(--leaf); border: 3px solid #111; box-shadow: 4px 4px 0 #111; transition: transform .08s ease, box-shadow .08s ease; -webkit-tap-highlight-color: transparent; }
+.fab:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #111; }
+.fab:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 #111; }
+.fab:focus-visible { outline: 3px dashed var(--blue); outline-offset: 4px; }
+.fab .ic { width: 34px; height: 34px; }
+.fab-tip { background: var(--cream); color: #111; border: 2.5px solid #111; border-radius: 14px; padding: 7px 11px; font-size: 13px; font-weight: 800; box-shadow: 3px 3px 0 #111; white-space: nowrap; opacity: 0; transform: translateX(8px); transition: opacity .3s ease, transform .3s ease; }
+.fab-tip.show { opacity: 1; transform: none; }
+footer { padding-bottom: 96px; }
+@media (prefers-reduced-motion: reduce) { .fab-tip { transition: none; } }
+
 .toast {
   position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(100px); z-index: 50;
   background: var(--cream); color: #111; border: 3px solid #111; box-shadow: 4px 4px 0 #111;
@@ -1332,6 +1344,10 @@ footer button { margin-top: 16px; }
   </footer>
 </main>
 
+<div class="fab-wrap" id="fab-wrap">
+  <span class="fab-tip" id="fab-tip" aria-hidden="true"></span>
+  <a class="fab" id="fab" href="#" target="_blank" rel="noopener"></a>
+</div>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
@@ -1647,7 +1663,7 @@ const UI = {
     feeding: "Feeding times", checklist: n => `${n}'s checklist for today`, whereHer: "Where her things are",
     dont: "Please don't", vet: "Vet:", next: d => `next · in ${d}`,
     weekly: "Once a week", important: "Important", leaveLine: n => `Check-out around noon · ${n} quick steps`,
-    address: "Address", goodToKnow: "Good to know", call: "Call", emailBtn: "Email",
+    address: "Address", goodToKnow: "Good to know", call: "Call", emailBtn: "Email", fabTip: "Questions? Message us!", fabLabel: "Message Ismael on WhatsApp", waHello: "Hi Ismael! 👋 (from the home guide) ",
     qrCap: "Scan with another phone to join the Wi-Fi", lockedSub: "Locked: use the code we sent you", lockedTitle: "Private details",
     lockedText: "The Wi-Fi and the address are locked. Enter the code we sent you to see them.",
     codePh: "Your code", unlock: "Unlock", unlocking: "Unlocking…", wrongCode: "That code doesn't match. Check it and try again?",
@@ -1692,7 +1708,7 @@ const UI = {
     feeding: "Heures des repas", checklist: n => `La liste de ${n} pour aujourd'hui`, whereHer: "Où sont ses affaires",
     dont: "À éviter", vet: "Vétérinaire :", next: d => `prochain · dans ${d}`,
     weekly: "Une fois par semaine", important: "Important", leaveLine: n => `Départ vers midi · ${n} petites étapes`,
-    address: "Adresse", goodToKnow: "Bon à savoir", call: "Appeler", emailBtn: "Courriel",
+    address: "Adresse", goodToKnow: "Bon à savoir", call: "Appeler", emailBtn: "Courriel", fabTip: "Une question ? Écrivez-nous !", fabLabel: "Écrire à Ismael sur WhatsApp", waHello: "Salut Ismael ! 👋 (depuis le guide) ",
     qrCap: "Scannez avec un autre téléphone pour rejoindre le Wi-Fi", lockedSub: "Verrouillé : utilisez le code qu'on vous a envoyé", lockedTitle: "Infos privées",
     lockedText: "Le Wi-Fi et l'adresse sont verrouillés. Entrez le code qu'on vous a envoyé pour les voir.",
     codePh: "Votre code", unlock: "Déverrouiller", unlocking: "Déverrouillage…", wrongCode: "Ce code ne correspond pas. Vérifiez-le et réessayez ?",
@@ -1930,6 +1946,14 @@ function render() {
       ${acts ? `<div class="acts">${acts}</div>` : ""}</div>`;
   }).join("")));
 
+  const host = H.contacts.find(c => c.whatsapp);
+  const fab = document.getElementById("fab");
+  if (host) {
+    fab.href = `https://wa.me/${host.whatsapp}?text=${encodeURIComponent(u.waHello)}`;
+    fab.innerHTML = ic("chat");
+    fab.setAttribute("aria-label", u.fabLabel); fab.title = u.fabLabel;
+    document.getElementById("fab-tip").textContent = u.fabTip;
+  } else document.getElementById("fab-wrap").hidden = true;
   document.getElementById("sections").innerHTML = SECTIONS.map(s => out[s.id] || "").join("");
   drawWifiQR();
   updateLive();
@@ -2105,6 +2129,15 @@ themeBtn.addEventListener("click", () => {
   else if (remembered) await tryCode(remembered, true);
   render();
   setupScene();
+  try {
+    const key = `fabtip:${todayKey()}`;
+    if (!store.get(key)) {
+      store.set(key, 1);
+      const tip = document.getElementById("fab-tip");
+      setTimeout(() => tip.classList.add("show"), 1500);
+      setTimeout(() => tip.classList.remove("show"), 6500);
+    }
+  } catch (e) {}
   setInterval(updateLive, 60 * 1000);
 })();
 </script>
