@@ -167,14 +167,17 @@ button:active, .pillbtn:active { transform: translate(2px, 2px); box-shadow: 1px
 .today li span.s { opacity: .85; font-size: 14px; }
 
 /* tiles */
-.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 24px 0 8px; }
+.tiles { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 24px 0 8px; }
+.tiles .tile { grid-column: span 2; }
+.tiles .tile:nth-child(7), .tiles .tile:nth-child(8) { grid-column: span 3; }
 .tile {
   text-decoration: none; color: #111; background: var(--cream); border: 3px solid var(--edge); border-radius: 16px;
   padding: 12px 4px 10px; text-align: center; box-shadow: 4px 4px 0 var(--edge); transition: transform .08s, box-shadow .08s;
 }
 .tile:nth-child(4n+1) { background: var(--sky); } .tile:nth-child(4n+2) { background: var(--pink); }
 .tile:nth-child(4n+3) { background: var(--leaf); } .tile:nth-child(4n+4) { background: var(--cream); }
-.tile.wide { grid-column: 1 / -1; background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; gap: 12px; }
+.tiles .tile.wide { grid-column: 1 / -1; }
+.tile.wide { background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; gap: 12px; }
 .tile.wide .e { display: inline; }
 .tile:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--edge); }
 .tile:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--edge); }
@@ -241,6 +244,10 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 #checkout { border-color: var(--red); box-shadow: 8px 8px 0 var(--red); }
 .important { font-size: 16px; }
 .important b { text-transform: uppercase; letter-spacing: .06em; }
+
+.acts-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.acts-row .pillbtn.small { margin-top: 0; }
+.muted-line { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
 
 /* Montreal */
 .hood { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
@@ -1286,10 +1293,27 @@ const HOME = {
       [{ en: "Laundry", fr: "Lessive" }, { en: "Washer and dryer, inside the bathroom.", fr: "Laveuse et sécheuse, dans la salle de bain." }],
       [{ en: "Home office", fr: "Bureau" }, { en: "Feel free to use it! Plug your laptop into the screen for a bigger display.", fr: "Servez-vous-en ! Branchez votre ordi à l'écran pour un plus grand affichage." }],
       [{ en: "Parking", fr: "Stationnement" }, { en: "Free street parking is often available on rue Coloniale. Check the signs for restrictions.", fr: "Stationnement gratuit souvent disponible sur la rue Coloniale. Vérifiez les panneaux." }],
-      [{ en: "Door / keys", fr: "Porte / clés" }, { en: "We'll send you the door and key details before you arrive.", fr: "On vous enverra les infos pour la porte et les clés avant votre arrivée." }]
+      [{ en: "Door / keys", fr: "Porte / clés" }, { en: "We'll send you the door and key details before you arrive.", fr: "On vous enverra les infos pour la porte et les clés avant votre arrivée." }],
+      [{ en: "Heating", fr: "Chauffage" }, { en: "Pre-programmed. You can adjust it with the thermostat on the wall of each room.", fr: "Préprogrammé. Vous pouvez l'ajuster avec le thermostat au mur de chaque pièce." }],
+      [{ en: "Hot water", fr: "Eau chaude" }, { en: "Always available, no need to do anything.", fr: "Toujours disponible, rien à faire." }],
+      [{ en: "Help yourself", fr: "Servez-vous" }, { en: "Coffee is in the cabinet above the microwave, spices are above the oven.", fr: "Le café est dans l'armoire au-dessus du micro-ondes, les épices au-dessus du four." }]
+    ],
+    // Arrival & departure (the key spot itself is private: see .secrets, "keySpot")
+    arrival: {
+      en: "Arrival time: we'll arrange it together. When you arrive, please send us a WhatsApp message and check on Molly.",
+      fr: "Heure d'arrivée : on s'organise ensemble. À votre arrivée, envoyez-nous un message WhatsApp et allez voir Molly."
+    },
+    departure: {
+      en: "Check-out: around noon is ideal. If no one is arriving after you, we can be flexible: just ask!",
+      fr: "Départ : vers midi, c'est idéal. Si personne n'arrive après vous, on peut être flexibles : demandez-nous !"
+    },
+    groceries: [
+      { name: "Intermarché", q: "Intermarché, Avenue du Mont-Royal Est, Montréal" },
+      { name: "Maxi", q: "Maxi, Avenue du Mont-Royal Est, Montréal" }
     ],
     tips: [
       { en: "Always lock the door when you leave.", fr: "Verrouillez toujours la porte en partant." },
+      { en: "No smoking indoors. If needed, please go outside the building.", fr: "Interdit de fumer à l'intérieur. Au besoin, sortez de l'immeuble." },
       { en: "Please be respectful to the neighbours (they know you're staying). No loud music.", fr: "Merci de respecter les voisins (ils savent que vous êtes là). Pas de musique forte." },
       { en: "Molly is an indoor cat: keep the doors closed so she can't slip out.", fr: "Molly est une chatte d'intérieur : gardez les portes fermées pour qu'elle ne se faufile pas dehors." }
     ]
@@ -1335,17 +1359,15 @@ const HOME = {
     }
   },
 
-  // water: which days of the week to water. 0=Sun … 6=Sat
-  plants: [
-    { icon: "plant", name: { en: "All the indoor plants", fr: "Toutes les plantes d'intérieur" }, where: { en: "Around the apartment", fr: "Un peu partout" }, water: [0],
-      tip: { en: "Once a week, but only if the soil feels dry. They're pretty low-maintenance!", fr: "Une fois par semaine, seulement si la terre est sèche. Elles sont faciles à vivre !" } }
-  ],
-  plantsNote: {
-    en: "How to check: press a finger into the soil. If it's dry 2–5 cm (1–2 inches) down, it's time to water.",
-    fr: "Pour vérifier : enfoncez un doigt dans la terre. Si elle est sèche sur 2 à 5 cm, c'est le moment d'arroser."
+  // Plants: a daily look (shown in Housekeeping)
+  plantsTip: {
+    en: "Check the plants every day. If the soil is dry or the leaves are drooping, give them more water.",
+    fr: "Jetez un œil aux plantes chaque jour. Si la terre est sèche ou si les feuilles tombent, donnez-leur plus d'eau."
   },
 
   supplies: [
+    { icon: "cup", name: { en: "Coffee", fr: "Café" }, where: { en: "In the cabinet above the microwave", fr: "Dans l'armoire au-dessus du micro-ondes" } },
+    { icon: "bowl", name: { en: "Spices", fr: "Épices" }, where: { en: "Above the oven", fr: "Au-dessus du four" } },
     { icon: "spray", name: { en: "Cleaning products", fr: "Produits ménagers" }, where: { en: "Under the kitchen sink", fr: "Sous l'évier de la cuisine" } },
     { icon: "towels", name: { en: "Fresh towels", fr: "Serviettes propres" }, where: { en: "Above the washer", fr: "Au-dessus de la laveuse" } },
     { icon: "bag", name: { en: "Extra cat litter", fr: "Litière en réserve" }, where: { en: "Near the kitchen", fr: "Près de la cuisine" } },
@@ -1376,7 +1398,7 @@ const HOME = {
       { en: "Your food is out of the fridge and the bins are emptied", fr: "Votre nourriture est sortie du frigo et les poubelles sont vidées" },
       { en: "Molly has dry food and fresh water, and her litter is scooped", fr: "Molly a des croquettes et de l'eau fraîche, et sa litière est ramassée" },
       { en: "Windows closed and lights off", fr: "Fenêtres fermées et lumières éteintes" },
-      { en: "Door locked behind you", fr: "Porte verrouillée en partant" }
+      "KEY"
     ]
   },
 
@@ -1551,8 +1573,9 @@ const UI = {
     liveMeal: (n, l, t) => `${n}'s next meal: ${l} at ${t}`, liveIn: d => `in ${d}`,
     tonight: b => `Tonight: take out the ${b}`, pickupTomorrow: "Pickup is tomorrow",
     pickupToday: b => `Pickup today: ${b}`, stillTime: "If it's still early, there's time!",
-    water: p => `Water today: ${p}`, waterTap: "Tap Plants for details",
-    noWater: "No plants to water today", dayOff: "Enjoy the day off",
+    plantCheck: "Quick plant check", plantCheckSub: "Dry soil or droopy leaves? Give them water.",
+    plantsTitle: "Plants", arrDep: "Arrival & departure", groceries: "Groceries nearby", groceriesNote: "Both on avenue du Mont-Royal.",
+    keyLocked: { en: "Lock the door and leave the key in the agreed spot (unlock the guide to see where).", fr: "Verrouillez la porte et laissez la clé à l'endroit convenu (déverrouillez le guide pour le voir)." },
     liveCheck: (n, d, t) => `${n}'s checklist: ${d} of ${t} done`, purrfect: "Purrfect", tickOff: "Tick things off as you go",
     meow: "Meow!", thanks: n => `${n} says thank you!`
   },
@@ -1595,8 +1618,9 @@ const UI = {
     liveMeal: (n, l, t) => `Prochain repas de ${n} : ${l.toLowerCase()} à ${t.replace(":", "h")}`, liveIn: d => `dans ${d}`,
     tonight: b => `Ce soir, à sortir : ${b}`, pickupTomorrow: "Ramassage demain",
     pickupToday: b => `Ramassage aujourd'hui : ${b}`, stillTime: "S'il est encore tôt, il est encore temps !",
-    water: p => `À arroser aujourd'hui : ${p}`, waterTap: "Voir Plantes pour les détails",
-    noWater: "Pas d'arrosage aujourd'hui", dayOff: "Profitez de la journée",
+    plantCheck: "Petit coup d'œil aux plantes", plantCheckSub: "Terre sèche ou feuilles tombantes ? Arrosez-les.",
+    plantsTitle: "Plantes", arrDep: "Arrivée et départ", groceries: "Épiceries à proximité", groceriesNote: "Les deux sur l'avenue du Mont-Royal.",
+    keyLocked: { en: "Lock the door and leave the key in the agreed spot (unlock the guide to see where).", fr: "Verrouillez la porte et laissez la clé à l'endroit convenu (déverrouillez le guide pour le voir)." },
     liveCheck: (n, d, t) => `Liste de ${n} : ${d} sur ${t}`, purrfect: "Parfait, ronron", tickOff: "Cochez au fur et à mesure",
     meow: "Miaou !", thanks: n => `${n} vous dit merci !`
   }
@@ -1635,7 +1659,7 @@ const whenLabel = n => n === 0 ? U().today : n === 1 ? U().tomorrow : U().daysLo
 const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; };
 
 /* Private details: encrypted with the access code (see tools/lock-secrets.mjs) */
-/*LOCKED*/const LOCKED = {"v":1,"iter":600000,"salt":"iQH+4l+QENn59Hya4V4gGg==","iv":"Pxv50lKrz83Cm58k","ct":"IfLrEAi51h/EvmHVDZ6LeRw+HasiHzQA95gJGBPHxccw17LeTAsh7+YNGullloZ07Ps7gDEjHC5c9WF4sRHK25MZqibvGkla8UMVQ8brzyQSsdiR8Tba1MxN0achav6pwGFpcQEZFfcK8HURExlc+O3vOyyWWqIuPRX8/zafrCyIk7MRFMs5aF2ydgnne1ZfsW4q65JsvS3asuB31nzEODIm+M5sT3ACv9qYuqrbtbQ9hU4oNn2h8wjK7Jo+HsLSP3dMeNBYpnLEFRpEm91o5e5HfjgZin67lyMqodMEa7j0SpdEkRPXSNjd763d7l4YKzORUTvRQc7EVkO4jO50VW286jxaRCjmpFNN6JsJo5t033zXyenrngkle3JJERNjsoQqNo1hT8RcAFGr7hcdP8L+l77ur5ZUk+o3m9qJGoux6vo8NjUOXNdbJ/fH5xTZl8cPQj41Yp68YghaKF22GzlvEy8l4Ii15jGUjV68lREPzBOEt0vxP7eIc8RITiaeRTS3SWmSIqisFXT278BUpCid4Cg7duq7T8k7rM8BZJyGqGpswZFJd5w0ZIOszSbYdJl+Ht9z5Y4g2xGklBZpH7CKBDmi+VqJ6PFLAlqpUTs2AxSOwku4mjFK8rSuIgrGAPhyna/dWzj0oWsP4KJGgBlSzuMITMV/6fyN4+4kUPRuV+lMk0vZBs3Z+uyaRnsZzA9GmM2jmdbI/D9Vbr+ApVXm7eIeZ0PHO2575dyldJMfZHJzeQDrvk77J1+XNd/yhjMff1Jx/plYDmS19wQj41iYiaxT2DPSctWgVyrcQI5ha480S7641VHNQhFRh1eRVVs3nViMntDH0hVj5WQSMz57TsN00Jv4bIkZp1YuxyY4sAGNTGmvzhWEZvY4HH71DLVYaRYWRS5aEqEoIKcCTTfqNbjNvFRlHyiDDftCY1gxuMYdX3oTpMbXMFLpOltjq1MB7MwKNJ2VBQ0S/RVBxIn296wRUPNPjPx6lrpp3o6eJkp1J1UeuUeAWswsCqHths4jClXh906jaPapxc6BX+dLRrgf4MxlwfgCvu/VJ6IViUbpgkZXF9MvWc2jY3uR+uDc7T6fKFsfCKzKYh0KeM4UgA=="};/*/LOCKED*/
+/*LOCKED*/const LOCKED = {"v":1,"iter":600000,"salt":"crQpyklhuYJnZtLG5QVYNQ==","iv":"fzAxHWTCHgTI78te","ct":"8KmvaBxQ5rgsw7aAq6ApaAIJWUUHYITN01kJOsftrDANx/gxzFNmP0W9kABBaMWQ4aQeZvvGoAU6rZAwmgwrz0SmzI27EMQXXHJodrD1ZihROmtt0hTweHxprA6gFiIKON7WaiiyLufcZjFh2HhHV7ywbk+cAeFoXsJhZYeN4ewAknxbfahbITxEjTPyvYRF+sYD/9crR6uRUqDGlZ0KavcFdsKJcC5m6bJVToKQhZHFSc5dvfe2ZnPVQZd79b+JTAMInZEZ+HCh/vhpFSyGn7ySgyeyXITm3RIYU3hBF9egxdgN836RboezEhqcjNPF3a8MW9TkchuNveYFvh4Gdyw2pQ4nfghpGquq//hj1OCJ0vnHDQPsJFmS5/PPszvWUFdpcrZ1dVu/54X/Ivw38SZTqAzh/ZhgefkxMPhh+te15gx8FYV0nTM/NUZ0J4SQrerwaJ41J3oEOOqac1tJK4qt8fE5hIth+WF8IRnryH6PcX31w/YsmegDH9z9ExYbYzjh+AylawYlERsd2nVE6ATvPgOND4zWKdIfeD94bYxcsGGM1yG8fd3x3fbCaOoKklo3gzhG1WWKf77CZLFf0dRgUvGRcYqKZxYNiql/pFEqzMs0RMYXSp8VlOdSRPYYeUmD6MyXoY0PRUh88WAvIr8b0Y3YBcUdd24NtNeQ3VsKnV3rWAuc20IqSpuf0OmOqMAlValqW6oEAUISNeS8ebMD7o6OLRAHmjPrVFVaN3BppEq2myAyFasgL/qsmMqrRbX/piEFAiYwVUTtypzNt6yyXD0yiTVxJbQsbLu1bD54yh7cDMnZHWC9d/E5dCS9bajk3Qo4MKA3HU+DK6JFOsqNp+NFSbubivlP9JiepF8DzSyPhvLZv+CFvXtbSDKgUiAAbDxmqF2AFQGbCsFra1s/G9vKTH2SyBdtBujzEmKoMA86XC9PgOQ/gHdEHWBoZ2o0MJuKOrSvwAnZyiothlKQXOKQkRc/lW5PoEmU/0YVu+D/GeU2OFUTCHW7mBjyiK/xWIZy+N3fNemMwcmoxd2NmbHNxgNGFkSHKjtfocf0COHKQ4ECx01QFIiz5uwQ7JTsbrvEHUtvrwphea63lPYyPP5r8GrSkvFYNA/8epCVoNHfx2vF3wxv4MC7ruv8wH8ygAwXA+Rr6Syz8KNDBZmH0lUlhmAvd2otLH5AyEA8gSuCis1Vzr6lsZhrVsPYkQM6fXMoqRgPIq4qLZL9f+heVtf5es15Uz9Pa8Dll0sN6WupPcRYynlgXTCv0J1A41yh0V74bA6WMd7Je2Ta6fGCs9fylxL6tPVqGZq/gCDR2bH2lY1kxQ45d9lc2s9TBi5nrQ=="};/*/LOCKED*/
 let SECRET = null;
 const normCode = c => String(c || "").trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
 const b64d = s => Uint8Array.from(atob(s), ch => ch.charCodeAt(0));
@@ -1658,7 +1682,6 @@ const SECTIONS = [
   { id: "explore", icon: "map", tone: "plum" },
   { id: "around", icon: "metro", tone: "sky" },
   { id: "molly", icon: "cat", tone: "terracotta" },
-  { id: "plants", icon: "plant", tone: "sage" },
   { id: "garbage", icon: "trash", tone: "plum" },
   { id: "cleaning", icon: "broom", tone: "mustard" },
   { id: "checkout", icon: "suitcase", tone: "terracotta" },
@@ -1752,13 +1775,6 @@ function render() {
     <ul class="list">${C.dont.map(d => `<li>${t(d)}</li>`).join("")}</ul>
     <div class="note warn"><b>${ic("vet")} ${esc(u.vet)}</b> <a href="${esc(C.vet.site)}" target="_blank" rel="noopener">${esc(C.vet.name)}</a> · <a href="tel:${telOf(C.vet.phone)}">${esc(C.vet.phone)}</a><br>${esc(C.vet.address)} · <a href="mailto:${esc(C.vet.email)}">${esc(C.vet.email)}</a><br><br>${t(C.vet.note)}</div>`));
 
-  out.plants = (sectionShell(S.plants, u.sub.plants(u.daysLong[today]), `
-    <div class="grid">${H.plants.map(p => `
-      <div class="mini"><div class="e">${ic(p.icon, "big")}</div><b>${t(p.name)}</b><p>${ic("pin")} ${t(p.where)}</p><p>${t(p.tip)}</p>
-        <div class="chips">${[1,2,3,4,5,6,0].map(d => `<span class="chip ${p.water.includes(d) ? "on" : ""} ${d === today ? "is-today" : ""}">${u.days[d]}</span>`).join("")}</div>
-      </div>`).join("")}</div>
-    <p class="note">${t(H.plantsNote)}</p>`));
-
   const bins = H.garbage.bins.map(b => ({ ...b, n: daysUntil(b.days) })).sort((a, b) => a.n - b.n);
   out.garbage = (sectionShell(S.garbage, u.sub.garbage, `
     <div class="bins">${bins.map(b => `
@@ -1770,17 +1786,28 @@ function render() {
   out.cleaning = (sectionShell(S.cleaning, u.sub.cleaning, `
     <h3>${h3("pin", u.whereThings)}</h3>
     <div class="grid">${H.supplies.map(s => `<div class="mini row"><div class="e">${ic(s.icon, "big")}</div><div><b>${esc(L(s.name))}</b><p>${ic("pin")} ${t(s.where)}</p></div></div>`).join("")}</div>
+    <h3>${h3("plant", u.plantsTitle)}</h3>
+    <p class="note">${esc(L(H.plantsTip))}</p>
     <h3>${h3("calendar", u.weekly)}</h3>
     <ul class="list">${H.cleaning.weekly.map(i => `<li>${t(i)}</li>`).join("")}</ul>
     `));
 
   out.checkout = sectionShell(S.checkout, u.sub.checkout, `
     <div class="note warn important"><b>${ic("heart")} ${esc(u.important)}</b><br>${esc(L(H.checkout.intro))}</div>
-    ${renderChecklist("leave", H.checkout.items)}`);
+    ${renderChecklist("leave", H.checkout.items.map(i => i === "KEY" ? (SECRET && SECRET.keySpot ? SECRET.keySpot : u.keyLocked) : i))}`);
 
   out.home = (sectionShell(S.home, u.sub.home, `
     <dl class="kv"><dt>${u.address}</dt><dd>${!SECRET ? `<a class="locked-note" href="#wifi">${ic("lock")} ${u.addrLocked}</a>` : /^TODO/.test(SECRET.address) ? t(SECRET.address) : `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SECRET.address)}" target="_blank" rel="noopener">${esc(SECRET.address)}</a>`}</dd>
       ${H.apartment.details.map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
+    <h3>${h3("suitcase", u.arrDep)}</h3>
+    <ul class="tips">
+      <li>${ic("chat")}<span>${esc(L(H.apartment.arrival))}</span></li>
+      <li>${ic("calendar")}<span>${esc(L(H.apartment.departure))}</span></li>
+      <li>${ic("key")}<span>${SECRET && SECRET.keySpot ? esc(L(SECRET.keySpot)) : `<a class="locked-note" href="#wifi">${esc(L(u.keyLocked))}</a>`}</span></li>
+    </ul>
+    <h3>${h3("basket", u.groceries)}</h3>
+    <div class="acts-row">${H.apartment.groceries.map(g => `<a class="pillbtn small" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(g.q)}" target="_blank" rel="noopener">${ic("pin")} ${esc(g.name)}</a>`).join("")}</div>
+    <p class="muted-line">${esc(u.groceriesNote)}</p>
     <h3>${h3("bulb", u.goodToKnow)}</h3>
     <ul class="list">${H.apartment.tips.map(i => `<li>${t(i)}</li>`).join("")}</ul>`));
 
@@ -1905,10 +1932,7 @@ function updateLive() {
   if (binsTomorrow.length) items.push(["moon", u.tonight(binNames(binsTomorrow)), u.pickupTomorrow]);
   if (binsToday.length) items.push(["truck", u.pickupToday(binNames(binsToday)), u.stillTime]);
 
-  const thirsty = H.plants.filter(p => p.water.includes(today));
-  items.push(thirsty.length
-    ? ["drop", u.water(thirsty.map(p => plain(p.name)).join(", ")), u.waterTap]
-    : ["leaf", u.noWater, u.dayOff]);
+  items.push(["drop", u.plantCheck, u.plantCheckSub]);
 
   const done = (store.get(`check:cat:${todayKey()}`) || []).length;
   items.push(["check", u.liveCheck(C.name, done, C.daily.length), done === C.daily.length ? u.purrfect : u.tickOff]);
