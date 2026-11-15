@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="cat-svg" aria-hidden="true">
+  <!-- Molly: grey tabby, white bib & paws, peachy legs, green sleepy eyes, pink heart tag -->
+  <circle cx="100" cy="106" r="90" fill="#d7261e" stroke="#111" stroke-width="5"/>
+  <circle cx="100" cy="106" r="78" fill="none" stroke="#fff1d0" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round"/>
+
+  <!-- tail -->
+  <g class="tail">
+    <path d="M136 182 C 176 186, 186 150, 166 128" fill="none" stroke="#111" stroke-width="19" stroke-linecap="round"/>
+    <path d="M136 182 C 176 186, 186 150, 166 128" fill="none" stroke="#a7a2a6" stroke-width="12" stroke-linecap="round"/>
+    <path d="M170 168 l8 -3 M176 152 l8 1 M172 138 l7 -4" stroke="#6f6a6f" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- body -->
+  <path d="M70 116 C 54 140, 50 170, 58 190 L 142 190 C 150 170, 146 140, 130 116 Z" fill="#a7a2a6" stroke="#111" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M64 150 l10 2 M60 166 l11 1 M136 150 l-10 2 M140 166 l-11 1" stroke="#6f6a6f" stroke-width="3" stroke-linecap="round"/>
+  <!-- white bib -->
+  <path d="M84 118 C 80 145, 88 170, 100 186 C 112 170, 120 145, 116 118 Z" fill="#fffaf0"/>
+  <!-- front legs with peach tint -->
+  <path d="M78 148 C 76 166, 78 178, 80 188 L 120 188 C 122 178, 124 166, 122 148 C 112 156, 88 156, 78 148 Z" fill="#a7a2a6"/>
+  <path d="M84 150 C 86 160, 114 160, 116 150 L 112 188 L 88 188 Z" fill="#fffaf0"/>
+  <path d="M79.5 168 C 79 176, 80 182, 81 188 L 94 188 C 95 180, 95 174, 94.5 168 Z" fill="#ebc6a6"/>
+  <path d="M120.5 168 C 121 176, 120 182, 119 188 L 106 188 C 105 180, 105 174, 105.5 168 Z" fill="#ebc6a6"/>
+  <path d="M78 150 C 76 166, 78 178, 80 188 M122 150 C 124 166, 122 178, 120 188 M100 164 V 188" fill="none" stroke="#111" stroke-width="3.5" stroke-linecap="round"/>
+  <ellipse cx="88" cy="188" rx="12" ry="7" fill="#fffaf0" stroke="#111" stroke-width="3.5"/>
+  <ellipse cx="112" cy="188" rx="12" ry="7" fill="#fffaf0" stroke="#111" stroke-width="3.5"/>
+  <path d="M84 186 v3 M89 186 v3 M108 186 v3 M113 186 v3" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- ears -->
+  <path d="M60 74 L 62 24 L 96 50 Z" fill="#a7a2a6" stroke="#111" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M140 74 L 138 24 L 104 50 Z" fill="#a7a2a6" stroke="#111" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M67 64 L 67 36 L 88 52 Z" fill="#f2b5a5"/>
+  <path d="M133 64 L 133 36 L 112 52 Z" fill="#f2b5a5"/>
+
+  <!-- head -->
+  <path d="M54 86 C 52 58, 74 42, 100 42 C 126 42, 148 58, 146 86 C 146 112, 126 126, 100 126 C 74 126, 54 112, 54 86 Z" fill="#a7a2a6" stroke="#111" stroke-width="4"/>
+  <!-- forehead "M" stripes & cheek stripes -->
+  <path d="M90 47 L 93 62 M100 45 L 100 60 M110 47 L 107 62" stroke="#6f6a6f" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M56 84 L 70 87 M57 94 L 70 94 M144 84 L 130 87 M143 94 L 130 94" stroke="#6f6a6f" stroke-width="3" stroke-linecap="round"/>
+  <!-- white muzzle & chin -->
+  <path d="M100 72 C 93 84, 76 90, 78 104 C 80 120, 120 120, 122 104 C 124 90, 107 84, 100 72 Z" fill="#fffaf0"/>
+
+  <!-- eyes: green, slit pupils, sassy half-closed lids -->
+  <g class="eye">
+    <ellipse cx="80" cy="80" rx="11" ry="8.5" fill="#c3cf55" stroke="#111" stroke-width="3"/>
+    <ellipse cx="81" cy="81" rx="2.4" ry="6.5" fill="#111"/>
+    <path d="M68.5 80 C 70 68, 90 68, 91.5 80 C 85 76.5, 75 76.5, 68.5 80 Z" fill="#a7a2a6" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="84.5" cy="83" r="1.6" fill="#fff"/>
+  </g>
+  <g class="eye">
+    <ellipse cx="120" cy="80" rx="11" ry="8.5" fill="#c3cf55" stroke="#111" stroke-width="3"/>
+    <ellipse cx="119" cy="81" rx="2.4" ry="6.5" fill="#111"/>
+    <path d="M108.5 80 C 110 68, 130 68, 131.5 80 C 125 76.5, 115 76.5, 108.5 80 Z" fill="#a7a2a6" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="123.5" cy="83" r="1.6" fill="#fff"/>
+  </g>
+
+  <!-- nose & slightly open mouth -->
+  <path d="M94 93 L 106 93 L 100 100 Z" fill="#e48f88" stroke="#111" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M100 100 V 104" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+  <path d="M93 106 C 95 103, 105 103, 107 106 C 105 110, 95 110, 93 106 Z" fill="#4a2b2b" stroke="#111" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- whiskers -->
+  <path d="M80 100 L 36 92 M80 104 L 36 106 M81 108 L 42 118 M120 100 L 164 92 M120 104 L 164 106 M119 108 L 158 118" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- collar + pink heart tag -->
+  <path d="M70 116 Q 100 132 130 116 L 131 125 Q 100 141 69 125 Z" fill="#161616" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+  <circle cx="106" cy="133" r="2.6" fill="none" stroke="#c5cbc7" stroke-width="1.8"/>
+  <path d="M106 158 C 90 148, 90 135, 99 135 C 103 135, 106 138, 106 141 C 106 138, 109 135, 113 135 C 122 135, 122 148, 106 158 Z" fill="#e04fb0" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+  <text x="106" y="146.5" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="5.6" fill="#fff" letter-spacing=".3">MOLLY</text>
+</svg>
