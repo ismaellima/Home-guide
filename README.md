@@ -1,4 +1,6 @@
-# Molly's Home Guide 🐱
+# Chez Molly 🐱
+
+A bilingual (EN / FR) guest guide with a playful street-café look: mustard, red and cobalt, chunky outlines, a striped awning, a shop sign, and a "Pet Molly" button.
 
 A one-page guide for guests staying at our apartment: Wi-Fi, Molly the cat (feeding times and a daily checklist), plants, cleaning supplies, house cleaning, garbage days and contacts.
 
