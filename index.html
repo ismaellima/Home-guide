@@ -229,6 +229,25 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 .photo-stamp figcaption { text-align: center; margin-top: 12px; font: 900 19px/1.1 "Phudu", sans-serif; text-transform: uppercase; }
 .photo-stamp figcaption::after { content: ""; display: block; width: 60%; height: 3px; background: var(--red); margin: 5px auto 0; }
 
+/* lock */
+.lock-card { background: var(--sun); color: #111; border: 3px solid var(--edge); border-radius: 18px; padding: 16px; box-shadow: 4px 4px 0 var(--edge); }
+.lock-head { display: flex; gap: 12px; align-items: center; }
+.lock-head b { font: 900 22px/1 "Phudu", sans-serif; text-transform: uppercase; }
+.lock-head p { margin: 4px 0 0; font-size: 14px; font-weight: 600; }
+.lock-head .ic.big { width: 44px; height: 44px; }
+.lock-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.lock-row input { flex: 1 1 210px; min-width: 0; font: 800 18px/1 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .1em; text-transform: uppercase;
+  border: 3px solid var(--edge); border-radius: 999px; padding: 10px 14px; background: #fff; color: #111; }
+.lock-row input::placeholder { letter-spacing: .02em; text-transform: none; font-family: "Inter", sans-serif; font-weight: 600; color: #8a7d66; }
+.lock-row input:focus { outline: 3px dashed var(--blue); outline-offset: 2px; }
+.lock-row button { flex: 1 1 auto; background: var(--red); color: #fff; }
+.lock-row button:disabled { opacity: .7; cursor: progress; }
+.lock-err { margin: 8px 0 0; color: var(--red); font-weight: 800; font-size: 14px; min-height: 1.2em; }
+.shake { animation: shake .4s ease; }
+@keyframes shake { 0%,100% { transform: translateX(0); } 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+.relock { margin-top: 14px; background: transparent; color: var(--text); box-shadow: none; border-width: 2px; font-size: 11px; }
+.locked-note { font-weight: 700; color: var(--muted); text-decoration: underline dashed; }
+
 /* meals */
 .timer {
   width: 74px; height: 74px; border-radius: 50%; background: var(--red); color: var(--cream); border: 4px solid var(--edge);
@@ -537,6 +556,14 @@ footer button { margin-top: 16px; }
     <path d="M6 13l18 14 18-14" fill="#9fd3e6"/>
     <path d="M6 37l13-12M42 37L29 25" stroke-width="2.5"/>
   </symbol>
+  <symbol id="i-lock" viewBox="0 0 48 48">
+    <path d="M15 22v-7a9 9 0 0 1 18 0v7" stroke-width="5"/>
+    <path d="M15 22v-7a9 9 0 0 1 18 0v7" stroke="#a7a2a6" stroke-width="1.6"/>
+    <rect x="8.5" y="21" width="31" height="22" rx="4.5" fill="#d7261e"/>
+    <circle cx="24" cy="30" r="3.4" fill="#fff1d0" stroke-width="2"/>
+    <path d="M24 33v5" stroke="#fff1d0" stroke-width="3"/>
+    <path d="M13 26v8" stroke="#fff" stroke-width="2.5"/>
+  </symbol>
   <symbol id="i-pencil" viewBox="0 0 48 48">
     <path d="M9 39l3.5-11L33 7.5l7.5 7.5L20 35.5z" fill="#ffd23f"/>
     <path d="M33 7.5l3-3a2.5 2.5 0 0 1 3.5 0l4 4a2.5 2.5 0 0 1 0 3.5l-3 3z" fill="#f4a6a0"/>
@@ -695,8 +722,8 @@ const HOME = {
   },
 
   wifi: {
-    network: "TODO: network name",
-    password: "TODO: password",
+    // Network name & password are private: they live in .secrets/secrets.json and are
+    // encrypted into the page by tools/lock-secrets.mjs (see README).
     note: {
       en: "Fast internet. If it drops, unplug the router for 10 seconds and plug it back in.",
       fr: "Internet rapide. Si ça coupe, débranchez le routeur 10 secondes puis rebranchez-le."
@@ -704,7 +731,7 @@ const HOME = {
   },
 
   apartment: {
-    address: "TODO: address (Montreal), waiting for your OK before publishing it",
+    // Address is private too (encrypted, see above).
     details: [
       [{ en: "Bedroom", fr: "Chambre" }, { en: "The primary bedroom is yours during your stay.", fr: "La chambre principale est à vous pendant votre séjour." }],
       [{ en: "Bathroom", fr: "Salle de bain" }, { en: "Full bathroom with bathtub. Fresh towels are above the washer.", fr: "Salle de bain complète avec baignoire. Serviettes propres au-dessus de la laveuse." }],
@@ -854,6 +881,10 @@ const UI = {
     dont: "Please don't", vet: "Vet:", next: d => `next · in ${d}`,
     weekly: "Once a week", beforeGo: "Before you leave",
     address: "Address", goodToKnow: "Good to know", call: "Call", emailBtn: "Email",
+    lockedSub: "Locked: use the code we sent you", lockedTitle: "Private details",
+    lockedText: "The Wi-Fi and the address are locked. Enter the code we sent you to see them.",
+    codePh: "Your code", unlock: "Unlock", unlocking: "Unlocking…", wrongCode: "That code doesn't match. Check it and try again?",
+    unlocked: "Unlocked! Welcome", relock: "Lock again on this device", addrLocked: "Locked: unlock it in the Wi-Fi section",
     progress: (d, n) => d === n ? "All done, thank you!" : `${d} of ${n} done`,
     liveMeal: (n, l, t) => `${n}'s next meal: ${l} at ${t}`, liveIn: d => `in ${d}`,
     tonight: b => `Tonight: take out the ${b}`, pickupTomorrow: "Pickup is tomorrow",
@@ -891,6 +922,10 @@ const UI = {
     dont: "À éviter", vet: "Vétérinaire :", next: d => `prochain · dans ${d}`,
     weekly: "Une fois par semaine", beforeGo: "Avant de partir",
     address: "Adresse", goodToKnow: "Bon à savoir", call: "Appeler", emailBtn: "Courriel",
+    lockedSub: "Verrouillé : utilisez le code qu'on vous a envoyé", lockedTitle: "Infos privées",
+    lockedText: "Le Wi-Fi et l'adresse sont verrouillés. Entrez le code qu'on vous a envoyé pour les voir.",
+    codePh: "Votre code", unlock: "Déverrouiller", unlocking: "Déverrouillage…", wrongCode: "Ce code ne correspond pas. Vérifiez-le et réessayez ?",
+    unlocked: "Déverrouillé ! Bienvenue", relock: "Reverrouiller sur cet appareil", addrLocked: "Verrouillé : déverrouillez dans la section Wi-Fi",
     progress: (d, n) => d === n ? "Tout est fait, merci !" : `${d} sur ${n} fait${d > 1 ? "s" : ""}`,
     liveMeal: (n, l, t) => `Prochain repas de ${n} : ${l.toLowerCase()} à ${t.replace(":", "h")}`, liveIn: d => `dans ${d}`,
     tonight: b => `Ce soir, à sortir : ${b}`, pickupTomorrow: "Ramassage demain",
@@ -933,6 +968,24 @@ const daysUntil = days => {
 };
 const whenLabel = n => n === 0 ? U().today : n === 1 ? U().tomorrow : U().daysLong[(new Date().getDay() + n) % 7];
 const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; };
+
+/* Private details: encrypted with the access code (see tools/lock-secrets.mjs) */
+/*LOCKED*/const LOCKED = {"v":1,"iter":600000,"salt":"aJje3/IEeb0hDKTIvIzhfQ==","iv":"e8BSJOufsi6yGrz/","ct":"ODxqsUqSt1uxe22kLAQHlRxHOzPcPuA5zU/s55ojtqy7AxiJG35kVijclRl1oTf3w+wrOupOKsvIPd/5Dm6DVujMo2Z4ZHYbFlxXx51K6+gf3DSWfsjIKtrzbZzv9ZopuQHpV5wnm9ygH66k8kcEhTTYMO+VmWEU2Xwphf/m8b/ZB7RrNukd0pU0Q/52NqhMeCbm/21ptDg7j8Lzpmw5/DM7"};/*/LOCKED*/
+let SECRET = null;
+const normCode = c => String(c || "").trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+const b64d = s => Uint8Array.from(atob(s), ch => ch.charCodeAt(0));
+async function openLocked(code) {
+  if (!LOCKED || !window.crypto?.subtle) throw new Error("unavailable");
+  const material = await crypto.subtle.importKey("raw", new TextEncoder().encode(normCode(code)), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey({ name: "PBKDF2", salt: b64d(LOCKED.salt), iterations: LOCKED.iter, hash: "SHA-256" },
+    material, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+  const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64d(LOCKED.iv) }, key, b64d(LOCKED.ct));
+  return JSON.parse(new TextDecoder().decode(plain));
+}
+async function tryCode(code, quiet) {
+  try { SECRET = await openLocked(code); store.set("code", normCode(code)); return true; }
+  catch (e) { if (!quiet) store.set("code", null); return false; }
+}
 
 const SECTIONS = [
   { id: "wifi", icon: "wifi", tone: "sky" },
@@ -988,13 +1041,24 @@ function render() {
   const today = new Date().getDay();
   const out = [];
 
-  out.push(sectionShell(S.wifi, u.sub.wifi, `
+  out.push(sectionShell(S.wifi, SECRET ? u.sub.wifi : u.lockedSub, SECRET ? `
     <div class="wifi">
-      <div class="wifi-row"><div><div class="lbl">${u.network}</div><div class="val">${t(H.wifi.network)}</div></div>
-        <button type="button" data-copy="${esc(H.wifi.network)}">${u.copy}</button></div>
-      <div class="wifi-row"><div><div class="lbl">${u.password}</div><div class="val">${t(H.wifi.password)}</div></div>
-        <button type="button" data-copy="${esc(H.wifi.password)}">${u.copy}</button></div>
+      <div class="wifi-row"><div><div class="lbl">${u.network}</div><div class="val">${t(SECRET.wifi.network)}</div></div>
+        <button type="button" data-copy="${esc(SECRET.wifi.network)}">${u.copy}</button></div>
+      <div class="wifi-row"><div><div class="lbl">${u.password}</div><div class="val">${t(SECRET.wifi.password)}</div></div>
+        <button type="button" data-copy="${esc(SECRET.wifi.password)}">${u.copy}</button></div>
     </div>
+    <p class="note">${t(H.wifi.note)}</p>
+    <button type="button" class="relock" id="relock">${ic("lock")} ${u.relock}</button>` : `
+    <form class="lock-card" id="unlock" autocomplete="off">
+      <div class="lock-head">${ic("lock", "big")}<div><b>${u.lockedTitle}</b><p>${u.lockedText}</p></div></div>
+      <div class="lock-row">
+        <input id="code-input" name="code" type="text" inputmode="text" autocapitalize="characters" spellcheck="false"
+          placeholder="${u.codePh}" aria-label="${u.codePh}" maxlength="24">
+        <button type="submit" id="unlock-btn">${u.unlock}</button>
+      </div>
+      <p class="lock-err" id="lock-err" role="alert"></p>
+    </form>
     <p class="note">${t(H.wifi.note)}</p>`));
 
   out.push(sectionShell(S.molly, u.sub.molly, `
@@ -1043,7 +1107,7 @@ function render() {
     ${renderChecklist("leave", H.cleaning.beforeYouGo)}`));
 
   out.push(sectionShell(S.home, u.sub.home, `
-    <dl class="kv"><dt>${u.address}</dt><dd>${/^TODO/.test(H.apartment.address) ? t(H.apartment.address) : `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(H.apartment.address)}" target="_blank" rel="noopener">${esc(H.apartment.address)}</a>`}</dd>
+    <dl class="kv"><dt>${u.address}</dt><dd>${!SECRET ? `<a class="locked-note" href="#wifi">${ic("lock")} ${u.addrLocked}</a>` : /^TODO/.test(SECRET.address) ? t(SECRET.address) : `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SECRET.address)}" target="_blank" rel="noopener">${esc(SECRET.address)}</a>`}</dd>
       ${H.apartment.details.map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
     <h3>${h3("bulb", u.goodToKnow)}</h3>
     <ul class="list">${H.apartment.tips.map(i => `<li>${t(i)}</li>`).join("")}</ul>`));
@@ -1134,6 +1198,25 @@ function petMolly() {
   toast(u.purr[n % u.purr.length], ["heart", "paw", "sparkle", "cat"][n % 4]);
 }
 
+document.addEventListener("submit", async e => {
+  if (e.target.id !== "unlock") return;
+  e.preventDefault();
+  const u = U(), input = document.getElementById("code-input"), btn = document.getElementById("unlock-btn"), err = document.getElementById("lock-err");
+  if (!normCode(input.value)) { input.focus(); return; }
+  btn.disabled = true; btn.textContent = u.unlocking; err.textContent = "";
+  if (await tryCode(input.value)) {
+    render(); toast(u.unlocked, "sparkle");
+    document.getElementById("wifi").scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    btn.disabled = false; btn.textContent = u.unlock; err.textContent = u.wrongCode;
+    const card = e.target; card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+    input.select();
+  }
+});
+document.addEventListener("click", e => {
+  if (e.target.closest("#relock")) { SECRET = null; store.set("code", null); render(); }
+});
+
 document.addEventListener("change", e => {
   const ul = e.target.closest(".check");
   if (!ul) return;
@@ -1156,8 +1239,15 @@ themeBtn.addEventListener("click", () => {
   store.set("theme", next);
 });
 
-render();
-setInterval(updateLive, 60 * 1000);
+(async () => {
+  const fromLink = new URLSearchParams(location.hash.slice(1)).get("code");
+  if (fromLink) history.replaceState(null, "", location.pathname + location.search);
+  const remembered = store.get("code");
+  if (fromLink) await tryCode(fromLink);
+  else if (remembered) await tryCode(remembered, true);
+  render();
+  setInterval(updateLive, 60 * 1000);
+})();
 </script>
 </body>
 </html>

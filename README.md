@@ -15,3 +15,19 @@ Days of the week are numbers: `0` = Sunday, `1` = Monday … `6` = Saturday.
 ## Publishing (GitHub Pages)
 
 Repo **Settings → Pages → Deploy from a branch**, choose the branch and `/ (root)`. The site shows up at `https://<user>.github.io/<repo>/`.
+
+## Private details (Wi-Fi, address)
+
+The Wi-Fi name/password and the address are **encrypted** inside `index.html`, so they are never readable on GitHub.
+Guests unlock them in their browser with an access code (their device remembers it).
+
+- Send guests the code, or a link that unlocks automatically: `https://<your-site>/#code=XXXX-XXXX-XXXX`
+- The real values live in `.secrets/secrets.json`, which is **not committed** (see `.gitignore`):
+
+```json
+{ "code": "XXXX-XXXX-XXXX",
+  "data": { "address": "…", "wifi": { "network": "…", "password": "…" } } }
+```
+
+- After editing that file, re-encrypt: `node tools/lock-secrets.mjs`
+- To change the code (e.g. after a stay): `node tools/lock-secrets.mjs --new-code`
