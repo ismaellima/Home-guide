@@ -281,7 +281,7 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 .fact span:not(.fi) { display: block; margin-top: 3px; font-size: 15px; overflow-wrap: anywhere; }
 
 /* annotated photo: where Molly's food is */
-.spot { margin: 16px auto 4px; width: min(330px, 92%); }
+.spot { margin: 14px auto 18px; width: min(330px, 92%); }
 .spot-frame { position: relative; border: 4px solid var(--edge); border-radius: 18px; overflow: hidden; box-shadow: 6px 6px 0 var(--edge); background: #fff; }
 .spot-frame img { display: block; width: 100%; height: auto; }
 .spot-mark { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -1880,10 +1880,10 @@ function render() {
     <h3>${h3("check", u.checklist(C.name))}</h3>
     ${renderChecklist("cat", C.daily)}
     <h3>${h3("pin", u.whereHer)}</h3>
-    <dl class="kv">${C.where.map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
+    <dl class="kv">${C.where.slice(0, 1).map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
     <figure class="spot">
       <div class="spot-frame">
-        <img src="assets/molly-food.jpg" alt="${esc(u.foodAlt)}" width="814" height="1100" loading="lazy">
+        <img src="assets/molly-food.jpg" alt="${esc(u.foodAlt)}" width="814" height="1100">
         <svg class="spot-mark" viewBox="0 0 814 1100" aria-hidden="true" preserveAspectRatio="none">
           <ellipse cx="382" cy="880" rx="185" ry="225" fill="none" stroke="#111" stroke-width="16"/>
           <ellipse cx="382" cy="880" rx="185" ry="225" fill="none" stroke="#d7261e" stroke-width="9" stroke-dasharray="26 16"/>
@@ -1892,6 +1892,7 @@ function render() {
       </div>
       <figcaption>${esc(u.foodCap)}</figcaption>
     </figure>
+    <dl class="kv">${C.where.slice(1).map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
     <h3>${h3("no", u.dont)}</h3>
     <ul class="list">${C.dont.map(d => `<li>${t(d)}</li>`).join("")}</ul>
     <div class="note warn"><b>${ic("vet")} ${esc(u.vet)}</b> <a href="${esc(C.vet.site)}" target="_blank" rel="noopener">${esc(C.vet.name)}</a> · <a href="tel:${telOf(C.vet.phone)}">${esc(C.vet.phone)}</a><br>${esc(C.vet.address)} · <a href="mailto:${esc(C.vet.email)}">${esc(C.vet.email)}</a><br><br>${t(C.vet.note)}</div>`));
