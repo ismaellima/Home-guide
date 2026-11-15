@@ -371,6 +371,9 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 @keyframes fall { from { transform: translate(0, -20px) rotate(0deg); } to { transform: translate(16px, 420px) rotate(220deg); } }
 @media (prefers-reduced-motion: reduce) { .mtl *, .mtl .c1, .mtl .c2 { animation: none !important; } .mtl.night .star { opacity: .8; } }
 
+.beret { display: none; }
+html[lang="fr"] .beret { display: inline; }
+
 /* lock */
 .lock-card { background: var(--sun); color: #111; border: 3px solid var(--edge); border-radius: 18px; padding: 16px; box-shadow: 4px 4px 0 var(--edge); }
 .lock-head { display: flex; gap: 12px; align-items: center; }
@@ -1219,6 +1222,12 @@ footer { padding-bottom: 96px; }
   <!-- white muzzle & chin -->
   <path d="M100 72 C 93 84, 76 90, 78 104 C 80 120, 120 120, 122 104 C 124 90, 107 84, 100 72 Z" fill="#fffaf0"/>
 
+  <g class="beret" aria-hidden="true">
+    <path d="M60 50 C 58 34, 84 24, 110 26 C 132 28, 146 38, 142 50 C 128 46, 80 46, 60 50 Z" fill="#1b1b24" stroke="#111" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M62 50 C 84 45, 122 44, 142 50" fill="none" stroke="#111" stroke-width="5" stroke-linecap="round"/>
+    <path d="M78 34 C 86 30, 96 28, 104 29" fill="none" stroke="#4a4a5c" stroke-width="3" stroke-linecap="round"/>
+    <path d="M104 26 C 104 20, 108 17, 112 18" fill="none" stroke="#111" stroke-width="5" stroke-linecap="round"/>
+  </g>
   <!-- eyes: green, slit pupils, sassy half-closed lids -->
   <g class="mb-eye">
     <ellipse cx="80" cy="80" rx="11" ry="8.5" fill="#c3cf55" stroke="#111" stroke-width="3"/>
@@ -1307,6 +1316,12 @@ footer { padding-bottom: 96px; }
   <!-- white muzzle & chin -->
   <path d="M100 72 C 93 84, 76 90, 78 104 C 80 120, 120 120, 122 104 C 124 90, 107 84, 100 72 Z" fill="#fffaf0"/>
 
+  <g class="beret" aria-hidden="true">
+    <path d="M60 50 C 58 34, 84 24, 110 26 C 132 28, 146 38, 142 50 C 128 46, 80 46, 60 50 Z" fill="#1b1b24" stroke="#111" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M62 50 C 84 45, 122 44, 142 50" fill="none" stroke="#111" stroke-width="5" stroke-linecap="round"/>
+    <path d="M78 34 C 86 30, 96 28, 104 29" fill="none" stroke="#4a4a5c" stroke-width="3" stroke-linecap="round"/>
+    <path d="M104 26 C 104 20, 108 17, 112 18" fill="none" stroke="#111" stroke-width="5" stroke-linecap="round"/>
+  </g>
   <!-- eyes: green, slit pupils, sassy half-closed lids -->
   <g class="eye">
     <ellipse cx="80" cy="80" rx="11" ry="8.5" fill="#c3cf55" stroke="#111" stroke-width="3"/>
