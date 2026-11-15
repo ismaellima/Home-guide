@@ -51,6 +51,20 @@ h1, h2, h3, .phudu { font-family: "Phudu", Impact, "Arial Narrow", sans-serif; f
 a { color: inherit; }
 .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
 
+/* comic icons */
+.ic { width: 1.3em; height: 1.3em; vertical-align: -.3em; stroke: #111; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; fill: none; overflow: visible; flex: none; }
+.ic.big { width: 36px; height: 36px; }
+.badge .ic { width: 34px; height: 34px; }
+.bin .dot .ic { width: 30px; height: 30px; }
+.today li .ic { width: 30px; height: 30px; }
+.mini .ic.big { width: 40px; height: 40px; }
+.heart .ic { width: 30px; height: 30px; }
+.h3l { display: inline-flex; align-items: center; gap: 10px; }
+.h3l .ic { width: 32px; height: 32px; }
+.todo .ic { width: 1.05em; height: 1.05em; vertical-align: -.15em; margin-right: 2px; }
+button .ic, .pillbtn .ic { width: 18px; height: 18px; vertical-align: -4px; margin: 0 2px; }
+.toast .ic { width: 22px; height: 22px; vertical-align: -5px; margin-left: 6px; }
+
 /* chunky pill buttons */
 button, .pillbtn {
   font: 800 13px/1 "Inter", sans-serif; text-transform: uppercase; letter-spacing: .08em; cursor: pointer;
@@ -145,7 +159,7 @@ button:active, .pillbtn:active { transform: translate(2px, 2px); box-shadow: 1px
 .today h2 small { display: block; font: 700 14px/1.4 "Inter"; text-transform: none; color: var(--cream); -webkit-text-stroke: 0; text-shadow: none; margin-top: 6px; opacity: .9; }
 .today ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
 .today li { display: flex; gap: 10px; align-items: flex-start; background: rgba(255,255,255,.1); border: 2.5px solid #111; border-radius: 14px; padding: 10px 12px; }
-.today li .e { font-size: 22px; line-height: 1.1; }
+.today li .e { line-height: 0; }
 .today li b { display: block; }
 .today li span.s { opacity: .85; font-size: 14px; }
 
@@ -248,6 +262,7 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 .mini .e { font-size: 28px; }
 .mini b { display: block; margin-top: 2px; font-weight: 800; }
 .mini p { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+.mini.row { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: center; }
 .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
 .chip { font-size: 12px; font-weight: 800; padding: 2px 7px; border-radius: 999px; border: 2px solid var(--edge); background: var(--cream); color: #111; }
 .chip.on { background: var(--blue); color: #fff; }
@@ -288,6 +303,230 @@ footer button { margin-top: 16px; }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-wifi" viewBox="0 0 48 48">
+    <path d="M6 19c10.5-9.5 25.5-9.5 36 0" stroke-width="5.5"/><path d="M6 19c10.5-9.5 25.5-9.5 36 0" stroke="#1e4fd8" stroke-width="2"/>
+    <path d="M12.5 26.5c7-6 16-6 23 0" stroke-width="5.5"/><path d="M12.5 26.5c7-6 16-6 23 0" stroke="#1e4fd8" stroke-width="2"/>
+    <path d="M19 33.5c3-2.6 7-2.6 10 0" stroke-width="5.5"/><path d="M19 33.5c3-2.6 7-2.6 10 0" stroke="#1e4fd8" stroke-width="2"/>
+    <circle cx="24" cy="40" r="4.2" fill="#d7261e"/>
+  </symbol>
+  <symbol id="i-cat" viewBox="0 0 48 48">
+    <path d="M8 24 L9 6 L21 14 Z" fill="#a7a2a6"/><path d="M40 24 L39 6 L27 14 Z" fill="#a7a2a6"/>
+    <path d="M11.5 15 L12 10 L17 13.5 Z M36.5 15 L36 10 L31 13.5 Z" fill="#f4a6a0" stroke="none"/>
+    <ellipse cx="24" cy="27" rx="17" ry="15" fill="#a7a2a6"/>
+    <path d="M24 22c-3 4.5-9 6-8 11.5 1.2 5.5 14.8 5.5 16 0 1-5.5-5-7-8-11.5z" fill="#fff1d0" stroke="none"/>
+    <path d="M20 14.5v4M24 13.5v4.5M28 14.5v4" stroke="#6f6a6f" stroke-width="2.2"/>
+    <circle cx="17.5" cy="25" r="3" fill="#111" stroke="none"/><circle cx="30.5" cy="25" r="3" fill="#111" stroke="none"/>
+    <circle cx="18.5" cy="24" r="1" fill="#fff" stroke="none"/><circle cx="31.5" cy="24" r="1" fill="#fff" stroke="none"/>
+    <path d="M22 30h4l-2 2.4z" fill="#f4a6a0" stroke-width="1.6"/>
+    <circle cx="13" cy="31" r="2.4" fill="#f4a6a0" stroke="none" opacity=".9"/><circle cx="35" cy="31" r="2.4" fill="#f4a6a0" stroke="none" opacity=".9"/>
+  </symbol>
+  <symbol id="i-plant" viewBox="0 0 48 48">
+    <path d="M24 28C14 26 7 16 11 6c9 2 14 11 13 22z" fill="#a8d08d"/>
+    <path d="M24 28c9-3 16-11 14-21-9 0-15 10-14 21z" fill="#7fb36a"/>
+    <path d="M17 13l5 9M31 13l-5 9" stroke-width="2"/>
+    <path d="M12 31h24l-3 12H15z" fill="#d7261e"/>
+    <rect x="9.5" y="27" width="29" height="6" rx="2" fill="#ffd23f"/>
+  </symbol>
+  <symbol id="i-cactus" viewBox="0 0 48 48">
+    <path d="M19 25h-5a3 3 0 0 1-3-3v-6a2.5 2.5 0 0 1 5 0v4h3" fill="#7fb36a"/>
+    <path d="M29 22h4v-7a2.5 2.5 0 0 1 5 0v7a3 3 0 0 1-3 3h-6" fill="#7fb36a"/>
+    <path d="M19 33V12a5 5 0 0 1 10 0v21" fill="#a8d08d"/>
+    <path d="M22.5 14v3M25.5 20v3M22.5 26v3" stroke-width="2"/>
+    <circle cx="24" cy="7.5" r="3" fill="#f4a6a0" stroke-width="2"/>
+    <path d="M13 32h22l-3 11H16z" fill="#d7261e"/>
+  </symbol>
+  <symbol id="i-herb" viewBox="0 0 48 48">
+    <path d="M24 37V20"/>
+    <path d="M24 28c-10 0-15-7-14-14 8 0 14 6 14 14z" fill="#a8d08d"/>
+    <path d="M24 22c8 0 14-6 13-13-8 0-13 6-13 13z" fill="#7fb36a"/>
+    <rect x="12" y="34" width="24" height="9" rx="3" fill="#ffd23f"/>
+  </symbol>
+  <symbol id="i-trash" viewBox="0 0 48 48">
+    <path d="M12 17h24l-2.5 25h-19z" fill="#9fd3e6"/>
+    <path d="M20 11V7.5h8V11" fill="#fff1d0"/>
+    <rect x="8.5" y="11" width="31" height="6.5" rx="2.5" fill="#1e4fd8"/>
+    <path d="M19 23v14M24 23v14M29 23v14" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-recycle" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="19" fill="#ffd23f"/>
+    <path d="M15 21a10 10 0 0 1 16-5" stroke-width="3.5"/><path d="M32 9.5v7h-7" stroke-width="3.5"/>
+    <path d="M33 27a10 10 0 0 1-16 5" stroke-width="3.5"/><path d="M16 38.5v-7h7" stroke-width="3.5"/>
+  </symbol>
+  <symbol id="i-box" viewBox="0 0 48 48">
+    <path d="M6 17v19l18 8V24z" fill="#c98f55"/>
+    <path d="M42 17v19l-18 8V24z" fill="#e0b07a"/>
+    <path d="M6 17l18-7 18 7-18 7z" fill="#f0c995"/>
+    <path d="M15 13.5l18 7v6" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-leaf" viewBox="0 0 48 48">
+    <path d="M9 39C7 20 20 8 41 7c1 21-11 34-32 32z" fill="#a8d08d"/>
+    <path d="M9 39L31 17M18 30h7M23 25v-7" stroke-width="2.5"/>
+    <path d="M30 13c3 0 5 1 6 3" stroke="#fff" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-spray" viewBox="0 0 48 48">
+    <path d="M15 23h17v18a3 3 0 0 1-3 3H18a3 3 0 0 1-3-3z" fill="#f4a6a0"/>
+    <path d="M18.5 23v-6h10v6" fill="#fff1d0"/>
+    <path d="M16 9h14l5 5h-6v3H16z" fill="#1e4fd8"/>
+    <rect x="18.5" y="28" width="10" height="10" rx="2" fill="#fff1d0" stroke-width="2"/>
+    <path d="M39 9l4-2.5M40 14h5M39 19l4 2.5" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-broom" viewBox="0 0 48 48">
+    <g transform="rotate(20 24 24)">
+      <rect x="21.5" y="2" width="5" height="23" rx="2.5" fill="#c98f55"/>
+      <path d="M15 30h18l4 13H11z" fill="#ffd23f"/>
+      <rect x="14" y="24" width="20" height="6" rx="2" fill="#d7261e"/>
+      <path d="M19 33l-1 8M24 33v8M29 33l1 8" stroke-width="2"/>
+    </g>
+  </symbol>
+  <symbol id="i-vacuum" viewBox="0 0 48 48">
+    <path d="M30 6v14" stroke-width="4"/>
+    <rect x="25" y="3" width="11" height="6" rx="3" fill="#d7261e"/>
+    <rect x="21" y="17" width="17" height="17" rx="6" fill="#d7261e"/>
+    <circle cx="29.5" cy="25.5" r="4" fill="#9fd3e6" stroke-width="2"/>
+    <path d="M26 34l-4 3.5"/>
+    <rect x="6" y="36.5" width="30" height="7" rx="3.5" fill="#1e4fd8"/>
+  </symbol>
+  <symbol id="i-roll" viewBox="0 0 48 48">
+    <path d="M30 19h10v22l-2.5-2-2.5 2-2.5-2-2.5 2" fill="#fff1d0"/>
+    <path d="M9 14v24a11 4.8 0 0 0 22 0V14" fill="#fff"/>
+    <ellipse cx="20" cy="14" rx="11" ry="4.8" fill="#fff"/>
+    <ellipse cx="20" cy="14" rx="4" ry="1.8" fill="#a7a2a6" stroke-width="2"/>
+    <path d="M13 22v12" stroke="#9fd3e6" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-towels" viewBox="0 0 48 48">
+    <rect x="7" y="31" width="34" height="11" rx="3.5" fill="#9fd3e6"/>
+    <rect x="9.5" y="20" width="29" height="11" rx="3.5" fill="#f4a6a0"/>
+    <rect x="12" y="9" width="24" height="11" rx="3.5" fill="#ffd23f"/>
+    <path d="M12 36.5h24M14.5 25.5h19M17 14.5h14" stroke-width="2" stroke-dasharray="2 3.5"/>
+  </symbol>
+  <symbol id="i-bag" viewBox="0 0 48 48">
+    <path d="M14 18C5 28 8 43 24 43s19-15 10-25z" fill="#6f6a6f"/>
+    <path d="M17 19l-3-10 10 5 10-5-3 10z" fill="#6f6a6f"/>
+    <path d="M14 30c0 4 2 7.5 5 9" stroke="#fff" stroke-width="2.5"/>
+    <path d="M18 19.5h13" stroke="#ffd23f" stroke-width="3"/>
+  </symbol>
+  <symbol id="i-basket" viewBox="0 0 48 48">
+    <path d="M12 21c1-8 9-11 13-5 3-6 11-4 11 5" fill="#f4a6a0"/>
+    <path d="M6 20h36l-4 22H10z" fill="#ffd23f"/>
+    <path d="M9 27.5h30M10.5 35h27M17 20v22M24 20v22M31 20v22" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-bulb" viewBox="0 0 48 48">
+    <path d="M24 6a12 12 0 0 1 7 21.7c-1.6 1.2-2 2.6-2 4.3H19c0-1.7-.4-3.1-2-4.3A12 12 0 0 1 24 6z" fill="#ffd23f"/>
+    <rect x="18.5" y="32" width="11" height="8" rx="2.5" fill="#a7a2a6"/>
+    <path d="M18.5 36h11" stroke-width="2"/><path d="M21.5 43.5h5"/>
+    <path d="M19.5 14a6 6 0 0 1 5-3.5" stroke="#fff" stroke-width="2.5"/>
+    <path d="M4 18h3.5M40.5 18H44M8.5 6.5l2.5 2.5M39.5 6.5L37 9" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-home" viewBox="0 0 48 48">
+    <path d="M10.5 21h27v21h-27z" fill="#fff1d0"/>
+    <path d="M5 23L24 7l19 16z" fill="#d7261e"/>
+    <rect x="31" y="9" width="5" height="8" fill="#a7a2a6" stroke-width="2.5"/>
+    <path d="M19.5 42V32a4.5 4.5 0 0 1 9 0v10" fill="#1e4fd8"/>
+    <rect x="30" y="27" width="5" height="5" fill="#9fd3e6" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-phone" viewBox="0 0 48 48">
+    <rect x="13" y="4" width="21" height="40" rx="4.5" fill="#1e4fd8"/>
+    <rect x="16.5" y="9.5" width="14" height="25" rx="1.5" fill="#9fd3e6" stroke-width="2"/>
+    <circle cx="23.5" cy="39" r="2" fill="#fff1d0" stroke-width="1.6"/>
+    <path d="M38 11l4-3M39 17.5h5M38 24l4 3" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-bowl" viewBox="0 0 48 48">
+    <circle cx="16.5" cy="23" r="3.6" fill="#c98f55" stroke-width="2.2"/><circle cx="24" cy="20.5" r="3.6" fill="#c98f55" stroke-width="2.2"/>
+    <circle cx="31.5" cy="23" r="3.6" fill="#c98f55" stroke-width="2.2"/>
+    <path d="M7 27h34c0 9-7 15-17 15S7 36 7 27z" fill="#d7261e"/>
+    <rect x="5" y="24.5" width="38" height="5.5" rx="2.75" fill="#ffd23f"/>
+    <path d="M13 34c2 3 4 4 7 4.5" stroke="#fff" stroke-width="2.2"/>
+  </symbol>
+  <symbol id="i-check" viewBox="0 0 48 48">
+    <rect x="9.5" y="8" width="29" height="36" rx="3.5" fill="#fff1d0"/>
+    <rect x="17" y="4.5" width="14" height="7.5" rx="2.5" fill="#a7a2a6"/>
+    <path d="M15 22l4 4 7-8" stroke="#d7261e" stroke-width="3.5"/>
+    <path d="M15 34l4 4 7-8" stroke="#1e4fd8" stroke-width="3.5"/>
+    <path d="M30 23h4M30 35h4" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-pin" viewBox="0 0 48 48">
+    <path d="M24 45S10 31 10 19.5a14 14 0 0 1 28 0C38 31 24 45 24 45z" fill="#d7261e"/>
+    <circle cx="24" cy="19.5" r="5.5" fill="#fff1d0"/>
+  </symbol>
+  <symbol id="i-no" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="19" fill="#fff1d0"/>
+    <circle cx="24" cy="24" r="15" stroke="#d7261e" stroke-width="5"/>
+    <path d="M13.5 13.5l21 21" stroke="#d7261e" stroke-width="5"/>
+    <circle cx="24" cy="24" r="19"/>
+  </symbol>
+  <symbol id="i-calendar" viewBox="0 0 48 48">
+    <rect x="6.5" y="10" width="35" height="32" rx="4" fill="#fff1d0"/>
+    <path d="M6.5 14a4 4 0 0 1 4-4h27a4 4 0 0 1 4 4v6h-35z" fill="#d7261e"/>
+    <path d="M16 6v8M32 6v8"/>
+    <rect x="13" y="25" width="7" height="5.5" rx="1" fill="#1e4fd8" stroke-width="2"/>
+    <rect x="27" y="32" width="7" height="5.5" rx="1" fill="#ffd23f" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-suitcase" viewBox="0 0 48 48">
+    <path d="M18 16v-5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/>
+    <rect x="6" y="16" width="36" height="25" rx="4.5" fill="#ffd23f"/>
+    <path d="M6 26.5h36" stroke-width="2.5"/>
+    <rect x="20" y="23" width="8" height="7" rx="1.5" fill="#d7261e" stroke-width="2"/>
+    <circle cx="35" cy="34.5" r="3" fill="#1e4fd8" stroke-width="2"/>
+    <path d="M11 33l4 3" stroke="#fff" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-vet" viewBox="0 0 48 48">
+    <path d="M18 15v-4h12v4"/>
+    <rect x="6.5" y="15" width="35" height="27" rx="4.5" fill="#fff1d0"/>
+    <path d="M21 20.5h6v5.5h5.5v6H27v5.5h-6V32h-5.5v-6H21z" fill="#d7261e" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-drop" viewBox="0 0 48 48">
+    <path d="M24 4.5S11 20 11 29a13 13 0 0 0 26 0c0-9-13-24.5-13-24.5z" fill="#9fd3e6"/>
+    <path d="M17 30a7.5 7.5 0 0 0 5 6.5" stroke="#fff" stroke-width="3"/>
+  </symbol>
+  <symbol id="i-moon" viewBox="0 0 48 48">
+    <path d="M30 6a17 17 0 1 0 12 26A14 14 0 0 1 30 6z" fill="#ffd23f"/>
+    <path d="M9 7l1.6 3.4L14 12l-3.4 1.6L9 17l-1.6-3.4L4 12l3.4-1.6z" fill="#fff1d0" stroke-width="2"/>
+    <circle cx="24" cy="30" r="2.2" fill="#e8b92e" stroke="none"/><circle cx="30" cy="37" r="1.6" fill="#e8b92e" stroke="none"/>
+  </symbol>
+  <symbol id="i-sun" viewBox="0 0 48 48">
+    <path d="M24 4v6M24 38v6M4 24h6M38 24h6M9.5 9.5l4.2 4.2M34.3 34.3l4.2 4.2M9.5 38.5l4.2-4.2M34.3 13.7l4.2-4.2"/>
+    <circle cx="24" cy="24" r="10" fill="#ffd23f"/>
+  </symbol>
+  <symbol id="i-truck" viewBox="0 0 48 48">
+    <path d="M3.5 13h25v21h-25z" fill="#a8d08d"/>
+    <path d="M28.5 19h9l6.5 7.5V34h-15.5z" fill="#d7261e"/>
+    <path d="M31.5 22h5l3.3 4h-8.3z" fill="#9fd3e6" stroke-width="2"/>
+    <path d="M9 19.5h14M9 26.5h14" stroke-width="2.5"/>
+    <circle cx="12.5" cy="36" r="4.8" fill="#a7a2a6"/><circle cx="36" cy="36" r="4.8" fill="#a7a2a6"/>
+  </symbol>
+  <symbol id="i-paw" viewBox="0 0 48 48">
+    <path d="M24 23c7 0 12 7 12 12.5 0 4.5-4 6.5-7.5 5.5-2.2-.6-3-1.5-4.5-1.5s-2.3.9-4.5 1.5C16 42 12 40 12 35.5 12 30 17 23 24 23z" fill="#f4a6a0"/>
+    <ellipse cx="10.5" cy="20" rx="4.6" ry="5.8" fill="#f4a6a0" transform="rotate(-20 10.5 20)"/>
+    <ellipse cx="19" cy="11.5" rx="4.6" ry="6" fill="#f4a6a0" transform="rotate(-8 19 11.5)"/>
+    <ellipse cx="29" cy="11.5" rx="4.6" ry="6" fill="#f4a6a0" transform="rotate(8 29 11.5)"/>
+    <ellipse cx="37.5" cy="20" rx="4.6" ry="5.8" fill="#f4a6a0" transform="rotate(20 37.5 20)"/>
+  </symbol>
+  <symbol id="i-heart" viewBox="0 0 48 48">
+    <path d="M24 42C8 31 4 21 9.5 12.5c5-6.5 12.5-4.5 14.5 1.5 2-6 9.5-8 14.5-1.5C44 21 40 31 24 42z" fill="#d7261e"/>
+    <path d="M12 18a6 6 0 0 1 4.5-4" stroke="#fff" stroke-width="2.8"/>
+  </symbol>
+  <symbol id="i-sparkle" viewBox="0 0 48 48">
+    <path d="M24 3c2 14 7 19 21 21-14 2-19 7-21 21-2-14-7-19-21-21 14-2 19-7 21-21z" fill="#ffd23f"/>
+    <path d="M38 6l1 3 3 1-3 1-1 3-1-3-3-1 3-1z" fill="#fff1d0" stroke-width="1.8"/>
+  </symbol>
+  <symbol id="i-copy" viewBox="0 0 48 48">
+    <rect x="16" y="5" width="23" height="28" rx="3.5" fill="#fff1d0"/>
+    <rect x="9" y="14" width="23" height="29" rx="3.5" fill="#9fd3e6"/>
+    <path d="M15 23h11M15 29h11M15 35h7" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-key" viewBox="0 0 48 48">
+    <path d="M22 24h20v7M35 24v5.5" stroke-width="4"/>
+    <circle cx="14" cy="24" r="9" fill="#ffd23f"/>
+    <circle cx="14" cy="24" r="3" fill="#fff1d0" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-pencil" viewBox="0 0 48 48">
+    <path d="M9 39l3.5-11L33 7.5l7.5 7.5L20 35.5z" fill="#ffd23f"/>
+    <path d="M33 7.5l3-3a2.5 2.5 0 0 1 3.5 0l4 4a2.5 2.5 0 0 1 0 3.5l-3 3z" fill="#f4a6a0"/>
+    <path d="M12.5 28l7.5 7.5M29 11.5l7.5 7.5" stroke-width="2.5"/>
+    <path d="M9 39l1.3-4.2 2.9 2.9z" fill="#111"/>
+  </symbol>
+</defs></svg>
 
 <header class="awning">
   <div class="wrap">
@@ -434,8 +673,8 @@ const HOME = {
     fr: "Tout ce qu'il vous faut pour votre séjour : le Wi-Fi, la routine de Molly, les plantes et où trouver les choses. Touchez une tuile pour y aller."
   },
   signoff: {
-    en: "Thank you for looking after our home (and Molly)! 💛",
-    fr: "Merci de prendre soin de notre appartement (et de Molly) ! 💛"
+    en: "Thank you for looking after our home (and Molly)!",
+    fr: "Merci de prendre soin de notre appartement (et de Molly) !"
   },
 
   wifi: {
@@ -459,7 +698,7 @@ const HOME = {
     tips: [
       { en: "Please keep windows on the cat-safe setting (tilted or with the screen) so Molly can't get out.",
         fr: "Merci de laisser les fenêtres en mode « sécurité chat » (entrouvertes en oscillo-battant ou avec la moustiquaire) pour que Molly ne sorte pas." },
-      { en: "Shoes off at the door, please 👟", fr: "On enlève ses chaussures à l'entrée, s'il vous plaît 👟" },
+      { en: "Shoes off at the door, please", fr: "On enlève ses chaussures à l'entrée, s'il vous plaît" },
       { en: "TODO: quiet hours / neighbor tips", fr: "TODO: heures calmes / infos voisins" },
       { en: "TODO: anything else guests should know (washing machine, dishwasher, TV…)", fr: "TODO: autres infos utiles (lave-linge, lave-vaisselle, télé…)" }
     ]
@@ -478,15 +717,15 @@ const HOME = {
       { time: "19:30", label: { en: "Dinner", fr: "Dîner" },             what: { en: "TODO: food and amount", fr: "TODO: nourriture et quantité" } }
     ],
     daily: [
-      { en: "Breakfast 🍽️", fr: "Petit-déjeuner 🍽️" },
-      { en: "Fresh water in her bowl 💧", fr: "Eau fraîche dans sa gamelle 💧" },
-      { en: "Scoop the litter box 🪣", fr: "Nettoyer la litière 🪣" },
-      { en: "Playtime, 10 minutes with the wand toy 🪶", fr: "Jeu : 10 minutes avec la canne à plumes 🪶" },
-      { en: "Dinner 🍽️", fr: "Dîner 🍽️" }
+      { en: "Breakfast", fr: "Petit-déjeuner" },
+      { en: "Fresh water in her bowl", fr: "Eau fraîche dans sa gamelle" },
+      { en: "Scoop the litter box", fr: "Nettoyer la litière" },
+      { en: "Playtime, 10 minutes with the wand toy", fr: "Jeu : 10 minutes avec la canne à plumes" },
+      { en: "Dinner", fr: "Dîner" }
     ],
     where: [
       [{ en: "Food", fr: "Nourriture" }, { en: "TODO: cupboard / shelf", fr: "TODO: placard / étagère" }],
-      [{ en: "Treats", fr: "Friandises" }, { en: "TODO: location (max 3 a day 😉)", fr: "TODO: emplacement (3 max par jour 😉)" }],
+      [{ en: "Treats", fr: "Friandises" }, { en: "TODO: location (max 3 a day)", fr: "TODO: emplacement (3 max par jour)" }],
       [{ en: "Litter & bags", fr: "Litière et sacs" }, { en: "TODO: location", fr: "TODO: emplacement" }],
       [{ en: "Carrier", fr: "Caisse de transport" }, { en: "TODO: location", fr: "TODO: emplacement" }]
     ],
@@ -500,11 +739,11 @@ const HOME = {
 
   // water: which days of the week to water. 0=Sun … 6=Sat
   plants: [
-    { emoji: "🪴", name: "TODO: plant name (e.g. Monstera)", where: { en: "Living room", fr: "Salon" }, water: [3, 6],
+    { icon: "plant", name: "TODO: plant name (e.g. Monstera)", where: { en: "Living room", fr: "Salon" }, water: [3, 6],
       tip: { en: "Water when the top 2 cm of soil is dry.", fr: "Arroser quand les 2 premiers cm de terre sont secs." } },
-    { emoji: "🌵", name: "TODO: cactus / succulents", where: { en: "Window sill", fr: "Rebord de fenêtre" }, water: [0],
+    { icon: "cactus", name: "TODO: cactus / succulents", where: { en: "Window sill", fr: "Rebord de fenêtre" }, water: [0],
       tip: { en: "Just a little, every week or two.", fr: "Juste un peu, toutes les une ou deux semaines." } },
-    { emoji: "🌿", name: { en: "TODO: herbs", fr: "TODO: herbes aromatiques" }, where: { en: "Kitchen", fr: "Cuisine" }, water: [1, 3, 5],
+    { icon: "herb", name: { en: "TODO: herbs", fr: "TODO: herbes aromatiques" }, where: { en: "Kitchen", fr: "Cuisine" }, water: [1, 3, 5],
       tip: { en: "They like a drink every other day.", fr: "Elles aiment être arrosées un jour sur deux." } }
   ],
   plantsNote: {
@@ -513,19 +752,19 @@ const HOME = {
   },
 
   supplies: [
-    { emoji: "🧴", name: { en: "Cleaning sprays", fr: "Produits ménagers" }, where: { en: "TODO: under the kitchen sink", fr: "TODO: sous l'évier de la cuisine" } },
-    { emoji: "🧹", name: { en: "Broom & mop", fr: "Balai et serpillière" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
-    { emoji: "🌀", name: { en: "Vacuum cleaner", fr: "Aspirateur" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
-    { emoji: "🧻", name: { en: "Toilet paper & paper towels", fr: "Papier toilette et essuie-tout" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
-    { emoji: "🛏️", name: { en: "Fresh sheets & towels", fr: "Draps et serviettes propres" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
-    { emoji: "🗑️", name: { en: "Garbage bags", fr: "Sacs poubelle" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
-    { emoji: "🧺", name: { en: "Laundry detergent", fr: "Lessive" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
-    { emoji: "💡", name: { en: "Light bulbs & batteries", fr: "Ampoules et piles" }, where: { en: "TODO: location", fr: "TODO: emplacement" } }
+    { icon: "spray", name: { en: "Cleaning sprays", fr: "Produits ménagers" }, where: { en: "TODO: under the kitchen sink", fr: "TODO: sous l'évier de la cuisine" } },
+    { icon: "broom", name: { en: "Broom & mop", fr: "Balai et serpillière" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { icon: "vacuum", name: { en: "Vacuum cleaner", fr: "Aspirateur" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { icon: "roll", name: { en: "Toilet paper & paper towels", fr: "Papier toilette et essuie-tout" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { icon: "towels", name: { en: "Fresh sheets & towels", fr: "Draps et serviettes propres" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { icon: "bag", name: { en: "Garbage bags", fr: "Sacs poubelle" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { icon: "basket", name: { en: "Laundry detergent", fr: "Lessive" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { icon: "bulb", name: { en: "Light bulbs & batteries", fr: "Ampoules et piles" }, where: { en: "TODO: location", fr: "TODO: emplacement" } }
   ],
 
   cleaning: {
     weekly: [
-      { en: "Vacuum the floors (Molly sheds, sorry! 🐈‍⬛)", fr: "Passer l'aspirateur (Molly perd ses poils, désolés ! 🐈‍⬛)" },
+      { en: "Vacuum the floors (Molly sheds, sorry!)", fr: "Passer l'aspirateur (Molly perd ses poils, désolés !)" },
       { en: "Wipe kitchen counters and stove", fr: "Nettoyer le plan de travail et les plaques" },
       { en: "Clean the bathroom sink and toilet", fr: "Nettoyer le lavabo et les toilettes" },
       { en: "Take out recycling", fr: "Sortir le recyclage" }
@@ -548,13 +787,13 @@ const HOME = {
       fr: "TODO: où sont les poubelles de l'immeuble et à quelle heure les descendre."
     },
     bins: [
-      { emoji: "🗑️", name: { en: "General waste", fr: "Ordures ménagères" }, color: "var(--soft-plum)", days: [2, 5],
+      { icon: "trash", name: { en: "General waste", fr: "Ordures ménagères" }, color: "var(--pink)", days: [2, 5],
         what: { en: "Everything that isn't recyclable", fr: "Tout ce qui ne se recycle pas" } },
-      { emoji: "♻️", name: { en: "Recycling", fr: "Recyclage" }, color: "var(--soft-mustard)", days: [3],
+      { icon: "recycle", name: { en: "Recycling", fr: "Recyclage" }, color: "var(--sun)", days: [3],
         what: { en: "Plastic, cans, cartons", fr: "Plastique, canettes, briques" } },
-      { emoji: "📦", name: { en: "Paper", fr: "Papier" }, color: "var(--soft-sky)", days: [1],
+      { icon: "box", name: { en: "Paper", fr: "Papier" }, color: "var(--sky)", days: [1],
         what: { en: "Flatten the boxes, please", fr: "Aplatissez les cartons, s'il vous plaît" } },
-      { emoji: "🍂", name: { en: "Organic", fr: "Biodéchets" }, color: "var(--soft-sage)", days: [4],
+      { icon: "leaf", name: { en: "Organic", fr: "Biodéchets" }, color: "var(--leaf)", days: [4],
         what: { en: "Food scraps (not cat litter!)", fr: "Restes alimentaires (pas la litière !)" } }
     ]
   },
@@ -572,13 +811,13 @@ const HOME = {
 const UI = {
   en: {
     locale: "en-GB",
-    greet: ["Good morning & welcome! 👋", "Good afternoon & welcome! 👋", "Good evening & welcome! 👋"],
+    greet: ["Good morning & welcome!", "Good afternoon & welcome!", "Good evening & welcome!"],
     todayTitle: "Today at home",
-    theme: "🌓 Light / dark", inWord: "in",
+    theme: "Light / dark", inWord: "in",
     photoCap: "Chief Napping Officer", photoBadge: "100% cat", photoAlt: "Molly, a grey and white tabby, sitting on the green sofa with her pink heart tag",
     stamp: "guest guide", signTop: "Today's specials: Wi-Fi · treats · naps", kicker: "Home guide · est. by Molly",
-    scroll: "Explore ↓", pet: "Pet Molly 🐾", petLabel: "Pet Molly",
-    purr: ["Purrr… 💛", "Again! 🐾", "Molly approves 😼", "Prrrrrt? 🐈‍⬛"],
+    scroll: "Explore ↓", pet: "Pet Molly", petLabel: "Pet Molly",
+    purr: ["Purrr…", "Again!", "Molly approves", "Prrrrrt?"],
     petted: n => n ? `Pets today: ${n}. She'd like more.` : "",
     footBig: "See you soon!", footSmall: "Molly approved this website. (She sat on the keyboard.)",
     days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
@@ -593,29 +832,29 @@ const UI = {
       garbage: "Put the bins out the evening before pickup", supplies: "Where to find things",
       cleaning: "Keeping things cozy", home: "The practical stuff", contacts: "Call or message anytime"
     },
-    network: "Network", password: "Password", copy: "Copy", copied: "Copied! 📋", copyFail: "Couldn't copy, please type it in",
-    feeding: "🍽️ Feeding times", checklist: n => `✅ ${n}'s checklist for today`, whereHer: "📍 Where her things are",
-    dont: "🚫 Please don't", vet: "🩺 Vet:", next: d => `next · in ${d}`,
-    weekly: "🗓️ Once a week", beforeGo: "👋 Before you leave",
-    address: "Address", goodToKnow: "💡 Good to know", call: "Call",
-    progress: (d, n) => d === n ? "All done, thank you! 🎉" : `${d} of ${n} done`,
+    network: "Network", password: "Password", copy: "Copy", copied: "Copied!", copyFail: "Couldn't copy, please type it in",
+    feeding: "Feeding times", checklist: n => `${n}'s checklist for today`, whereHer: "Where her things are",
+    dont: "Please don't", vet: "Vet:", next: d => `next · in ${d}`,
+    weekly: "Once a week", beforeGo: "Before you leave",
+    address: "Address", goodToKnow: "Good to know", call: "Call",
+    progress: (d, n) => d === n ? "All done, thank you!" : `${d} of ${n} done`,
     liveMeal: (n, l, t) => `${n}'s next meal: ${l} at ${t}`, liveIn: d => `in ${d}`,
     tonight: b => `Tonight: take out the ${b}`, pickupTomorrow: "Pickup is tomorrow",
     pickupToday: b => `Pickup today: ${b}`, stillTime: "If it's still early, there's time!",
     water: p => `Water today: ${p}`, waterTap: "Tap Plants for details",
     noWater: "No plants to water today", dayOff: "Enjoy the day off",
-    liveCheck: (n, d, t) => `${n}'s checklist: ${d} of ${t} done`, purrfect: "Purrfect 🎉", tickOff: "Tick things off as you go",
-    meow: "Meow! 🐾", thanks: n => `${n} says thank you! 🐾`
+    liveCheck: (n, d, t) => `${n}'s checklist: ${d} of ${t} done`, purrfect: "Purrfect", tickOff: "Tick things off as you go",
+    meow: "Meow!", thanks: n => `${n} says thank you!`
   },
   fr: {
     locale: "fr-FR",
-    greet: ["Bonjour et bienvenue ! 👋", "Bon après-midi et bienvenue ! 👋", "Bonsoir et bienvenue ! 👋"],
+    greet: ["Bonjour et bienvenue !", "Bon après-midi et bienvenue !", "Bonsoir et bienvenue !"],
     todayTitle: "Aujourd'hui à la maison",
-    theme: "🌓 Clair / sombre", inWord: "dans",
+    theme: "Clair / sombre", inWord: "dans",
     photoCap: "Directrice des siestes", photoBadge: "100 % chat", photoAlt: "Molly, une chatte tigrée grise et blanche, assise sur le canapé vert avec sa médaille cœur rose",
     stamp: "guide des invités", signTop: "Au menu : Wi-Fi · friandises · siestes", kicker: "Guide maison · signé Molly",
-    scroll: "Explorer ↓", pet: "Caresser Molly 🐾", petLabel: "Caresser Molly",
-    purr: ["Rrrrr… 💛", "Encore ! 🐾", "Molly approuve 😼", "Prrrrrt ? 🐈‍⬛"],
+    scroll: "Explorer ↓", pet: "Caresser Molly", petLabel: "Caresser Molly",
+    purr: ["Rrrrr…", "Encore !", "Molly approuve", "Prrrrrt ?"],
     petted: n => n ? `Caresses aujourd'hui : ${n}. Elle en veut encore.` : "",
     footBig: "À très vite !", footSmall: "Site approuvé par Molly. (Elle s'est assise sur le clavier.)",
     days: ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"],
@@ -630,19 +869,19 @@ const UI = {
       garbage: "Sortez les poubelles la veille au soir du ramassage", supplies: "Où trouver les choses",
       cleaning: "Pour que tout reste agréable", home: "Les infos pratiques", contacts: "Appelez ou écrivez-nous quand vous voulez"
     },
-    network: "Réseau", password: "Mot de passe", copy: "Copier", copied: "Copié ! 📋", copyFail: "Copie impossible, tapez-le à la main",
-    feeding: "🍽️ Heures des repas", checklist: n => `✅ La liste de ${n} pour aujourd'hui`, whereHer: "📍 Où sont ses affaires",
-    dont: "🚫 À éviter", vet: "🩺 Vétérinaire :", next: d => `prochain · dans ${d}`,
-    weekly: "🗓️ Une fois par semaine", beforeGo: "👋 Avant de partir",
-    address: "Adresse", goodToKnow: "💡 Bon à savoir", call: "Appeler",
-    progress: (d, n) => d === n ? "Tout est fait, merci ! 🎉" : `${d} sur ${n} fait${d > 1 ? "s" : ""}`,
+    network: "Réseau", password: "Mot de passe", copy: "Copier", copied: "Copié !", copyFail: "Copie impossible, tapez-le à la main",
+    feeding: "Heures des repas", checklist: n => `La liste de ${n} pour aujourd'hui`, whereHer: "Où sont ses affaires",
+    dont: "À éviter", vet: "Vétérinaire :", next: d => `prochain · dans ${d}`,
+    weekly: "Une fois par semaine", beforeGo: "Avant de partir",
+    address: "Adresse", goodToKnow: "Bon à savoir", call: "Appeler",
+    progress: (d, n) => d === n ? "Tout est fait, merci !" : `${d} sur ${n} fait${d > 1 ? "s" : ""}`,
     liveMeal: (n, l, t) => `Prochain repas de ${n} : ${l.toLowerCase()} à ${t.replace(":", "h")}`, liveIn: d => `dans ${d}`,
     tonight: b => `Ce soir, à sortir : ${b}`, pickupTomorrow: "Ramassage demain",
     pickupToday: b => `Ramassage aujourd'hui : ${b}`, stillTime: "S'il est encore tôt, il est encore temps !",
     water: p => `À arroser aujourd'hui : ${p}`, waterTap: "Voir Plantes pour les détails",
     noWater: "Pas d'arrosage aujourd'hui", dayOff: "Profitez de la journée",
-    liveCheck: (n, d, t) => `Liste de ${n} : ${d} sur ${t}`, purrfect: "Parfait, ronron 🎉", tickOff: "Cochez au fur et à mesure",
-    meow: "Miaou ! 🐾", thanks: n => `${n} vous dit merci ! 🐾`
+    liveCheck: (n, d, t) => `Liste de ${n} : ${d} sur ${t}`, purrfect: "Parfait, ronron", tickOff: "Cochez au fur et à mesure",
+    meow: "Miaou !", thanks: n => `${n} vous dit merci !`
   }
 };
 
@@ -660,13 +899,13 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;"
 // Translate, escape, and highlight anything still marked TODO
 const t = raw => {
   const s = String(L(raw)), v = esc(s);
-  return /^TODO/.test(s) ? `<span class="todo">✏️ ${v.replace(/^TODO:?\s*/, "")}</span>`
-    : v.replace(/TODO:?\s*([^.]*)/g, '<span class="todo">✏️ $1</span>');
+  return /^TODO/.test(s) ? `<span class="todo">${ic("pencil")}${v.replace(/^TODO:?\s*/, "")}</span>`
+    : v.replace(/TODO:?\s*([^.]*)/g, `<span class="todo">${ic("pencil")}$1</span>`);
 };
 const plain = raw => String(L(raw)).replace(/^TODO:?\s*/, "");
-const toast = msg => {
+const toast = (msg, icon) => {
   const el = document.getElementById("toast");
-  el.textContent = msg; el.classList.add("show");
+  el.innerHTML = esc(msg) + (icon ? ic(icon) : ""); el.classList.add("show");
   clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("show"), 1600);
 };
 const toMin = hhmm => { const [h, m] = hhmm.split(":").map(Number); return h * 60 + m; };
@@ -679,21 +918,23 @@ const whenLabel = n => n === 0 ? U().today : n === 1 ? U().tomorrow : U().daysLo
 const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; };
 
 const SECTIONS = [
-  { id: "wifi", emoji: "📶", tone: "sky" },
-  { id: "molly", emoji: "🐱", tone: "terracotta" },
-  { id: "plants", emoji: "🌿", tone: "sage" },
-  { id: "garbage", emoji: "🗑️", tone: "plum" },
-  { id: "supplies", emoji: "🧴", tone: "mustard" },
-  { id: "cleaning", emoji: "🧹", tone: "sky" },
-  { id: "home", emoji: "🏠", tone: "terracotta" },
-  { id: "contacts", emoji: "📞", tone: "sage" }
+  { id: "wifi", icon: "wifi", tone: "sky" },
+  { id: "molly", icon: "cat", tone: "terracotta" },
+  { id: "plants", icon: "plant", tone: "sage" },
+  { id: "garbage", icon: "trash", tone: "plum" },
+  { id: "supplies", icon: "spray", tone: "mustard" },
+  { id: "cleaning", icon: "broom", tone: "sky" },
+  { id: "home", icon: "home", tone: "terracotta" },
+  { id: "contacts", icon: "phone", tone: "sage" }
 ];
+const ic = (n, c = "") => `<svg class="ic ${c}" aria-hidden="true" focusable="false"><use href="#i-${n}"/></svg>`;
+const h3 = (n, txt) => `<span class="h3l">${ic(n)}${esc(txt)}</span>`;
 const label = s => s.id === "molly" ? HOME.cat.name : U().labels[s.id];
 
 function sectionShell(s, subtitle, body) {
   const title = s.id === "molly" ? U().catTitle(HOME.cat.name) : label(s);
   return `<section class="card t-${s.tone}" id="${s.id}">
-    <div class="sec-head"><div class="badge">${s.id === "molly" ? '<img src="assets/molly-avatar.svg" alt="" class="badge-img">' : s.emoji}</div>
+    <div class="sec-head"><div class="badge">${s.id === "molly" ? '<img src="assets/molly-avatar.svg" alt="" class="badge-img">' : ic(s.icon)}</div>
       <div><h2>${esc(title)}</h2><p>${esc(subtitle)}</p></div></div>
     ${body}</section>`;
 }
@@ -714,17 +955,17 @@ function render() {
   document.getElementById("title").textContent = L(H.title);
   document.getElementById("intro").textContent = L(H.intro);
   document.getElementById("today-title").textContent = u.todayTitle;
-  document.getElementById("theme-btn").textContent = u.theme;
+  document.getElementById("theme-btn").innerHTML = `${ic("moon")} ${esc(u.theme)}`;
   const set = (id, v) => { document.getElementById(id).textContent = v; };
   set("stamp-sub", u.stamp); set("sign-top", u.signTop); set("sign-kicker", u.kicker);
-  set("scroll-btn", u.scroll); set("pet-btn", u.pet); set("foot-big", u.footBig); set("foot-small", u.footSmall);
+  set("scroll-btn", u.scroll); document.getElementById("pet-btn").innerHTML = `${esc(u.pet)} ${ic("paw")}`; set("foot-big", u.footBig); set("foot-small", u.footSmall);
   set("pet-count", u.petted(store.get(`pets:${todayKey()}`) || 0));
   document.getElementById("cat-btn").setAttribute("aria-label", u.petLabel);
-  document.getElementById("signoff").innerHTML = `${esc(L(H.signoff))}<br>${t(H.hosts)}`;
+  document.getElementById("signoff").innerHTML = `${esc(L(H.signoff))} ${ic("heart")}<br>${t(H.hosts)}`;
   document.querySelectorAll("#lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
-  document.getElementById("nav").innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.emoji} ${esc(label(s))}</a>`).join("");
+  document.getElementById("nav").innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${ic(s.icon)} ${esc(label(s))}</a>`).join("");
   document.getElementById("tiles").innerHTML = SECTIONS.map(s =>
-    `<a class="tile" href="#${s.id}"><span class="e">${s.emoji}</span><span>${esc(label(s))}</span></a>`).join("");
+    `<a class="tile" href="#${s.id}"><span class="e">${ic(s.icon, "big")}</span><span>${esc(label(s))}</span></a>`).join("");
 
   const today = new Date().getDay();
   const out = [];
@@ -749,19 +990,19 @@ function render() {
       </figure>
       <p>${t(C.about)}</p>
     </div>
-    <h3><span>${u.feeding}</span><span class="timer" id="timer" role="img"></span></h3>
+    <h3>${h3("bowl", u.feeding)}<span class="timer" id="timer" role="img"></span></h3>
     <div class="meals" id="meals"></div>
-    <h3>${esc(u.checklist(C.name))}</h3>
+    <h3>${h3("check", u.checklist(C.name))}</h3>
     ${renderChecklist("cat", C.daily)}
-    <h3>${u.whereHer}</h3>
+    <h3>${h3("pin", u.whereHer)}</h3>
     <dl class="kv">${C.where.map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
-    <h3>${u.dont}</h3>
+    <h3>${h3("no", u.dont)}</h3>
     <ul class="list">${C.dont.map(d => `<li>${t(d)}</li>`).join("")}</ul>
-    <div class="note warn"><b>${u.vet}</b> ${t(C.vet.name)} · ${t(C.vet.phone)}<br>${t(C.vet.address)}</div>`));
+    <div class="note warn"><b>${ic("vet")} ${esc(u.vet)}</b> ${t(C.vet.name)} · ${t(C.vet.phone)}<br>${t(C.vet.address)}</div>`));
 
   out.push(sectionShell(S.plants, u.sub.plants(u.daysLong[today]), `
     <div class="grid">${H.plants.map(p => `
-      <div class="mini"><div class="e">${p.emoji}</div><b>${t(p.name)}</b><p>📍 ${t(p.where)}</p><p>${t(p.tip)}</p>
+      <div class="mini"><div class="e">${ic(p.icon, "big")}</div><b>${t(p.name)}</b><p>${ic("pin")} ${t(p.where)}</p><p>${t(p.tip)}</p>
         <div class="chips">${[1,2,3,4,5,6,0].map(d => `<span class="chip ${p.water.includes(d) ? "on" : ""} ${d === today ? "today" : ""}">${u.days[d]}</span>`).join("")}</div>
       </div>`).join("")}</div>
     <p class="note">${t(H.plantsNote)}</p>`));
@@ -769,24 +1010,24 @@ function render() {
   const bins = H.garbage.bins.map(b => ({ ...b, n: daysUntil(b.days) })).sort((a, b) => a.n - b.n);
   out.push(sectionShell(S.garbage, u.sub.garbage, `
     <div class="bins">${bins.map(b => `
-      <div class="bin ${b.n <= 1 ? "soon" : ""}"><div class="dot" style="background:${b.color}">${b.emoji}</div>
+      <div class="bin ${b.n <= 1 ? "soon" : ""}"><div class="dot" style="background:${b.color}">${ic(b.icon)}</div>
         <div><b>${esc(L(b.name))}</b><div class="what" style="color:var(--muted);font-size:14px">${t(b.what)}</div></div>
         <div class="when">${esc(whenLabel(b.n))}<small>${b.days.map(d => u.days[d]).join(u.and)}</small></div></div>`).join("")}</div>
     <p class="note">${t(H.garbage.note)}</p>`));
 
   out.push(sectionShell(S.supplies, u.sub.supplies, `
-    <div class="grid">${H.supplies.map(s => `<div class="mini"><div class="e">${s.emoji}</div><b>${esc(L(s.name))}</b><p>📍 ${t(s.where)}</p></div>`).join("")}</div>`));
+    <div class="grid">${H.supplies.map(s => `<div class="mini row"><div class="e">${ic(s.icon, "big")}</div><div><b>${esc(L(s.name))}</b><p>${ic("pin")} ${t(s.where)}</p></div></div>`).join("")}</div>`));
 
   out.push(sectionShell(S.cleaning, u.sub.cleaning, `
-    <h3>${u.weekly}</h3>
+    <h3>${h3("calendar", u.weekly)}</h3>
     <ul class="list">${H.cleaning.weekly.map(i => `<li>${t(i)}</li>`).join("")}</ul>
-    <h3>${u.beforeGo}</h3>
+    <h3>${h3("suitcase", u.beforeGo)}</h3>
     ${renderChecklist("leave", H.cleaning.beforeYouGo)}`));
 
   out.push(sectionShell(S.home, u.sub.home, `
     <dl class="kv"><dt>${u.address}</dt><dd>${t(H.apartment.address)}</dd>
       ${H.apartment.details.map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
-    <h3>${u.goodToKnow}</h3>
+    <h3>${h3("bulb", u.goodToKnow)}</h3>
     <ul class="list">${H.apartment.tips.map(i => `<li>${t(i)}</li>`).join("")}</ul>`));
 
   out.push(sectionShell(S.contacts, u.sub.contacts, H.contacts.map(c => {
@@ -827,24 +1068,24 @@ function updateLive() {
     new Date().toLocaleDateString(u.locale, { weekday: "long", day: "numeric", month: "long" });
 
   const items = [];
-  items.push(["🐱", u.liveMeal(C.name, L(next.label), next.time), u.liveIn(u.dur(until))]);
+  items.push(["cat", u.liveMeal(C.name, L(next.label), next.time), u.liveIn(u.dur(until))]);
 
   const binNames = list => list.map(b => L(b.name).toLowerCase()).join(u.and);
   const binsToday = H.garbage.bins.filter(b => b.days.includes(today));
   const binsTomorrow = H.garbage.bins.filter(b => b.days.includes((today + 1) % 7));
-  if (binsTomorrow.length) items.push(["🌙", u.tonight(binNames(binsTomorrow)), u.pickupTomorrow]);
-  if (binsToday.length) items.push(["🚛", u.pickupToday(binNames(binsToday)), u.stillTime]);
+  if (binsTomorrow.length) items.push(["moon", u.tonight(binNames(binsTomorrow)), u.pickupTomorrow]);
+  if (binsToday.length) items.push(["truck", u.pickupToday(binNames(binsToday)), u.stillTime]);
 
   const thirsty = H.plants.filter(p => p.water.includes(today));
   items.push(thirsty.length
-    ? ["💧", u.water(thirsty.map(p => plain(p.name)).join(", ")), u.waterTap]
-    : ["🌿", u.noWater, u.dayOff]);
+    ? ["drop", u.water(thirsty.map(p => plain(p.name)).join(", ")), u.waterTap]
+    : ["leaf", u.noWater, u.dayOff]);
 
   const done = (store.get(`check:cat:${todayKey()}`) || []).length;
-  items.push(["✅", u.liveCheck(C.name, done, C.daily.length), done === C.daily.length ? u.purrfect : u.tickOff]);
+  items.push(["check", u.liveCheck(C.name, done, C.daily.length), done === C.daily.length ? u.purrfect : u.tickOff]);
 
   document.getElementById("today-list").innerHTML = items.map(([e, b, s]) =>
-    `<li><span class="e">${e}</span><div><b>${esc(b)}</b><span class="s">${esc(s)}</span></div></li>`).join("");
+    `<li><span class="e">${ic(e)}</span><div><b>${esc(b)}</b><span class="s">${esc(s)}</span></div></li>`).join("");
 }
 
 document.addEventListener("click", async e => {
@@ -853,7 +1094,7 @@ document.addEventListener("click", async e => {
   if (e.target.closest("#cat-btn, #pet-btn")) { petMolly(); return; }
   const btn = e.target.closest("[data-copy]");
   if (!btn) return;
-  try { await navigator.clipboard.writeText(btn.dataset.copy); toast(U().copied); }
+  try { await navigator.clipboard.writeText(btn.dataset.copy); toast(U().copied, "copy"); }
   catch (err) { toast(U().copyFail); }
 });
 
@@ -864,10 +1105,10 @@ function petMolly() {
   const cat = document.getElementById("cat-btn");
   cat.classList.remove("petted"); void cat.offsetWidth; cat.classList.add("petted");
   const h = document.createElement("span");
-  h.className = "heart"; h.textContent = ["💛", "❤️", "🐾", "✨"][n % 4];
+  h.className = "heart"; h.innerHTML = ic(["heart", "paw", "sparkle", "heart"][n % 4]);
   h.style.left = `${30 + Math.random() * 60}%`; h.style.top = "10%";
   cat.appendChild(h); setTimeout(() => h.remove(), 1200);
-  toast(u.purr[n % u.purr.length]);
+  toast(u.purr[n % u.purr.length], ["heart", "paw", "sparkle", "cat"][n % 4]);
 }
 
 document.addEventListener("change", e => {
@@ -877,7 +1118,7 @@ document.addEventListener("change", e => {
   store.set(ul.dataset.key, checked);
   updateProgress(ul.dataset.id);
   updateLive();
-  if (e.target.checked && ul.dataset.id === "cat") toast(checked.length === HOME.cat.daily.length ? U().thanks(HOME.cat.name) : U().meow);
+  if (e.target.checked && ul.dataset.id === "cat") toast(checked.length === HOME.cat.daily.length ? U().thanks(HOME.cat.name) : U().meow, checked.length === HOME.cat.daily.length ? "heart" : "paw");
 });
 
 const themeBtn = document.getElementById("theme-btn");
