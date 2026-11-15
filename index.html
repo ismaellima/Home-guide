@@ -285,6 +285,12 @@ section.card#contacts { background: var(--blue); color: var(--cream); }
 #contacts .sec-head p { color: var(--cream); opacity: .85; }
 .contact { display: flex; justify-content: space-between; align-items: center; gap: 10px; border: 3px solid #111; border-radius: 16px; padding: 12px 14px; background: rgba(255,255,255,.1); }
 .contact + .contact { margin-top: 10px; }
+.nowrap { white-space: nowrap; }
+.contact .acts { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.contact.main { flex-direction: column; align-items: stretch; background: rgba(255,210,63,.18); }
+.contact.main .acts { justify-content: flex-start; margin-top: 4px; }
+.contact .pillbtn.wa { background: var(--leaf); }
+.contact .pillbtn.mail { background: var(--cream); }
 .contact small { display: block; opacity: .85; }
 .contact .pillbtn { background: var(--sun); font: 900 15px/1 "Phudu", sans-serif; }
 
@@ -522,6 +528,15 @@ footer button { margin-top: 16px; }
     <circle cx="14" cy="24" r="9" fill="#ffd23f"/>
     <circle cx="14" cy="24" r="3" fill="#fff1d0" stroke-width="2"/>
   </symbol>
+  <symbol id="i-chat" viewBox="0 0 48 48">
+    <path d="M24 6C13 6 5 13 5 22c0 5 2.5 9.3 6.5 12L9 43l10-5c1.6.4 3.3.6 5 .6 11 0 19-7 19-16S35 6 24 6z" fill="#a8d08d"/>
+    <circle cx="16" cy="22.5" r="2.6" fill="#111" stroke="none"/><circle cx="24" cy="22.5" r="2.6" fill="#111" stroke="none"/><circle cx="32" cy="22.5" r="2.6" fill="#111" stroke="none"/>
+  </symbol>
+  <symbol id="i-mail" viewBox="0 0 48 48">
+    <rect x="5" y="11" width="38" height="27" rx="4" fill="#fff1d0"/>
+    <path d="M6 13l18 14 18-14" fill="#9fd3e6"/>
+    <path d="M6 37l13-12M42 37L29 25" stroke-width="2.5"/>
+  </symbol>
   <symbol id="i-pencil" viewBox="0 0 48 48">
     <path d="M9 39l3.5-11L33 7.5l7.5 7.5L20 35.5z" fill="#ffd23f"/>
     <path d="M33 7.5l3-3a2.5 2.5 0 0 1 3.5 0l4 4a2.5 2.5 0 0 1 0 3.5l-3 3z" fill="#f4a6a0"/>
@@ -668,7 +683,7 @@ footer button { margin-top: 16px; }
    Days of the week: 0 = Sunday, 1 = Monday ... 6 = Saturday.
    ===================================================================== */
 const HOME = {
-  hosts: "TODO: your names",
+  hosts: "Ismael",
   title: { en: "Make yourself at home.", fr: "Faites comme chez vous." },
   intro: {
     en: "Thank you so much for staying with us and looking after Molly! Everything in the apartment is yours to use. We hope you feel relaxed and comfortable during your stay in Montreal.",
@@ -800,8 +815,8 @@ const HOME = {
   },
 
   contacts: [
-    { name: "TODO: Host 1", role: { en: "Owner", fr: "Propriétaire" }, phone: "TODO: +1 000 000 0000" },
-    { name: "TODO: Host 2", role: { en: "Owner", fr: "Propriétaire" }, phone: "TODO: +1 000 000 0000" },
+    { name: "Ismael Lima", role: { en: "Host · message me anytime", fr: "Hôte · écrivez-moi quand vous voulez" },
+      phone: "+1 514 654 4762", whatsapp: "15146544762", email: "ismaeldf@gmail.com" },
     { name: "Anima-Plus", role: { en: "Molly's vet · 1019 Laurier Ouest", fr: "Vétérinaire de Molly · 1019 Laurier Ouest" }, phone: "(514) 277-0977" },
     { name: "Pharmaprix", role: { en: "Pharmacy · 1 Mont-Royal Ave E", fr: "Pharmacie · 1, av. du Mont-Royal Est" }, phone: "" },
     { name: { en: "Emergency", fr: "Urgences" }, role: { en: "Police, fire, ambulance", fr: "Police, pompiers, ambulance" }, phone: "911" }
@@ -838,7 +853,7 @@ const UI = {
     feeding: "Feeding times", checklist: n => `${n}'s checklist for today`, whereHer: "Where her things are",
     dont: "Please don't", vet: "Vet:", next: d => `next · in ${d}`,
     weekly: "Once a week", beforeGo: "Before you leave",
-    address: "Address", goodToKnow: "Good to know", call: "Call",
+    address: "Address", goodToKnow: "Good to know", call: "Call", emailBtn: "Email",
     progress: (d, n) => d === n ? "All done, thank you!" : `${d} of ${n} done`,
     liveMeal: (n, l, t) => `${n}'s next meal: ${l} at ${t}`, liveIn: d => `in ${d}`,
     tonight: b => `Tonight: take out the ${b}`, pickupTomorrow: "Pickup is tomorrow",
@@ -875,7 +890,7 @@ const UI = {
     feeding: "Heures des repas", checklist: n => `La liste de ${n} pour aujourd'hui`, whereHer: "Où sont ses affaires",
     dont: "À éviter", vet: "Vétérinaire :", next: d => `prochain · dans ${d}`,
     weekly: "Une fois par semaine", beforeGo: "Avant de partir",
-    address: "Adresse", goodToKnow: "Bon à savoir", call: "Appeler",
+    address: "Adresse", goodToKnow: "Bon à savoir", call: "Appeler", emailBtn: "Courriel",
     progress: (d, n) => d === n ? "Tout est fait, merci !" : `${d} sur ${n} fait${d > 1 ? "s" : ""}`,
     liveMeal: (n, l, t) => `Prochain repas de ${n} : ${l.toLowerCase()} à ${t.replace(":", "h")}`, liveIn: d => `dans ${d}`,
     tonight: b => `Ce soir, à sortir : ${b}`, pickupTomorrow: "Ramassage demain",
@@ -1035,8 +1050,13 @@ function render() {
 
   out.push(sectionShell(S.contacts, u.sub.contacts, H.contacts.map(c => {
     const tel = /^TODO/.test(c.phone) ? "" : telOf(c.phone);
-    return `<div class="contact"><div><b>${t(c.name)}</b><small>${esc(L(c.role))}${c.phone ? ` · ${t(c.phone)}` : ""}</small></div>
-      ${tel ? `<a class="pillbtn" href="tel:${esc(tel)}">${u.call}</a>` : ""}</div>`;
+    const acts = [
+      tel && `<a class="pillbtn" href="tel:${esc(tel)}">${ic("phone")} ${u.call}</a>`,
+      c.whatsapp && `<a class="pillbtn wa" href="https://wa.me/${esc(c.whatsapp)}" target="_blank" rel="noopener">${ic("chat")} WhatsApp</a>`,
+      c.email && `<a class="pillbtn mail" href="mailto:${esc(c.email)}">${ic("mail")} ${u.emailBtn}</a>`
+    ].filter(Boolean).join("");
+    return `<div class="contact${c.whatsapp || c.email ? " main" : ""}"><div><b>${t(c.name)}</b><small>${esc(L(c.role))}${c.phone ? ` · <span class="nowrap">${t(c.phone)}</span>` : ""}</small></div>
+      ${acts ? `<div class="acts">${acts}</div>` : ""}</div>`;
   }).join("")));
 
   document.getElementById("sections").innerHTML = out.join("");
