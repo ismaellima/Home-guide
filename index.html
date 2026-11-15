@@ -6,6 +6,7 @@
 <title>Chez Molly</title>
 <meta name="description" content="Everything our guests need: Wi-Fi, Molly the cat, plants, cleaning and garbage days. / Tout pour nos invités.">
 <meta name="theme-color" content="#ffd23f">
+<meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/molly-avatar-sm.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -688,7 +689,7 @@ const HOME = {
   },
 
   apartment: {
-    address: "TODO: street, number, apartment (Montreal)",
+    address: "TODO: address (Montreal), waiting for your OK before publishing it",
     details: [
       [{ en: "Bedroom", fr: "Chambre" }, { en: "The primary bedroom is yours during your stay.", fr: "La chambre principale est à vous pendant votre séjour." }],
       [{ en: "Bathroom", fr: "Salle de bain" }, { en: "Full bathroom with bathtub. Fresh towels are above the washer.", fr: "Salle de bain complète avec baignoire. Serviettes propres au-dessus de la laveuse." }],
@@ -1027,7 +1028,7 @@ function render() {
     ${renderChecklist("leave", H.cleaning.beforeYouGo)}`));
 
   out.push(sectionShell(S.home, u.sub.home, `
-    <dl class="kv"><dt>${u.address}</dt><dd>${t(H.apartment.address)}</dd>
+    <dl class="kv"><dt>${u.address}</dt><dd>${/^TODO/.test(H.apartment.address) ? t(H.apartment.address) : `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(H.apartment.address)}" target="_blank" rel="noopener">${esc(H.apartment.address)}</a>`}</dd>
       ${H.apartment.details.map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
     <h3>${h3("bulb", u.goodToKnow)}</h3>
     <ul class="list">${H.apartment.tips.map(i => `<li>${t(i)}</li>`).join("")}</ul>`));
