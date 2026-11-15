@@ -1,4 +1,4 @@
-# Chez Molly 🐱
+# Chez Ismael, Daniel & Molly 🐱
 
 A bilingual (EN / FR) welcome guide for our home-exchange guests in Montreal: the apartment, the Plateau and the city, getting around, and looking after Molly the cat. Playful street-café look with comic icons.
 
