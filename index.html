@@ -238,6 +238,7 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 /* Montreal */
 .hood { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
 .tag { display: inline-block; margin-top: 4px; padding: 2px 8px; border: 2px solid var(--edge); border-radius: 999px; background: var(--sun); color: #111; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+.tag.walk { background: var(--sky); margin-right: 4px; }
 .tag .ic { width: 14px; height: 14px; vertical-align: -3px; }
 .group-title { margin: 26px 0 -4px; padding: 10px 14px; background: var(--red); color: #fff; border: 3px solid var(--edge); border-radius: 14px; box-shadow: 4px 4px 0 var(--edge); transform: rotate(-.6deg); }
 .group-title b { display: block; font: 900 24px/1 "Phudu", sans-serif; text-transform: uppercase; color: var(--sun); text-shadow: 2px 2px 0 #111; }
@@ -1387,35 +1388,35 @@ const HOME = {
     },
     picks: [
       // ——— Ismael's picks ———
-      { cat: "dine", icon: "star", name: "Le Violon", q: "Le Violon, Montréal",
+      { cat: "dine", icon: "star", name: "Le Violon", q: "Le Violon, 4720 Rue Marquette, Montréal",
         desc: { en: "One of the best fine-dining spots in the city.", fr: "Une des meilleures tables gastronomiques de la ville." } },
-      { cat: "dine", icon: "bowl", name: "Pichai", q: "Pichai, Montréal",
+      { cat: "dine", icon: "bowl", name: "Pichai", q: "Pichai, 5985 Rue Saint-Hubert, Montréal",
         desc: { en: "Thai food with a cool vibe and delicious wines.", fr: "Cuisine thaïe, ambiance cool et très bons vins." } },
       { cat: "dine", icon: "pizza", name: "Mano Cornuto", q: "Mano Cornuto, Montréal",
         desc: { en: "A bit hyped, but the sandwiches and plates are very good. Try the tiramisu ;)", fr: "Un peu à la mode, mais les sandwichs et les assiettes sont très bons. Goûtez le tiramisu ;)" } },
-      { cat: "dine", icon: "heart", name: "Café chez Téta", q: "Café chez Téta, Montréal",
+      { cat: "dine", icon: "heart", name: "Café chez Téta", q: "Café chez Téta, 227 Rue Rachel E, Montréal",
         desc: { en: "Lebanese. The owners and staff are so friendly, and everything you eat is just #chefskiss.", fr: "Libanais. Les proprios et l'équipe sont adorables, et tout ce que vous mangez est #chefskiss." } },
       { cat: "dine", icon: "bowl", name: "Épicerie Pumpui", q: "Épicerie Pumpui, Montréal",
         desc: { en: "Delicious Thai food.", fr: "Délicieuse cuisine thaïe." } },
-      { cat: "casual", icon: "burger", name: "Casse-Croûte MangeDansMonHood", q: "Casse-Croûte MangeDansMonHood, Montréal",
+      { cat: "casual", icon: "burger", name: "Casse-Croûte MangeDansMonHood", q: "Casse-Croûte MangeDansMonHood, 1380 Rue Jean-Talon E, Montréal",
         desc: { en: "Best smash burgers in town.", fr: "Les meilleurs smash burgers en ville." } },
-      { cat: "casual", icon: "pizza", name: "Pizza Toni", q: "Pizza Toni Saint-Viateur, Montréal",
+      { cat: "casual", icon: "pizza", name: "Pizza Toni", q: "Pizza Toni, 104 Rue Saint-Viateur O, Montréal",
         desc: { en: "On Saint-Viateur. Second-best pizza in town (Bouquet is better!).", fr: "Sur Saint-Viateur. La deuxième meilleure pizza en ville (Bouquet est meilleure !)." } },
       { cat: "casual", icon: "bagel", name: "Fairmount Bagel", q: "Fairmount Bagel, 74 Av Fairmount O, Montréal",
         desc: { en: "Best bagels in town, in my opinion :P", fr: "Les meilleurs bagels en ville, selon moi :P" } },
       { cat: "casual", icon: "burger", name: "Kahwa Café", q: "Kahwa Café, Montréal",
         desc: { en: "Their chicken sandwich is the best.", fr: "Leur sandwich au poulet est le meilleur." } },
-      { cat: "casual", icon: "bowl", name: "Ohayo", q: "Ohayo, Montréal",
+      { cat: "casual", icon: "bowl", name: "Ohayo", q: "Café Ohayo, 145 Av du Mont-Royal E, Montréal",
         desc: { en: "Japanese: fried chicken sandwiches, curry and ramen.", fr: "Japonais : sandwichs au poulet frit, cari et ramen." } },
-      { cat: "brunch", icon: "cup", name: "Le Saint Louis café", q: "Le Saint Louis café, Montréal",
+      { cat: "brunch", icon: "cup", name: "Le Saint Louis café", q: "Le Saint Louis café, 4800 Rue de Bullion, Montréal",
         desc: { en: "The white chocolate brioche is the highlight.", fr: "La brioche au chocolat blanc est la vedette." } },
       { cat: "brunch", icon: "cup", name: "Café Éclair", q: "Café Éclair, Montréal",
         desc: { en: "Slow-paced café with small-batch roasted coffee.", fr: "Café tranquille, café torréfié en petits lots." } },
-      { cat: "brunch", icon: "bowl", name: "Pub Bishop & Bagg", q: "Pub Bishop & Bagg, Montréal",
+      { cat: "brunch", icon: "bowl", name: "Pub Bishop & Bagg", q: "Pub Bishop & Bagg, 52 Rue Saint-Viateur O, Montréal",
         desc: { en: "Very good options for brunch.", fr: "Très bonnes options pour le brunch." } },
-      { cat: "brunch", icon: "cup", name: "Larry's", q: "Larry's, Montréal",
+      { cat: "brunch", icon: "cup", name: "Larry's", q: "Larry's, 9 Av Fairmount E, Montréal",
         desc: { en: "Good any time of the day.", fr: "Bon à toute heure de la journée." } },
-      { cat: "sweets", icon: "croissant", name: "Pâtisserie Mélilot", q: "Pâtisserie Mélilot, Montréal",
+      { cat: "sweets", icon: "croissant", name: "Pâtisserie Mélilot", q: "Pâtisserie Mélilot, 1062 Av Laurier O, Montréal",
         desc: { en: "High-end pastry shop, worth a try.", fr: "Pâtisserie haut de gamme, à essayer." } },
       { cat: "sweets", icon: "croissant", name: "Kouign Amann", q: "Kouign Amann, Avenue du Mont-Royal Est, Montréal",
         desc: { en: "The best kouign-amann in town.", fr: "Le meilleur kouign-amann en ville." } },
@@ -1423,19 +1424,19 @@ const HOME = {
         desc: { en: "Mexican bakery in Mile End: conchas, guava pastries and tamales.", fr: "Boulangerie mexicaine dans le Mile End : conchas, viennoiseries à la goyave et tamales." } },
       { cat: "sweets", icon: "croissant", name: "Boulangerie Le Toledo", q: "Boulangerie Le Toledo, 351 Av du Mont-Royal E, Montréal",
         desc: { en: "Bakery on avenue du Mont-Royal: breads and pastries.", fr: "Boulangerie sur l'avenue du Mont-Royal : pains et viennoiseries." } },
-      { cat: "sweets", icon: "croissant", name: "Boulangerie Guillaume", q: "Boulangerie Guillaume, Mile End, Montréal",
+      { cat: "sweets", icon: "croissant", name: "Boulangerie Guillaume", q: "Boulangerie Guillaume, 5170 Boul Saint-Laurent, Montréal",
         desc: { en: "A Mile End staple, steps from home: great bread and viennoiseries.", fr: "Une institution du Mile End, à deux pas : excellent pain et viennoiseries." } },
       { cat: "sweets", icon: "croissant", name: "Comète Bake Shop", q: "Comète Bake Shop, 4484 Rue Fabre, Montréal",
         desc: { en: "Tiny Japanese-French bakery: curry pan, matcha melon pan, yuzu brioche. Go early, things sell out! Check their Instagram for hours.", fr: "Petite boulangerie franco-japonaise : curry pan, melon pan au matcha, brioche au yuzu. Allez-y tôt, tout part vite ! Horaires sur leur Instagram." } },
-      { cat: "sweets", icon: "donut", name: "Beigne Habitude", q: "Beigne Habitude, Montréal",
+      { cat: "sweets", icon: "donut", name: "Beigne Habitude", q: "Beigne Habitude, 7035 Boul Saint-Laurent, Montréal",
         desc: { en: "Baked daily, and much better than Bernie Beignes :)", fr: "Cuits chaque jour, et bien meilleurs que Bernie Beignes :)" } },
-      { cat: "sweets", icon: "icecream", name: "Kem CoBa", q: "Kem CoBa, Montréal", only: "summer",
+      { cat: "sweets", icon: "icecream", name: "Kem CoBa", q: "Kem CoBa, 60 Av Fairmount O, Montréal", only: "summer",
         desc: { en: "One of the best ice creams in town. Open in summer only, and cash only!", fr: "Une des meilleures crèmes glacées en ville. Ouvert l'été seulement, et argent comptant seulement !" } },
       { cat: "drinks", icon: "wine", name: "Mamie", q: "Mamie bar à vin, Montréal",
         desc: { en: "Honest prices, great cheese boards and wines.", fr: "Prix honnêtes, super planches de fromages et bons vins." } },
-      { cat: "drinks", icon: "pizza", name: "Bar Star Bar", q: "Bar Star Bar, Montréal",
+      { cat: "drinks", icon: "pizza", name: "Bar Star Bar", q: "Star Bar, 4671 Boul Saint-Laurent, Montréal",
         desc: { en: "From the owners of Pizza Bouquet: try the potato or Cherry Bomb pizza. Pickup available.", fr: "Par les proprios de Pizza Bouquet : goûtez la pizza aux patates ou la Cherry Bomb. Pour emporter aussi." } },
-      { cat: "drinks", icon: "beer", name: "Brasserie Dieu du Ciel!", q: "Dieu du Ciel!, Montréal",
+      { cat: "drinks", icon: "beer", name: "Brasserie Dieu du Ciel!", q: "Dieu du Ciel!, 29 Av Laurier O, Montréal",
         desc: { en: "Delicious craft beer, and good food too.", fr: "Délicieuses bières de microbrasserie, et bonne bouffe aussi." } },
       // ——— Montreal classics ———
       { cat: "see", icon: "mountain", name: { en: "Mount Royal lookout", fr: "Belvédère du mont Royal" }, q: "Belvédère Kondiaronk, Montréal",
@@ -1512,7 +1513,7 @@ const UI = {
     dur: m => m < 60 ? `${m} min` : `${Math.floor(m / 60)}h ${String(m % 60).padStart(2, "0")}m`,
     labels: { wifi: "Wi-Fi", explore: "Explore", around: "Getting around", plants: "Plants", garbage: "Garbage", cleaning: "Housekeeping", home: "Apartment", contacts: "Contacts" },
     cats: { dine: "Restaurants", casual: "Quick bites", brunch: "Brunch & coffee", sweets: "Bakeries & sweets", drinks: "Drinks", see: "See", stroll: "Stroll" },
-    onlyIn: { summer: "Summer only" }, oursTitle: "Ismael's picks", oursSub: "Our favourite spots, most of them a short walk from home.", classicsTitle: "Montreal classics", openMap: "Map", tipsTitle: "Good to know in Montreal",
+    onlyIn: { summer: "Summer only" }, walkTag: m => m > 30 ? `~${Math.round(m / 5) * 5} min walk · or metro / BIXI` : `~${m > 10 ? Math.round(m / 5) * 5 : m} min walk`, oursTitle: "Ismael's picks", oursSub: "Our favourite spots, sorted closest first once unlocked.", classicsTitle: "Montreal classics", openMap: "Map", tipsTitle: "Good to know in Montreal",
     nowTitle: "Right now", whereThings: "Where things are", idea: n => `Idea for today: ${n}`,
     catTitle: n => `${n} the cat`,
     sub: {
@@ -1556,7 +1557,7 @@ const UI = {
     dur: m => m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")}`,
     labels: { wifi: "Wi-Fi", explore: "Explorer", around: "Se déplacer", plants: "Plantes", garbage: "Poubelles", cleaning: "Entretien", home: "Appartement", contacts: "Contacts" },
     cats: { dine: "Restos", casual: "Sur le pouce", brunch: "Brunch et café", sweets: "Pâtisseries et douceurs", drinks: "Prendre un verre", see: "Voir", stroll: "Flâner" },
-    onlyIn: { summer: "L'été seulement" }, oursTitle: "Les adresses d'Ismael", oursSub: "Nos adresses préférées, la plupart à quelques pas de la maison.", classicsTitle: "Les classiques de Montréal", openMap: "Carte", tipsTitle: "Bon à savoir à Montréal",
+    onlyIn: { summer: "L'été seulement" }, walkTag: m => m > 30 ? `~${Math.round(m / 5) * 5} min à pied · ou métro / BIXI` : `~${m > 10 ? Math.round(m / 5) * 5 : m} min à pied`, oursTitle: "Les adresses d'Ismael", oursSub: "Nos adresses préférées, de la plus proche à la plus loin une fois déverrouillé.", classicsTitle: "Les classiques de Montréal", openMap: "Carte", tipsTitle: "Bon à savoir à Montréal",
     nowTitle: "En ce moment", whereThings: "Où trouver les choses", idea: n => `Idée du jour : ${n}`,
     catTitle: n => `${n}, notre minette`,
     sub: {
@@ -1618,7 +1619,7 @@ const whenLabel = n => n === 0 ? U().today : n === 1 ? U().tomorrow : U().daysLo
 const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; };
 
 /* Private details: encrypted with the access code (see tools/lock-secrets.mjs) */
-/*LOCKED*/const LOCKED = {"v":1,"iter":600000,"salt":"8rdyGHBTGWk3zrVq+RNjlQ==","iv":"egB5TxKFQA2VQwlQ","ct":"CF5GHan+Fn5e3kV1DvpZusrkfE2OyHmRNULkp1as3tcsGYpPBG4K4J44XaSebnnUxvf8DjHhusohYF9rTobXHfTK8a0EERHAogY1HJWoLT1e02K5RPPzREyA+8gz00IQGt97GyQdN1L+NwZLEBDDfHUlg2jmXJQyNfuxkf9RP0Ro9/hfxGPN08Co3WOI9RpAloZl"};/*/LOCKED*/
+/*LOCKED*/const LOCKED = {"v":1,"iter":600000,"salt":"5M/iBMDb2j6QV+fULgtlXQ==","iv":"9BP0YBJIER7lI9Mc","ct":"UY+gH2Hw9VHlYc/qUDn/rxjftvBMfd0xgmrlAj+3EyJ4uw8GPfFkxa6q6I6bkw4UYu7I3jJ8MOZ9Yrjr87mMzzrVI3sy+v43EJUjhX0r7PrxKX350zsB8GxUA5OS8+7WIBlHGIljZPpIkOfZrusxkv6EBI8/l5JfzSJTdfbIiFQNjzhHxtzNeL26RWPKb/rIjB/ehESTLb6wqD/IJiDWOUr6ahOdn9K+XjkFbzeNSK/8h4367R2IYcHs/d4LiqVTU3Hw/Wu4k6tNCCHhzgbNVvp9U1i7aFDry2+EfEaS9UfoRIgipdc1Vw+oIQ57GPLU/IDokfgIHPZn0P36+YFw92xJgSlQlU6DukXNNwD73RDHehemOXRfKr1WiQflHrzVI6ivw3beVwgeTs2UtTlv/qXJ2qMk1mvD19u6lWh5pEExOUAb/A9yvdzfIkk63eWqVdQW6IhAyN0GzawzTpIgTx284+jCCIJzCiiUF3/1xTHoG/M4WEOQz7cZMtD9VDJnbuSeOQrJ5Km0EM9JhX3eUMnDYbFbP0yxT3ZsjJjJ63m+FkXzWhUJ3LabFbtp+jD/uQXlDyaR/BDA6vAku/NWMJ0CK89oMvXV+g6DSMDpIuHknpyF3ycgzPt3SxCFTbQ5pZ81pf/s3VG4mzvS48C2MEII05abxBrqWMolJJ+bvr+HeWmLrOrwZEhgU3HttGKpXzwXHhoA3hTkakfUqRI0oRs49RNkPZsehCWAdHbPEqLr9HihsWJAcaFREf0+72Xgr7kDiyqMW9UtOC2CWcUgmDSb8s99HlFeMrrXIbV76ZLcAdXEwJekJwsDFcAwYwHUGTzd1hrrivGT9SO/gM1MbLChnZiv+6kHSqX35sA2pvPK8DFA7mSOaxc7y1lES+Vbdfz5MzekcArh6ZAvMUIYfjpItoFcDAnCXJsPFnfM41w1Ys3MZloVNBKflO2F3x/ojzOeE8/B7TxCc2yLb2FGPfi9lndrU+DlqI2ZJlUdDirF7x+g3Z7Ti3n+voiTRp3NvK5s10sTKk7/qGXv2HLNUsGpUpenTQ=="};/*/LOCKED*/
 let SECRET = null;
 const normCode = c => String(c || "").trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
 const b64d = s => Uint8Array.from(atob(s), ch => ch.charCodeAt(0));
@@ -1764,12 +1765,17 @@ function render() {
     <ul class="list">${H.apartment.tips.map(i => `<li>${t(i)}</li>`).join("")}</ul>`));
 
   const mapUrl = q => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
-  const pickCard = p => `<div class="mini pick"><div class="e">${ic(p.icon || "star", "big")}</div><div><b>${t(p.name)}</b>${p.only ? `<span class="tag">${ic("sun")} ${esc(u.onlyIn[p.only])}</span>` : ""}<p>${t(p.desc)}</p>
+  const pickCard = p => `<div class="mini pick"><div class="e">${ic(p.icon || "star", "big")}</div><div><b>${t(p.name)}</b>${(() => { const m = walkOf(p); return m == null ? "" : `<span class="tag walk">${ic(m > 30 ? "metro" : "map")} ${esc(u.walkTag(m))}</span>`; })()}${p.only ? `<span class="tag">${ic("sun")} ${esc(u.onlyIn[p.only])}</span>` : ""}<p>${t(p.desc)}</p>
     ${p.q ? `<a class="pillbtn small" href="${mapUrl(p.q)}" target="_blank" rel="noopener">${ic("pin")} ${u.openMap}</a>` : ""}</div></div>`;
+  const keyOf = p => typeof p.name === "object" ? p.name.en : p.name;
+  const walkOf = p => { const w = SECRET && SECRET.walk; if (!w) return null; const k = keyOf(p);
+    return w[k] ?? Object.entries(w).find(([n]) => k.includes(n))?.[1] ?? null; };
+  const byWalk = list => !(SECRET && SECRET.walk) ? list
+    : list.map((p, i) => [p, walkOf(p) ?? 999, i]).sort((a, b) => a[1] - b[1] || a[2] - b[2]).map(x => x[0]);
   const catIcon = { dine: "star", casual: "burger", brunch: "cup", sweets: "croissant", drinks: "wine", see: "mountain", stroll: "map" };
   const group = (title, sub, cats) => `<div class="group-title"><b>${esc(title)}</b>${sub ? `<span>${esc(sub)}</span>` : ""}</div>
     ${cats.map(c => `<h3>${h3(catIcon[c], u.cats[c])}</h3>
-      <div class="grid swipe">${M.picks.filter(p => p.cat === c).map(pickCard).join("")}</div>`).join("")}`;
+      <div class="grid swipe">${byWalk(M.picks.filter(p => p.cat === c)).map(pickCard).join("")}</div>`).join("")}`;
   out.explore = sectionShell(S.explore, u.sub.explore, `
     <p class="hood">${t(M.hood)}</p>
     ${group(u.oursTitle, u.oursSub, ["dine", "casual", "brunch", "sweets", "drinks"])}
