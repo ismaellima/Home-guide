@@ -355,7 +355,7 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 .lock-head p { margin: 4px 0 0; font-size: 14px; font-weight: 600; }
 .lock-head .ic.big { width: 44px; height: 44px; }
 .lock-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-.lock-row input { flex: 1 1 210px; min-width: 0; font: 800 18px/1 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .1em; text-transform: uppercase;
+.lock-row input { flex: 1 1 210px; min-width: 0; font: 700 16px/1.2 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .02em;
   border: 3px solid var(--edge); border-radius: 999px; padding: 10px 14px; background: #fff; color: #111; }
 .lock-row input::placeholder { letter-spacing: .02em; text-transform: none; font-family: "Inter", sans-serif; font-weight: 600; color: #8a7d66; }
 .lock-row input:focus { outline: 3px dashed var(--blue); outline-offset: 2px; }
@@ -1679,7 +1679,7 @@ const whenLabel = n => n === 0 ? U().today : n === 1 ? U().tomorrow : U().daysLo
 const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; };
 
 /* Private details: encrypted with the access code (see tools/lock-secrets.mjs) */
-/*LOCKED*/const LOCKED = {"v":1,"iter":600000,"salt":"crQpyklhuYJnZtLG5QVYNQ==","iv":"fzAxHWTCHgTI78te","ct":"8KmvaBxQ5rgsw7aAq6ApaAIJWUUHYITN01kJOsftrDANx/gxzFNmP0W9kABBaMWQ4aQeZvvGoAU6rZAwmgwrz0SmzI27EMQXXHJodrD1ZihROmtt0hTweHxprA6gFiIKON7WaiiyLufcZjFh2HhHV7ywbk+cAeFoXsJhZYeN4ewAknxbfahbITxEjTPyvYRF+sYD/9crR6uRUqDGlZ0KavcFdsKJcC5m6bJVToKQhZHFSc5dvfe2ZnPVQZd79b+JTAMInZEZ+HCh/vhpFSyGn7ySgyeyXITm3RIYU3hBF9egxdgN836RboezEhqcjNPF3a8MW9TkchuNveYFvh4Gdyw2pQ4nfghpGquq//hj1OCJ0vnHDQPsJFmS5/PPszvWUFdpcrZ1dVu/54X/Ivw38SZTqAzh/ZhgefkxMPhh+te15gx8FYV0nTM/NUZ0J4SQrerwaJ41J3oEOOqac1tJK4qt8fE5hIth+WF8IRnryH6PcX31w/YsmegDH9z9ExYbYzjh+AylawYlERsd2nVE6ATvPgOND4zWKdIfeD94bYxcsGGM1yG8fd3x3fbCaOoKklo3gzhG1WWKf77CZLFf0dRgUvGRcYqKZxYNiql/pFEqzMs0RMYXSp8VlOdSRPYYeUmD6MyXoY0PRUh88WAvIr8b0Y3YBcUdd24NtNeQ3VsKnV3rWAuc20IqSpuf0OmOqMAlValqW6oEAUISNeS8ebMD7o6OLRAHmjPrVFVaN3BppEq2myAyFasgL/qsmMqrRbX/piEFAiYwVUTtypzNt6yyXD0yiTVxJbQsbLu1bD54yh7cDMnZHWC9d/E5dCS9bajk3Qo4MKA3HU+DK6JFOsqNp+NFSbubivlP9JiepF8DzSyPhvLZv+CFvXtbSDKgUiAAbDxmqF2AFQGbCsFra1s/G9vKTH2SyBdtBujzEmKoMA86XC9PgOQ/gHdEHWBoZ2o0MJuKOrSvwAnZyiothlKQXOKQkRc/lW5PoEmU/0YVu+D/GeU2OFUTCHW7mBjyiK/xWIZy+N3fNemMwcmoxd2NmbHNxgNGFkSHKjtfocf0COHKQ4ECx01QFIiz5uwQ7JTsbrvEHUtvrwphea63lPYyPP5r8GrSkvFYNA/8epCVoNHfx2vF3wxv4MC7ruv8wH8ygAwXA+Rr6Syz8KNDBZmH0lUlhmAvd2otLH5AyEA8gSuCis1Vzr6lsZhrVsPYkQM6fXMoqRgPIq4qLZL9f+heVtf5es15Uz9Pa8Dll0sN6WupPcRYynlgXTCv0J1A41yh0V74bA6WMd7Je2Ta6fGCs9fylxL6tPVqGZq/gCDR2bH2lY1kxQ45d9lc2s9TBi5nrQ=="};/*/LOCKED*/
+/*LOCKED*/const LOCKED = {"v":1,"iter":600000,"salt":"IoWqs8Z3+XXHPGUgNa2X9g==","iv":"ZYDBPlSQhzyNiW3K","ct":"+v7+ayEQUoeynA+3lInLTGHR1SdSO5WVjbKeJFwgoxLzk9acJnl6fqpsEcOzc9GfboM5WTjT+4dCfI9IVvVJpY5r7q9nGgf5Q+QRA/f38l/HvptzosFBxx+1nuh031a3BGY+yaCE0WyKWa/go38R6+QgJE9YO/dKgVACfKQRT0FB1Rp0PRhJiMc2zs19SOGzG99/WCVNkNs2lQkQURj3PifPb2jlGtTIyRLQLlttpRHO4T8wfQBYwU+nqGQVrirviEg/r7/183W2fJ0yGr7EY3kecUkW4m1YKwfWOB1GAKJcsBV0DuqL3uDNAn3nemiOK7UIu40N5TpW5EYYahJCSRilY34CSRzdI0fexo+9RZ2JnHYwWqV6mqo5VOHkS7bu8tPQ1qRBwOGYp9wz+QbYv9ym4J/YsAh4a28HsUp7JdnmguKcEZp2Y3TRZCOZBexnOySmokbwa7uJ9F45ivx9efz97IfXZYW0LC02ui81cUEJ4mU8oyMnYgxC5wLO3WzTctqGxiZ5crdjUlnn1Vti4xpzue+DJOU7O1VfqZBRQClEER0/jOLO+NVQvCXIRuSgJNPSjr8ZEef1uXeIjLF3EaIcM73sq+wleai8XGo50UZcJnUO0rQaXGGGCdvcRq4S2DjSaFzPqIbTGQzPSNgJH5xbGKZz25Ow52/IHvGufCiLP01jdPobebpzZcDm7IvFT+hIX5DS8wT8vIKgT2AaU5LgsOFYAlcRVtk4nKdhtRRimOFI3doH/ShN7dtc7EQZ2m+ouSwAeaC0yoDxvSOw6WvpTAbt7YJ0V+ZWFC2Y/TX5nUygrVfy7jy5rirkqc0KKyPYrHMEOjHFSBHzQWrK3K3hEjASRChaz/qdZpP1UQlEHKLhzjQXxosoGfHTi3ExBdqv0i3fhBRMO+b5RaTLFXCPeN8UcV3jKT3kXjj26ADNR8jVqLTFMk3tFgj/pRRBUpQBC+2Jvj9lojbLOAUzNjApbFB3FXpY/bY3kaT1sv4E4aM0L1ZyG+U6i0R6MNeMzS6UVNQlOwwi+sD5ARn9KL5+J4x2rZVtOeuNrGyzFVbShmr2WRETvAGbWwyYvPCHvqHq1rnh1AWPw9H5RqSOBAf08vUjQkJU35UVjtd1Cl9RxiqDaeBn/HmdzZDfkv7tj7MNTb/qnOTRqtksBVQjJ1y//uzMxOvicl6oqOwFlsABYiPrRnMMTIvZCdEOKl5YaFlmDA7LJm/3LT/jbjE3KRBqADoWLY4vp+ziwosaQ1CKp4zvloUu7Jnptt/KHHT6nD1in9OiI9KB+aS4Gfin4IglcznZvGUIsTYESnIbf7wxdJ/eunZUYDSmpkxboB/5DrfU5Q=="};/*/LOCKED*/
 let SECRET = null;
 const normCode = c => String(c || "").trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
 const b64d = s => Uint8Array.from(atob(s), ch => ch.charCodeAt(0));
@@ -1766,8 +1766,8 @@ function render() {
     <form class="lock-card" id="unlock" autocomplete="off">
       <div class="lock-head">${ic("lock", "big")}<div><b>${u.lockedTitle}</b><p>${u.lockedText}</p></div></div>
       <div class="lock-row">
-        <input id="code-input" name="code" type="text" inputmode="text" autocapitalize="characters" spellcheck="false"
-          placeholder="${u.codePh}" aria-label="${u.codePh}" maxlength="24">
+        <input id="code-input" name="code" type="text" inputmode="text" autocapitalize="none" spellcheck="false"
+          placeholder="${u.codePh}" aria-label="${u.codePh}" maxlength="64">
         <button type="submit" id="unlock-btn">${u.unlock}</button>
       </div>
       <p class="lock-err" id="lock-err" role="alert"></p>

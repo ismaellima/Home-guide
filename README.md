@@ -21,11 +21,11 @@ Repo **Settings → Pages → Deploy from a branch**, choose the branch and `/ (
 The Wi-Fi name/password and the address are **encrypted** inside `index.html`, so they are never readable on GitHub.
 Guests unlock them in their browser with an access code (their device remembers it).
 
-- Send guests the code, or a link that unlocks automatically: `https://<your-site>/#code=XXXX-XXXX-XXXX`
+- Send guests the code, or a link that unlocks automatically: `https://<your-site>/#code=your-pass-phrase`
 - The real values live in `.secrets/secrets.json`, which is **not committed** (see `.gitignore`):
 
 ```json
-{ "code": "XXXX-XXXX-XXXX",
+{ "code": "your-pass-phrase",
   "data": { "address": "…", "wifi": { "network": "…", "password": "…" } } }
 ```
 
