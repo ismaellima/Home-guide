@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chez Ismael, Daniel & Molly</title>
 <meta name="description" content="Everything our guests need: Wi-Fi, Molly the cat, plants, cleaning and garbage days. / Tout pour nos invités.">
 <meta name="theme-color" content="#ffd23f">
@@ -38,7 +38,7 @@
   --bg: #1a140e; --card: #2a2118; --text: #fff1d0; --muted: #cdbb98; --edge: #000000; --grain-blend: overlay;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(96px + env(safe-area-inset-top, 0px)); }
 body {
   margin: 0; background: var(--bg); color: var(--text);
   font: 16px/1.55 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -78,7 +78,7 @@ button:active, .pillbtn:active { transform: translate(2px, 2px); box-shadow: 1px
 
 /* awning */
 .awning {
-  position: relative; height: 92px; border-top: 8px solid #111;
+  position: relative; height: calc(92px + env(safe-area-inset-top, 0px)); padding-top: env(safe-area-inset-top, 0px); border-top: 8px solid #111;
   background: repeating-linear-gradient(90deg, var(--red) 0 56px, var(--cream) 56px 112px);
 }
 .awning::after {
@@ -98,7 +98,9 @@ button:active, .pillbtn:active { transform: translate(2px, 2px); box-shadow: 1px
 .stamp small { font: 700 11px/1.3 "Phudu", sans-serif; color: #fff; letter-spacing: .14em; text-transform: uppercase; }
 
 /* sticky nav */
-.nav { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 3px solid var(--edge); margin-top: 30px; }
+/* the bar sticks below the status bar; body::after paints the strip behind the clock so content never shows through */
+body::after { content: ""; position: fixed; top: 0; left: 0; right: 0; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 9; pointer-events: none; }
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); border-bottom: 3px solid var(--edge); margin-top: 30px; }
 .navbar { display: flex; gap: 8px; align-items: center; padding-top: 10px; padding-bottom: 10px; }
 .links { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; min-width: 0; padding: 2px 4px 5px 2px; }
 .links::-webkit-scrollbar { display: none; }
