@@ -734,7 +734,7 @@ footer button { margin-top: 16px; }
   <figure class="mtl-scene">
     <button type="button" class="mtl-btn" id="mtl-btn" aria-label="Switch day / night">
 <svg class="mtl" id="mtl" viewBox="0 0 400 260" role="img" aria-labelledby="mtl-title">
-<title id="mtl-title">Montreal: Mount Royal and its cross, the skyline, the Olympic Stadium and Plateau houses, with Molly in a window</title>
+<title id="mtl-title">Montreal: Mount Royal and its cross, the skyline, the Olympic Stadium and Mile End houses, with Molly in a window</title>
 <rect class="sky" width="400" height="260"/>
 <path class="star" style="animation-delay:0s" d="M30 26l1.2 2.8 2.8 1.2-2.8 1.2-1.2 2.8-1.2-2.8-2.8-1.2 2.8-1.2z"/>
 <path class="star" style="animation-delay:1.2s" d="M70 54l1.2 2.8 2.8 1.2-2.8 1.2-1.2 2.8-1.2-2.8-2.8-1.2 2.8-1.2z"/>
@@ -1082,8 +1082,8 @@ const HOME = {
   // Montreal: neighbourhood, picks (q = what to search in Maps), getting around, local tips
   montreal: {
     hood: {
-      en: "You're in the Plateau-Mont-Royal, right on the edge of Mile End: one of the most walkable, lively corners of the city. Cafés, bakeries, murals and bagels are all a few minutes away on foot.",
-      fr: "Vous êtes sur le Plateau-Mont-Royal, juste à côté du Mile End : un des coins les plus vivants et agréables à pied de la ville. Cafés, boulangeries, murales et bagels sont à quelques minutes."
+      en: "You're in Mile End: one of the most walkable, lively corners of the city. Cafés, bakeries, murals and bagels are all a few minutes away on foot.",
+      fr: "Vous êtes dans le Mile End : un des coins les plus vivants et agréables à pied de la ville. Cafés, boulangeries, murales et bagels sont à quelques minutes."
     },
     favs: [
       { name: { en: "TODO: your favourite café", fr: "TODO: votre café préféré" }, desc: { en: "TODO: why you love it", fr: "TODO: pourquoi vous l'aimez" }, q: "" },
@@ -1107,13 +1107,13 @@ const HOME = {
       { cat: "see", icon: "leaf", name: "Parc La Fontaine", q: "Parc La Fontaine, Montréal",
         desc: { en: "Big trees, a pond and picnic lawns, with skating on the pond in winter.", fr: "Grands arbres, étang et pelouses, avec patinage sur l'étang en hiver." } },
       { cat: "stroll", icon: "map", name: "Mile End", q: "Rue Saint-Viateur, Montréal",
-        desc: { en: "Right next door: cafés, vintage shops and murals around rue Saint-Viateur and rue Bernard.", fr: "Juste à côté : cafés, friperies et murales autour des rues Saint-Viateur et Bernard." } },
+        desc: { en: "Your neighbourhood: cafés, vintage shops and murals around rue Saint-Viateur and rue Bernard.", fr: "Votre quartier : cafés, friperies et murales autour des rues Saint-Viateur et Bernard." } },
       { cat: "stroll", icon: "map", name: { en: "Boulevard Saint-Laurent", fr: "Boulevard Saint-Laurent" }, q: "Boulevard Saint-Laurent, Montréal",
         desc: { en: "\"The Main\": giant murals, bars and boutiques, a few minutes away.", fr: "« La Main » : murales géantes, bars et boutiques, à quelques minutes." } },
       { cat: "stroll", icon: "map", name: { en: "Avenue du Mont-Royal", fr: "Avenue du Mont-Royal" }, q: "Avenue du Mont-Royal, Montréal",
         desc: { en: "The Plateau's main street: shops, bakeries and terraces.", fr: "L'artère du Plateau : boutiques, boulangeries et terrasses." } },
-      { cat: "stroll", icon: "home", name: { en: "The Plateau staircases", fr: "Les escaliers du Plateau" }, q: "Plateau-Mont-Royal, Montréal",
-        desc: { en: "Wander the side streets to spot the famous outdoor spiral staircases.", fr: "Flânez dans les petites rues pour voir les fameux escaliers extérieurs en colimaçon." } }
+      { cat: "stroll", icon: "home", name: { en: "The spiral staircases", fr: "Les escaliers en colimaçon" }, q: "Plateau-Mont-Royal, Montréal",
+        desc: { en: "Wander the side streets of Mile End and the Plateau to spot the famous outdoor spiral staircases.", fr: "Flânez dans les petites rues du Mile End et du Plateau pour voir les fameux escaliers extérieurs en colimaçon." } }
     ],
     around: [
       { icon: "metro", name: { en: "Metro", fr: "Métro" },
@@ -1125,7 +1125,7 @@ const HOME = {
       { icon: "coin", name: { en: "Tickets", fr: "Titres de transport" },
         desc: { en: "Buy fares at the machines in any metro station. The 747 fare works as a 24-hour pass on buses and metro.", fr: "Achetez vos titres aux distributrices du métro. Le tarif du 747 sert de passe 24 h pour bus et métro." } },
       { icon: "bike", name: "BIXI", desc: { en: "Bike-share stations all over the city; pay in the BIXI app or at the station. Mostly spring to fall.", fr: "Vélos en libre-service partout en ville ; payez dans l'appli BIXI ou à la borne. Surtout du printemps à l'automne." } },
-      { icon: "map", name: { en: "On foot", fr: "À pied" }, desc: { en: "The Plateau and Mile End are best explored walking.", fr: "Le Plateau et le Mile End se découvrent mieux à pied." } }
+      { icon: "map", name: { en: "On foot", fr: "À pied" }, desc: { en: "Mile End and the nearby Plateau are best explored walking.", fr: "Le Mile End et le Plateau voisin se découvrent mieux à pied." } }
     ],
     tips: [
       { icon: "coin", en: "Tipping: 15–20% at restaurants, bars and in taxis. The card machine suggests amounts.", fr: "Pourboire : 15 à 20 % au resto, au bar et en taxi. Le terminal propose les montants." },
@@ -1161,7 +1161,7 @@ const UI = {
     todayTitle: "Today in Montreal", sceneCap: "Tap the city to switch between day and night", sceneLabel: "Switch day / night",
     theme: "Light / dark", inWord: "in",
     photoCap: "Chief Napping Officer", photoBadge: "100% cat", photoAlt: "Molly, a grey and white tabby, sitting on the green sofa with her pink heart tag",
-    stamp: "home exchange", signTop: "Welcome to the Plateau!", kicker: "Chez Ismael & Molly · Home exchange",
+    stamp: "home exchange", signTop: "Welcome to Mile End!", kicker: "Chez Ismael & Molly · Home exchange",
     scroll: "Explore ↓", pet: "Pet Molly", petLabel: "Pet Molly",
     purr: ["Purrr…", "Again!", "Molly approves", "Prrrrrt?"],
     petted: n => n ? `Pets today: ${n}. She'd like more.` : "",
@@ -1204,7 +1204,7 @@ const UI = {
     todayTitle: "Aujourd'hui à Montréal", sceneCap: "Touchez la ville pour passer du jour à la nuit", sceneLabel: "Passer du jour à la nuit",
     theme: "Clair / sombre", inWord: "dans",
     photoCap: "Directrice des siestes", photoBadge: "100 % chat", photoAlt: "Molly, une chatte tigrée grise et blanche, assise sur le canapé vert avec sa médaille cœur rose",
-    stamp: "échange de maison", signTop: "Bienvenue sur le Plateau !", kicker: "Chez Ismael & Molly · Échange de maison",
+    stamp: "échange de maison", signTop: "Bienvenue dans le Mile End !", kicker: "Chez Ismael & Molly · Échange de maison",
     scroll: "Explorer ↓", pet: "Caresser Molly", petLabel: "Caresser Molly",
     purr: ["Rrrrr…", "Encore !", "Molly approuve", "Prrrrrt ?"],
     petted: n => n ? `Caresses aujourd'hui : ${n}. Elle en veut encore.` : "",
