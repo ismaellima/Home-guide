@@ -139,6 +139,7 @@ button:active, .pillbtn:active { transform: translate(2px, 2px); box-shadow: 1px
 .hero .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 .pet-count { font-size: 13px; font-weight: 700; color: var(--muted); }
 .cat-btn { all: unset; cursor: pointer; position: relative; display: block; }
+.cat-btn, .cat-btn:hover, .cat-btn:active, .mtl-btn, .mtl-btn:hover, .mtl-btn:active { box-shadow: none; transform: none; -webkit-tap-highlight-color: transparent; }
 .cat-btn:focus-visible { outline: 3px dashed var(--edge); outline-offset: 4px; border-radius: 50%; }
 .cat-svg { width: 180px; height: auto; display: block; transition: transform .15s ease; }
 .cat-btn.petted .cat-svg { animation: squish .45s ease; }
