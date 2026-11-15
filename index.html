@@ -125,8 +125,8 @@ button:active, .pillbtn:active { transform: translate(2px, 2px); box-shadow: 1px
 .kicker { font: 800 14px/1 "Phudu", sans-serif; color: var(--brown); text-transform: uppercase; letter-spacing: .08em; }
 .kicker span { border-bottom: 3px solid var(--red); padding-bottom: 2px; }
 .signname {
-  font-size: clamp(56px, 17vw, 112px); color: var(--red); margin-top: 8px; -webkit-text-stroke: 1.5px #111;
-  text-shadow: 1px 1px 0 var(--brown), 2px 2px 0 var(--brown), 3px 3px 0 var(--brown), 4px 4px 0 #3a1708, 5px 5px 0 #111;
+  font-size: clamp(56px, 17vw, 112px); color: var(--red); margin-top: 8px;
+  text-shadow: -1px -1px 0 #111, 1px -1px 0 #111, -1px 1px 0 #111, 1px 1px 0 #111, 0 -1.4px 0 #111, 0 1.4px 0 #111, -1.4px 0 0 #111, 1.4px 0 0 #111, 2px 2px 0 var(--brown), 3px 3px 0 var(--brown), 4px 4px 0 var(--brown), 5px 5px 0 #3a1708, 6px 6px 0 #111;
 }
 .screw { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: #c5cbc7; border: 2.5px solid #111; z-index: 2; }
 .screw::after { content: ""; position: absolute; left: 1px; right: 1px; top: 4px; height: 2px; background: #111; transform: rotate(-30deg); }
@@ -157,8 +157,8 @@ button:active, .pillbtn:active { transform: translate(2px, 2px); box-shadow: 1px
   margin: 22px 0 8px; background: var(--blue); color: var(--cream); border: 4px solid var(--edge);
   border-radius: 22px; padding: 18px; box-shadow: 8px 8px 0 var(--edge);
 }
-.today h2 { font-size: 30px; color: var(--sun); -webkit-text-stroke: 1px #111; text-shadow: 3px 3px 0 #111; }
-.today h2 small { display: block; font: 700 14px/1.4 "Inter"; text-transform: none; color: var(--cream); -webkit-text-stroke: 0; text-shadow: none; margin-top: 6px; opacity: .9; }
+.today h2 { font-size: 30px; color: var(--sun); text-shadow: -1px -1px 0 #111, 1px -1px 0 #111, -1px 1px 0 #111, 1px 1px 0 #111, 0 -1.4px 0 #111, 0 1.4px 0 #111, -1.4px 0 0 #111, 1.4px 0 0 #111, 3px 3px 0 #111; }
+.today h2 small { display: block; font: 700 14px/1.4 "Inter"; text-transform: none; color: var(--cream); text-shadow: none; margin-top: 6px; opacity: .9; }
 .today ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
 .today li { display: flex; gap: 10px; align-items: flex-start; background: rgba(255,255,255,.1); border: 2.5px solid #111; border-radius: 14px; padding: 10px 12px; }
 .today li .e { line-height: 0; }
@@ -166,7 +166,7 @@ button:active, .pillbtn:active { transform: translate(2px, 2px); box-shadow: 1px
 .today li span.s { opacity: .85; font-size: 14px; }
 
 /* tiles */
-.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 24px 0 8px; }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 24px 0 8px; }
 .tile {
   text-decoration: none; color: #111; background: var(--cream); border: 3px solid var(--edge); border-radius: 16px;
   padding: 12px 4px 10px; text-align: center; box-shadow: 4px 4px 0 var(--edge); transition: transform .08s, box-shadow .08s;
@@ -234,6 +234,21 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 .qr-box { width: 180px; height: 180px; margin: 0 auto; background: #fff; border: 3px solid var(--edge); border-radius: 16px; padding: 8px; box-shadow: 4px 4px 0 var(--edge); }
 .qr-box svg { width: 100%; height: 100%; display: block; }
 .wifi-qr figcaption { margin-top: 10px; font-size: 14px; font-weight: 700; color: var(--muted); }
+
+/* Montreal */
+.hood { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
+.mini.pick { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: start; }
+.mini.pick p { margin: 4px 0 0; }
+.pillbtn.small { padding: 7px 11px; font-size: 11px; margin-top: 10px; box-shadow: 2px 2px 0 var(--edge); }
+.pillbtn.small .ic { width: 15px; height: 15px; vertical-align: -3px; }
+@media (max-width: 599px) {
+  .grid.swipe { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 -20px; padding: 2px 20px 10px; scroll-padding: 0 20px; scrollbar-width: none; }
+  .grid.swipe::-webkit-scrollbar { display: none; }
+  .grid.swipe > .mini { flex: 0 0 80%; scroll-snap-align: start; }
+}
+.tips { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.tips li { display: flex; gap: 12px; align-items: flex-start; }
+.tips li .ic { width: 28px; height: 28px; margin-top: -2px; }
 
 /* lock */
 .lock-card { background: var(--sun); color: #111; border: 3px solid var(--edge); border-radius: 18px; padding: 16px; box-shadow: 4px 4px 0 var(--edge); }
@@ -306,7 +321,7 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 
 /* contacts finale */
 section.card#contacts { background: var(--blue); color: var(--cream); }
-#contacts h2 { color: var(--sun); -webkit-text-stroke: 1px #111; text-shadow: 3px 3px 0 #111; }
+#contacts h2 { color: var(--sun); text-shadow: -1px -1px 0 #111, 1px -1px 0 #111, -1px 1px 0 #111, 1px 1px 0 #111, 0 -1.4px 0 #111, 0 1.4px 0 #111, -1.4px 0 0 #111, 1.4px 0 0 #111, 3px 3px 0 #111; }
 #contacts .sec-head p { color: var(--cream); opacity: .85; }
 .contact { display: flex; justify-content: space-between; align-items: center; gap: 10px; border: 3px solid #111; border-radius: 16px; padding: 12px 14px; background: rgba(255,255,255,.1); }
 .contact + .contact { margin-top: 10px; }
@@ -570,6 +585,61 @@ footer button { margin-top: 16px; }
     <path d="M24 33v5" stroke="#fff1d0" stroke-width="3"/>
     <path d="M13 26v8" stroke="#fff" stroke-width="2.5"/>
   </symbol>
+  <symbol id="i-bagel" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="19" fill="#d9a066"/>
+    <circle cx="24" cy="24" r="6.5" fill="#fff1d0"/>
+    <path d="M12 17c2-3 5-5 8-5.5" stroke="#fff" stroke-width="2.5"/>
+    <g fill="#fff8e6" stroke="none"><ellipse cx="15" cy="27" rx="1.6" ry="1" transform="rotate(30 15 27)"/><ellipse cx="31" cy="14" rx="1.6" ry="1" transform="rotate(-20 31 14)"/><ellipse cx="35" cy="28" rx="1.6" ry="1" transform="rotate(60 35 28)"/><ellipse cx="22" cy="36" rx="1.6" ry="1"/><ellipse cx="27" cy="33" rx="1.6" ry="1" transform="rotate(-40 27 33)"/><ellipse cx="18" cy="20" rx="1.6" ry="1" transform="rotate(70 18 20)"/></g>
+  </symbol>
+  <symbol id="i-mountain" viewBox="0 0 48 48">
+    <path d="M3 41L17 17l7 10 7-12 14 26z" fill="#a8d08d"/>
+    <path d="M17 17l-5 8.5 3-1 2 2 2.5-2 2.8 1.5z" fill="#fff" stroke-width="2"/>
+    <path d="M31 15V5M27.5 8.5h7" stroke-width="2.6"/>
+    <path d="M9 41l6-8M36 41l-4-7" stroke="#7fb36a" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-star" viewBox="0 0 48 48">
+    <path d="M24 4l5.9 12.6 13.8 1.6-10.2 9.4 2.8 13.6L24 34.4l-12.3 6.8 2.8-13.6L4.3 18.2l13.8-1.6z" fill="#ffd23f"/>
+    <path d="M16 20.5l4-.5" stroke="#fff" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-map" viewBox="0 0 48 48">
+    <path d="M4 11l13-4 14 4 13-4v30l-13 4-14-4-13 4z" fill="#fff1d0"/>
+    <path d="M17 7v30M31 11v30" stroke-width="2.5"/>
+    <path d="M9 31c4-2 6-7 11-7s6 6 12 4" stroke="#d7261e" stroke-width="2.5" stroke-dasharray="3 3"/>
+    <circle cx="37" cy="21" r="3.5" fill="#d7261e" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-metro" viewBox="0 0 48 48">
+    <path d="M16 37l-5 7M32 37l5 7"/>
+    <rect x="10" y="5" width="28" height="32" rx="8" fill="#f08a24"/>
+    <rect x="14.5" y="10.5" width="19" height="11" rx="2.5" fill="#9fd3e6" stroke-width="2.2"/>
+    <circle cx="17" cy="29" r="2.4" fill="#fff1d0" stroke-width="2"/><circle cx="31" cy="29" r="2.4" fill="#fff1d0" stroke-width="2"/>
+    <path d="M17 13.5l3-1" stroke="#fff" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-bus" viewBox="0 0 48 48">
+    <path d="M14 37v6M34 37v6" stroke-width="5"/>
+    <rect x="8" y="6" width="32" height="31" rx="6" fill="#1e4fd8"/>
+    <rect x="12" y="11" width="24" height="12" rx="2.5" fill="#9fd3e6" stroke-width="2.2"/>
+    <circle cx="15" cy="30" r="2.4" fill="#ffd23f" stroke-width="2"/><circle cx="33" cy="30" r="2.4" fill="#ffd23f" stroke-width="2"/>
+    <path d="M20 30h8" stroke="#fff1d0" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-plane" viewBox="0 0 48 48">
+    <path d="M43 24c0-2-1.6-3-3.6-3H29.5L20.5 7h-5.2l4.6 14H11.6l-4-5H4.2l2.6 8-2.6 8h3.4l4-5h8.3L15.3 41h5.2l9-14H39.4c2 0 3.6-1 3.6-3z" fill="#fff1d0"/>
+    <path d="M30 24h7" stroke="#d7261e" stroke-width="3"/>
+  </symbol>
+  <symbol id="i-coin" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="18" fill="#ffd23f"/>
+    <circle cx="24" cy="24" r="12.5" stroke-width="2"/>
+    <path d="M28.5 18.5c-1-1.7-2.8-2.4-4.5-2.4-2.8 0-4.8 1.5-4.8 3.6 0 4.9 9.6 2.6 9.6 7.6 0 2.2-2 3.7-4.8 3.7-2 0-3.9-.8-4.9-2.6M24 13v3M24 31.5v3.5" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-bike" viewBox="0 0 48 48">
+    <circle cx="11.5" cy="32" r="8" fill="#fff1d0" stroke-width="3.5"/><circle cx="36.5" cy="32" r="8" fill="#fff1d0" stroke-width="3.5"/>
+    <path d="M11.5 32l8-14h12l5 14M19.5 18l6 14h-14M31.5 18l-2-6h-4.5M19.5 18l-2-5h-4" stroke-width="5"/>
+    <path d="M11.5 32l8-14h12l5 14M19.5 18l6 14h-14M31.5 18l-2-6h-4.5M19.5 18l-2-5h-4" stroke="#d7261e" stroke-width="2"/>
+    <circle cx="25.5" cy="32" r="2.5" fill="#111" stroke="none"/>
+  </symbol>
+  <symbol id="i-snow" viewBox="0 0 48 48">
+    <path d="M24 4v40M6.7 14l34.6 20M6.7 34l34.6-20M18.5 7.5L24 12l5.5-4.5M18.5 40.5L24 36l5.5 4.5M6 21.5l6.5-2.5L11 12M42 26.5l-6.5 2.5L37 36M6 26.5l6.5 2.5L11 36M42 21.5l-6.5-2.5L37 12" stroke-width="5.5"/>
+    <path d="M24 4v40M6.7 14l34.6 20M6.7 34l34.6-20M18.5 7.5L24 12l5.5-4.5M18.5 40.5L24 36l5.5 4.5M6 21.5l6.5-2.5L11 12M42 26.5l-6.5 2.5L37 36M6 26.5l6.5 2.5L11 36M42 21.5l-6.5-2.5L37 12" stroke="#9fd3e6" stroke-width="2.2"/>
+  </symbol>
   <symbol id="i-pencil" viewBox="0 0 48 48">
     <path d="M9 39l3.5-11L33 7.5l7.5 7.5L20 35.5z" fill="#ffd23f"/>
     <path d="M33 7.5l3-3a2.5 2.5 0 0 1 3.5 0l4 4a2.5 2.5 0 0 1 0 3.5l-3 3z" fill="#f4a6a0"/>
@@ -598,7 +668,7 @@ footer button { margin-top: 16px; }
         <div class="band top" id="sign-top"></div>
         <div class="board">
           <div class="kicker"><span id="sign-kicker"></span></div>
-          <div class="signname phudu" aria-hidden="true">Chez Molly</div>
+          <div class="signname phudu" aria-hidden="true">Montréal</div>
         </div>
         <div class="band bottom"><span id="greeting"></span><span>EN · FR</span></div>
       </div>
@@ -717,14 +787,14 @@ footer button { margin-top: 16px; }
    ===================================================================== */
 const HOME = {
   hosts: "Ismael",
-  title: { en: "Make yourself at home.", fr: "Faites comme chez vous." },
+  title: { en: "Welcome to Montreal.", fr: "Bienvenue à Montréal." },
   intro: {
-    en: "Thank you so much for staying with us and looking after Molly! Everything in the apartment is yours to use. We hope you feel relaxed and comfortable during your stay in Montreal.",
-    fr: "Merci mille fois de rester chez nous et de veiller sur Molly ! Tout l'appartement est à votre disposition. On espère que vous vous sentirez bien et détendu·e pendant votre séjour à Montréal."
+    en: "Welcome, fellow home exchanger! Our home is yours: settle in, explore the city, and keep Molly company. Everything you need is right here.",
+    fr: "Bienvenue ! Pendant cet échange de maison, notre appartement est le vôtre : installez-vous, explorez la ville et tenez compagnie à Molly. Tout ce qu'il vous faut est ici."
   },
   signoff: {
-    en: "Thank you for taking such good care of our home (and Molly)! Send us photos of her anytime, we love seeing them.",
-    fr: "Merci de prendre si bien soin de notre appartement (et de Molly) ! Envoyez-nous des photos d'elle quand vous voulez, ça nous fait toujours plaisir."
+    en: "Thank you for the exchange and for looking after Molly! Send us photos of your Montreal adventures (and of her).",
+    fr: "Merci pour l'échange et de veiller sur Molly ! Envoyez-nous des photos de vos aventures montréalaises (et d'elle)."
   },
 
   wifi: {
@@ -847,6 +917,70 @@ const HOME = {
     ]
   },
 
+  // Montreal: neighbourhood, picks (q = what to search in Maps), getting around, local tips
+  montreal: {
+    hood: {
+      en: "You're in the Plateau-Mont-Royal, right on the edge of Mile End: one of the most walkable, lively corners of the city. Cafés, bakeries, murals and bagels are all a few minutes away on foot.",
+      fr: "Vous êtes sur le Plateau-Mont-Royal, juste à côté du Mile End : un des coins les plus vivants et agréables à pied de la ville. Cafés, boulangeries, murales et bagels sont à quelques minutes."
+    },
+    favs: [
+      { name: { en: "TODO: your favourite café", fr: "TODO: votre café préféré" }, desc: { en: "TODO: why you love it", fr: "TODO: pourquoi vous l'aimez" }, q: "" },
+      { name: { en: "TODO: your favourite restaurant", fr: "TODO: votre resto préféré" }, desc: { en: "TODO: what to order", fr: "TODO: quoi commander" }, q: "" }
+    ],
+    picks: [
+      { cat: "eat", icon: "bagel", name: "St-Viateur Bagel", q: "St-Viateur Bagel, 263 Rue Saint-Viateur O, Montréal",
+        desc: { en: "Wood-fired Montreal bagels, open around the clock. Get a sesame one, still warm.", fr: "Bagels cuits au feu de bois, ouvert jour et nuit. Prenez-en un au sésame, encore chaud." } },
+      { cat: "eat", icon: "bagel", name: "Fairmount Bagel", q: "Fairmount Bagel, 74 Av Fairmount O, Montréal",
+        desc: { en: "The other legendary bagel shop, also open 24/7. Locals pick a side!", fr: "L'autre bagel légendaire, ouvert 24 h sur 24. Les Montréalais ont leur camp !" } },
+      { cat: "eat", icon: "bowl", name: "Schwartz's", q: "Schwartz's Deli, 3895 Boul Saint-Laurent, Montréal",
+        desc: { en: "The classic Montreal smoked meat sandwich, on Saint-Laurent. Expect a line.", fr: "Le sandwich au smoked meat classique, sur Saint-Laurent. Il y a souvent la file." } },
+      { cat: "eat", icon: "bowl", name: "La Banquise", q: "La Banquise, 994 Rue Rachel E, Montréal",
+        desc: { en: "Poutine in dozens of versions, open 24/7, next to Parc La Fontaine.", fr: "La poutine en dizaines de versions, ouvert 24 h sur 24, près du parc La Fontaine." } },
+      { cat: "eat", icon: "basket", name: { en: "Jean-Talon Market", fr: "Marché Jean-Talon" }, q: "Marché Jean-Talon, Montréal",
+        desc: { en: "A huge open-air market in Little Italy: produce, cheese, and maple everything.", fr: "Un immense marché dans la Petite-Italie : fruits, fromages et érable sous toutes ses formes." } },
+      { cat: "see", icon: "mountain", name: { en: "Mount Royal lookout", fr: "Belvédère du mont Royal" }, q: "Belvédère Kondiaronk, Montréal",
+        desc: { en: "Walk up the mountain to the Kondiaronk lookout for the classic skyline view.", fr: "Montez jusqu'au belvédère Kondiaronk pour la vue classique sur le centre-ville." } },
+      { cat: "see", icon: "star", name: { en: "Old Montreal", fr: "Vieux-Montréal" }, q: "Vieux-Montréal",
+        desc: { en: "Cobblestone streets, Notre-Dame Basilica and the Old Port by the river.", fr: "Rues pavées, basilique Notre-Dame et Vieux-Port au bord du fleuve." } },
+      { cat: "see", icon: "leaf", name: "Parc La Fontaine", q: "Parc La Fontaine, Montréal",
+        desc: { en: "Big trees, a pond and picnic lawns, with skating on the pond in winter.", fr: "Grands arbres, étang et pelouses, avec patinage sur l'étang en hiver." } },
+      { cat: "stroll", icon: "map", name: "Mile End", q: "Rue Saint-Viateur, Montréal",
+        desc: { en: "Right next door: cafés, vintage shops and murals around rue Saint-Viateur and rue Bernard.", fr: "Juste à côté : cafés, friperies et murales autour des rues Saint-Viateur et Bernard." } },
+      { cat: "stroll", icon: "map", name: { en: "Boulevard Saint-Laurent", fr: "Boulevard Saint-Laurent" }, q: "Boulevard Saint-Laurent, Montréal",
+        desc: { en: "\"The Main\": giant murals, bars and boutiques, a few minutes away.", fr: "« La Main » : murales géantes, bars et boutiques, à quelques minutes." } },
+      { cat: "stroll", icon: "map", name: { en: "Avenue du Mont-Royal", fr: "Avenue du Mont-Royal" }, q: "Avenue du Mont-Royal, Montréal",
+        desc: { en: "The Plateau's main street: shops, bakeries and terraces.", fr: "L'artère du Plateau : boutiques, boulangeries et terrasses." } },
+      { cat: "stroll", icon: "home", name: { en: "The Plateau staircases", fr: "Les escaliers du Plateau" }, q: "Plateau-Mont-Royal, Montréal",
+        desc: { en: "Wander the side streets to spot the famous outdoor spiral staircases.", fr: "Flânez dans les petites rues pour voir les fameux escaliers extérieurs en colimaçon." } }
+    ],
+    around: [
+      { icon: "metro", name: { en: "Metro", fr: "Métro" },
+        desc: { en: "Nearest station: Laurier (orange line). The metro is quick and runs from early morning until around 1 am.", fr: "Station la plus proche : Laurier (ligne orange). Le métro est rapide et roule de tôt le matin jusqu'à environ 1 h." } },
+      { icon: "bus", name: { en: "Bus 55", fr: "Autobus 55" },
+        desc: { en: "Runs up and down boulevard Saint-Laurent: handy for going downtown.", fr: "Monte et descend le boulevard Saint-Laurent : pratique pour aller au centre-ville." } },
+      { icon: "plane", name: { en: "Airport (YUL)", fr: "Aéroport (YUL)" },
+        desc: { en: "Bus 747 links the airport and downtown 24/7, then take the orange line to Laurier. A taxi or Uber takes about 30–45 min.", fr: "L'autobus 747 relie l'aéroport au centre-ville 24 h sur 24, puis la ligne orange jusqu'à Laurier. En taxi ou Uber, environ 30 à 45 min." } },
+      { icon: "coin", name: { en: "Tickets", fr: "Titres de transport" },
+        desc: { en: "Buy fares at the machines in any metro station. The 747 fare works as a 24-hour pass on buses and metro.", fr: "Achetez vos titres aux distributrices du métro. Le tarif du 747 sert de passe 24 h pour bus et métro." } },
+      { icon: "bike", name: "BIXI", desc: { en: "Bike-share stations all over the city; pay in the BIXI app or at the station. Mostly spring to fall.", fr: "Vélos en libre-service partout en ville ; payez dans l'appli BIXI ou à la borne. Surtout du printemps à l'automne." } },
+      { icon: "map", name: { en: "On foot", fr: "À pied" }, desc: { en: "The Plateau and Mile End are best explored walking.", fr: "Le Plateau et le Mile End se découvrent mieux à pied." } }
+    ],
+    tips: [
+      { icon: "coin", en: "Tipping: 15–20% at restaurants, bars and in taxis. The card machine suggests amounts.", fr: "Pourboire : 15 à 20 % au resto, au bar et en taxi. Le terminal propose les montants." },
+      { icon: "coin", en: "Prices are shown before tax: about 15% is added at the register.", fr: "Les prix sont affichés avant taxes : environ 15 % s'ajoutent à la caisse." },
+      { icon: "chat", en: "French first! A friendly \"Bonjour!\" goes a long way, and most people happily switch to English.", fr: "Le français d'abord ! Un « Bonjour ! » souriant fait toujours plaisir." },
+      { icon: "basket", en: "Dépanneurs (corner stores) sell snacks, beer and wine; the SAQ sells wine and spirits.", fr: "Les dépanneurs vendent collations, bière et vin ; la SAQ vend vins et spiritueux." },
+      { icon: "vet", en: "Health questions (non-urgent): call 811, Info-Santé. Emergencies: 911.", fr: "Questions de santé non urgentes : 811, Info-Santé. Urgences : 911." }
+    ],
+    // shown in "Right now", picked by month
+    seasons: {
+      winter: { icon: "snow", en: "Winter is serious here: warm boots, hat and gloves, and watch for icy sidewalks. Go skating, or stay warm in the Underground City (RÉSO) downtown.", fr: "L'hiver est sérieux ici : bottes chaudes, tuque et gants, et attention aux trottoirs glacés. Allez patiner, ou restez au chaud dans le RÉSO (ville souterraine) au centre-ville." },
+      shoulder: { icon: "snow", en: "In-between season: dress in layers with a waterproof jacket. It can still snow!", fr: "Entre-saison : habillez-vous en couches avec un manteau imperméable. Il peut encore neiger !" },
+      summer: { icon: "sun", en: "Festival season: terraces, parks and free outdoor shows everywhere. Bring sunscreen.", fr: "Saison des festivals : terrasses, parcs et spectacles gratuits partout. Apportez de la crème solaire." },
+      fall: { icon: "leaf", en: "Fall colours! Walk up Mount Royal for the best view of the red and gold trees.", fr: "Les couleurs d'automne ! Montez au mont Royal pour voir les arbres rouges et dorés." }
+    }
+  },
+
   contacts: [
     { name: "Ismael Lima", role: { en: "Host · message me anytime", fr: "Hôte · écrivez-moi quand vous voulez" },
       phone: "+1 514 654 4762", whatsapp: "15146544762", email: "ismaeldf@gmail.com" },
@@ -862,25 +996,27 @@ const UI = {
   en: {
     locale: "en-GB",
     greet: ["Good morning & welcome!", "Good afternoon & welcome!", "Good evening & welcome!"],
-    todayTitle: "Today at home",
+    todayTitle: "Today in Montreal",
     theme: "Light / dark", inWord: "in",
     photoCap: "Chief Napping Officer", photoBadge: "100% cat", photoAlt: "Molly, a grey and white tabby, sitting on the green sofa with her pink heart tag",
-    stamp: "guest guide", signTop: "Today's specials: Wi-Fi · treats · naps", kicker: "Home guide · est. by Molly",
+    stamp: "home exchange", signTop: "Welcome to the Plateau!", kicker: "Chez Ismael & Molly · Home exchange",
     scroll: "Explore ↓", pet: "Pet Molly", petLabel: "Pet Molly",
     purr: ["Purrr…", "Again!", "Molly approves", "Prrrrrt?"],
     petted: n => n ? `Pets today: ${n}. She'd like more.` : "",
-    footBig: "See you soon!", footSmall: "Molly approved this website. (She sat on the keyboard.)",
+    footBig: "Enjoy Montreal!", footSmall: "Molly approved this website. (She sat on the keyboard.)",
     days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
     daysLong: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     today: "Today", tomorrow: "Tomorrow", and: " & ",
     dur: m => m < 60 ? `${m} min` : `${Math.floor(m / 60)}h ${String(m % 60).padStart(2, "0")}m`,
-    labels: { wifi: "Wi-Fi", plants: "Plants", garbage: "Garbage", supplies: "Supplies", cleaning: "Cleaning", home: "Apartment", contacts: "Contacts" },
+    labels: { wifi: "Wi-Fi", explore: "Explore", around: "Getting around", plants: "Plants", garbage: "Garbage", cleaning: "Housekeeping", home: "Apartment", contacts: "Contacts" },
+    cats: { eat: "Eat", see: "See", stroll: "Stroll" }, ours: "Our favourites", openMap: "Map", tipsTitle: "Good to know in Montreal",
+    nowTitle: "Right now", whereThings: "Where things are", idea: n => `Idea for today: ${n}`,
     catTitle: n => `${n} the cat`,
     sub: {
       wifi: "Tap to copy", molly: "Meals, daily routine and house rules",
       plants: d => `Blue days = watering days. Today is ${d}.`,
-      garbage: "Put the bins out the evening before pickup", supplies: "Where to find things",
-      cleaning: "Keeping things cozy", home: "The practical stuff", contacts: "Call or message anytime"
+      garbage: "Put the bins out the evening before pickup", explore: "Our neighbourhood and the Montreal classics", around: "Metro, bikes, the airport and local tips",
+      cleaning: "Where things are, and a few chores", home: "The practical stuff", contacts: "Call or message anytime"
     },
     network: "Network", password: "Password", copy: "Copy", copied: "Copied!", copyFail: "Couldn't copy, please type it in",
     feeding: "Feeding times", checklist: n => `${n}'s checklist for today`, whereHer: "Where her things are",
@@ -903,25 +1039,27 @@ const UI = {
   fr: {
     locale: "fr-FR",
     greet: ["Bonjour et bienvenue !", "Bon après-midi et bienvenue !", "Bonsoir et bienvenue !"],
-    todayTitle: "Aujourd'hui à la maison",
+    todayTitle: "Aujourd'hui à Montréal",
     theme: "Clair / sombre", inWord: "dans",
     photoCap: "Directrice des siestes", photoBadge: "100 % chat", photoAlt: "Molly, une chatte tigrée grise et blanche, assise sur le canapé vert avec sa médaille cœur rose",
-    stamp: "guide des invités", signTop: "Au menu : Wi-Fi · friandises · siestes", kicker: "Guide maison · signé Molly",
+    stamp: "échange de maison", signTop: "Bienvenue sur le Plateau !", kicker: "Chez Ismael & Molly · Échange de maison",
     scroll: "Explorer ↓", pet: "Caresser Molly", petLabel: "Caresser Molly",
     purr: ["Rrrrr…", "Encore !", "Molly approuve", "Prrrrrt ?"],
     petted: n => n ? `Caresses aujourd'hui : ${n}. Elle en veut encore.` : "",
-    footBig: "À très vite !", footSmall: "Site approuvé par Molly. (Elle s'est assise sur le clavier.)",
+    footBig: "Profitez de Montréal !", footSmall: "Site approuvé par Molly. (Elle s'est assise sur le clavier.)",
     days: ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"],
     daysLong: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
     today: "Aujourd'hui", tomorrow: "Demain", and: " et ",
     dur: m => m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")}`,
-    labels: { wifi: "Wi-Fi", plants: "Plantes", garbage: "Poubelles", supplies: "Rangements", cleaning: "Ménage", home: "Appartement", contacts: "Contacts" },
+    labels: { wifi: "Wi-Fi", explore: "Explorer", around: "Se déplacer", plants: "Plantes", garbage: "Poubelles", cleaning: "Entretien", home: "Appartement", contacts: "Contacts" },
+    cats: { eat: "Manger", see: "Voir", stroll: "Flâner" }, ours: "Nos coups de cœur", openMap: "Carte", tipsTitle: "Bon à savoir à Montréal",
+    nowTitle: "En ce moment", whereThings: "Où trouver les choses", idea: n => `Idée du jour : ${n}`,
     catTitle: n => `${n}, notre minette`,
     sub: {
       wifi: "Touchez pour copier", molly: "Repas, routine et règles de la maison",
       plants: d => `Jours en bleu = jours d'arrosage. Aujourd'hui, c'est ${d}.`,
-      garbage: "Sortez les poubelles la veille au soir du ramassage", supplies: "Où trouver les choses",
-      cleaning: "Pour que tout reste agréable", home: "Les infos pratiques", contacts: "Appelez ou écrivez-nous quand vous voulez"
+      garbage: "Sortez les poubelles la veille au soir du ramassage", explore: "Notre quartier et les classiques de Montréal", around: "Métro, vélos, aéroport et astuces locales",
+      cleaning: "Où trouver les choses, et quelques tâches", home: "Les infos pratiques", contacts: "Appelez ou écrivez-nous quand vous voulez"
     },
     network: "Réseau", password: "Mot de passe", copy: "Copier", copied: "Copié !", copyFail: "Copie impossible, tapez-le à la main",
     feeding: "Heures des repas", checklist: n => `La liste de ${n} pour aujourd'hui`, whereHer: "Où sont ses affaires",
@@ -995,17 +1133,19 @@ async function tryCode(code, quiet) {
 
 const SECTIONS = [
   { id: "wifi", icon: "wifi", tone: "sky" },
+  { id: "home", icon: "home", tone: "terracotta" },
+  { id: "explore", icon: "map", tone: "plum" },
+  { id: "around", icon: "metro", tone: "sky" },
   { id: "molly", icon: "cat", tone: "terracotta" },
   { id: "plants", icon: "plant", tone: "sage" },
   { id: "garbage", icon: "trash", tone: "plum" },
-  { id: "supplies", icon: "spray", tone: "mustard" },
-  { id: "cleaning", icon: "broom", tone: "sky" },
-  { id: "home", icon: "home", tone: "terracotta" },
+  { id: "cleaning", icon: "broom", tone: "mustard" },
   { id: "contacts", icon: "phone", tone: "sage" }
 ];
 const ic = (n, c = "") => `<svg class="ic ${c}" aria-hidden="true" focusable="false"><use href="#i-${n}"/></svg>`;
 const h3 = (n, txt) => `<span class="h3l">${ic(n)}${esc(txt)}</span>`;
 const telOf = ph => { const d = String(ph).replace(/[^\d+]/g, ""); return d.length === 10 ? `+1${d}` : d; };
+const seasonOf = m => [11, 0, 1, 2].includes(m) ? "winter" : [3, 10].includes(m) ? "shoulder" : m === 9 ? "fall" : "summer";
 const label = s => s.id === "molly" ? HOME.cat.name : U().labels[s.id];
 
 function sectionShell(s, subtitle, body) {
@@ -1045,9 +1185,9 @@ function render() {
     `<a class="tile" href="#${s.id}"><span class="e">${ic(s.icon, "big")}</span><span>${esc(label(s))}</span></a>`).join("");
 
   const today = new Date().getDay();
-  const out = [];
+  const out = {}, M = H.montreal;
 
-  out.push(sectionShell(S.wifi, SECRET ? u.sub.wifi : u.lockedSub, SECRET ? `
+  out.wifi = (sectionShell(S.wifi, SECRET ? u.sub.wifi : u.lockedSub, SECRET ? `
     <div class="wifi">
       <div class="wifi-row"><div><div class="lbl">${u.network}</div><div class="val">${t(SECRET.wifi.network)}</div></div>
         <button type="button" data-copy="${esc(SECRET.wifi.network)}">${u.copy}</button></div>
@@ -1068,7 +1208,7 @@ function render() {
     </form>
     <p class="note">${t(H.wifi.note)}</p>`));
 
-  out.push(sectionShell(S.molly, u.sub.molly, `
+  out.molly = (sectionShell(S.molly, u.sub.molly, `
     <div class="molly-intro">
       <figure class="photo-stamp">
         <div class="ps-frame"><div class="ps-in">
@@ -1089,7 +1229,7 @@ function render() {
     <ul class="list">${C.dont.map(d => `<li>${t(d)}</li>`).join("")}</ul>
     <div class="note warn"><b>${ic("vet")} ${esc(u.vet)}</b> <a href="${esc(C.vet.site)}" target="_blank" rel="noopener">${esc(C.vet.name)}</a> · <a href="tel:${telOf(C.vet.phone)}">${esc(C.vet.phone)}</a><br>${esc(C.vet.address)} · <a href="mailto:${esc(C.vet.email)}">${esc(C.vet.email)}</a><br><br>${t(C.vet.note)}</div>`));
 
-  out.push(sectionShell(S.plants, u.sub.plants(u.daysLong[today]), `
+  out.plants = (sectionShell(S.plants, u.sub.plants(u.daysLong[today]), `
     <div class="grid">${H.plants.map(p => `
       <div class="mini"><div class="e">${ic(p.icon, "big")}</div><b>${t(p.name)}</b><p>${ic("pin")} ${t(p.where)}</p><p>${t(p.tip)}</p>
         <div class="chips">${[1,2,3,4,5,6,0].map(d => `<span class="chip ${p.water.includes(d) ? "on" : ""} ${d === today ? "is-today" : ""}">${u.days[d]}</span>`).join("")}</div>
@@ -1097,29 +1237,47 @@ function render() {
     <p class="note">${t(H.plantsNote)}</p>`));
 
   const bins = H.garbage.bins.map(b => ({ ...b, n: daysUntil(b.days) })).sort((a, b) => a.n - b.n);
-  out.push(sectionShell(S.garbage, u.sub.garbage, `
+  out.garbage = (sectionShell(S.garbage, u.sub.garbage, `
     <div class="bins">${bins.map(b => `
       <div class="bin ${b.n <= 1 ? "soon" : ""}"><div class="dot" style="background:${b.color}">${ic(b.icon)}</div>
         <div><b>${esc(L(b.name))}</b><div class="what" style="color:var(--muted);font-size:14px">${t(b.what)}</div></div>
         <div class="when">${esc(whenLabel(b.n))}<small>${b.days.map(d => u.days[d]).join(u.and)}</small></div></div>`).join("")}</div>
     <p class="note">${t(H.garbage.note)}</p>`));
 
-  out.push(sectionShell(S.supplies, u.sub.supplies, `
-    <div class="grid">${H.supplies.map(s => `<div class="mini row"><div class="e">${ic(s.icon, "big")}</div><div><b>${esc(L(s.name))}</b><p>${ic("pin")} ${t(s.where)}</p></div></div>`).join("")}</div>`));
-
-  out.push(sectionShell(S.cleaning, u.sub.cleaning, `
+  out.cleaning = (sectionShell(S.cleaning, u.sub.cleaning, `
+    <h3>${h3("pin", u.whereThings)}</h3>
+    <div class="grid">${H.supplies.map(s => `<div class="mini row"><div class="e">${ic(s.icon, "big")}</div><div><b>${esc(L(s.name))}</b><p>${ic("pin")} ${t(s.where)}</p></div></div>`).join("")}</div>
     <h3>${h3("calendar", u.weekly)}</h3>
     <ul class="list">${H.cleaning.weekly.map(i => `<li>${t(i)}</li>`).join("")}</ul>
     <h3>${h3("suitcase", u.beforeGo)}</h3>
     ${renderChecklist("leave", H.cleaning.beforeYouGo)}`));
 
-  out.push(sectionShell(S.home, u.sub.home, `
+  out.home = (sectionShell(S.home, u.sub.home, `
     <dl class="kv"><dt>${u.address}</dt><dd>${!SECRET ? `<a class="locked-note" href="#wifi">${ic("lock")} ${u.addrLocked}</a>` : /^TODO/.test(SECRET.address) ? t(SECRET.address) : `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SECRET.address)}" target="_blank" rel="noopener">${esc(SECRET.address)}</a>`}</dd>
       ${H.apartment.details.map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
     <h3>${h3("bulb", u.goodToKnow)}</h3>
     <ul class="list">${H.apartment.tips.map(i => `<li>${t(i)}</li>`).join("")}</ul>`));
 
-  out.push(sectionShell(S.contacts, u.sub.contacts, H.contacts.map(c => {
+  const mapUrl = q => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+  const pickCard = p => `<div class="mini pick"><div class="e">${ic(p.icon || "star", "big")}</div><div><b>${t(p.name)}</b><p>${t(p.desc)}</p>
+    ${p.q ? `<a class="pillbtn small" href="${mapUrl(p.q)}" target="_blank" rel="noopener">${ic("pin")} ${u.openMap}</a>` : ""}</div></div>`;
+  const catIcon = { eat: "bagel", see: "mountain", stroll: "map" };
+  out.explore = sectionShell(S.explore, u.sub.explore, `
+    <p class="hood">${t(M.hood)}</p>
+    ${["eat", "see", "stroll"].map(c => `<h3>${h3(catIcon[c], u.cats[c])}</h3>
+      <div class="grid swipe">${M.picks.filter(p => p.cat === c).map(pickCard).join("")}</div>`).join("")}
+    <h3>${h3("heart", u.ours)}</h3>
+    <div class="grid swipe">${M.favs.map(pickCard).join("")}</div>`);
+
+  const season = M.seasons[seasonOf(new Date().getMonth())];
+  out.around = sectionShell(S.around, u.sub.around, `
+    <div class="grid">${M.around.map(a => `<div class="mini row"><div class="e">${ic(a.icon, "big")}</div><div><b>${esc(L(a.name))}</b><p>${esc(L(a.desc))}</p></div></div>`).join("")}</div>
+    <h3>${h3(season.icon, u.nowTitle)}</h3>
+    <p class="note">${esc(L(season))}</p>
+    <h3>${h3("bulb", u.tipsTitle)}</h3>
+    <ul class="tips">${M.tips.map(x => `<li>${ic(x.icon)}<span>${esc(L(x))}</span></li>`).join("")}</ul>`);
+
+  out.contacts = (sectionShell(S.contacts, u.sub.contacts, H.contacts.map(c => {
     const tel = /^TODO/.test(c.phone) ? "" : telOf(c.phone);
     const acts = [
       tel && `<a class="pillbtn" href="tel:${esc(tel)}">${ic("phone")} ${u.call}</a>`,
@@ -1130,7 +1288,7 @@ function render() {
       ${acts ? `<div class="acts">${acts}</div>` : ""}</div>`;
   }).join("")));
 
-  document.getElementById("sections").innerHTML = out.join("");
+  document.getElementById("sections").innerHTML = SECTIONS.map(s => out[s.id] || "").join("");
   drawWifiQR();
   updateLive();
   ["cat", "leave"].forEach(updateProgress);
@@ -1176,6 +1334,9 @@ function updateLive() {
     new Date().toLocaleDateString(u.locale, { weekday: "long", day: "numeric", month: "long" });
 
   const items = [];
+  const picks = H.montreal.picks, start = new Date(new Date().getFullYear(), 0, 0);
+  const pick = picks[Math.floor((new Date() - start) / 864e5) % picks.length];
+  items.push(["star", u.idea(plain(pick.name)), L(pick.desc)]);
   items.push(["cat", u.liveMeal(C.name, L(next.label), next.time), u.liveIn(u.dur(until))]);
 
   const binNames = list => list.map(b => L(b.name).toLowerCase()).join(u.and);

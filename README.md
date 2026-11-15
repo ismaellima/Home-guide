@@ -1,6 +1,6 @@
 # Chez Molly 🐱
 
-A bilingual (EN / FR) guest guide with a playful street-café look: mustard, red and cobalt, chunky outlines, a striped awning, a shop sign, and a "Pet Molly" button.
+A bilingual (EN / FR) welcome guide for our home-exchange guests in Montreal: the apartment, the Plateau and the city, getting around, and looking after Molly the cat. Playful street-café look with comic icons.
 
 A one-page guide for guests staying at our apartment: Wi-Fi, Molly the cat (feeding times and a daily checklist), plants, cleaning supplies, house cleaning, garbage days and contacts.
 
