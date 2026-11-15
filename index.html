@@ -174,6 +174,8 @@ button:active, .pillbtn:active { transform: translate(2px, 2px); box-shadow: 1px
 }
 .tile:nth-child(4n+1) { background: var(--sky); } .tile:nth-child(4n+2) { background: var(--pink); }
 .tile:nth-child(4n+3) { background: var(--leaf); } .tile:nth-child(4n+4) { background: var(--cream); }
+.tile.wide { grid-column: 1 / -1; background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; gap: 12px; }
+.tile.wide .e { display: inline; }
 .tile:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--edge); }
 .tile:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--edge); }
 .tile .e { font-size: 28px; display: block; }
@@ -235,6 +237,10 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 .qr-box { width: 180px; height: 180px; margin: 0 auto; background: #fff; border: 3px solid var(--edge); border-radius: 16px; padding: 8px; box-shadow: 4px 4px 0 var(--edge); }
 .qr-box svg { width: 100%; height: 100%; display: block; }
 .wifi-qr figcaption { margin-top: 10px; font-size: 14px; font-weight: 700; color: var(--muted); }
+
+#checkout { border-color: var(--red); box-shadow: 8px 8px 0 var(--red); }
+.important { font-size: 16px; }
+.important b { text-transform: uppercase; letter-spacing: .06em; }
 
 /* Montreal */
 .hood { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
@@ -1354,14 +1360,23 @@ const HOME = {
       { en: "Vacuum the floors (Molly sheds, sorry!)", fr: "Passer l'aspirateur (Molly perd ses poils, désolés !)" },
       { en: "Wipe the kitchen counters and stove", fr: "Nettoyer le comptoir et la cuisinière" },
       { en: "Take out the bins on the right days", fr: "Sortir les poubelles les bons jours" }
-    ],
-    beforeYouGo: [
-      { en: "Strip the bed and put the sheets in the laundry", fr: "Défaire le lit et mettre les draps au lavage" },
-      { en: "Run and empty the dishwasher", fr: "Lancer et vider le lave-vaisselle" },
-      { en: "Empty all bins", fr: "Vider toutes les poubelles" },
-      { en: "Fill Molly's dry food and water, and scoop the litter", fr: "Remplir les croquettes et l'eau de Molly, et ramasser la litière" },
-      { en: "Close the windows and turn off the lights", fr: "Fermer les fenêtres et éteindre les lumières" },
-      { en: "Lock the door", fr: "Verrouiller la porte" }
+    ]
+  },
+
+  // Check-out: shown as its own section with a checklist
+  checkout: {
+    intro: {
+      en: "Please leave our home just as you found it: clean, tidy and ready for us. It means a lot to us. Thank you!",
+      fr: "Merci de laisser notre appartement comme vous l'avez trouvé : propre, rangé et prêt pour notre retour. Ça compte beaucoup pour nous !"
+    },
+    items: [
+      { en: "The home is clean and tidy, just as you found it", fr: "L'appartement est propre et rangé, comme à votre arrivée" },
+      { en: "Dishes washed, dried and put back in their place", fr: "Vaisselle lavée, séchée et rangée à sa place" },
+      { en: "Sheets and towels: if you have time, wash, dry and put them back. Otherwise, put them in the laundry basket in the bedroom", fr: "Draps et serviettes : si vous avez le temps, lavez-les, séchez-les et rangez-les. Sinon, déposez-les dans le panier à linge de la chambre" },
+      { en: "Your food is out of the fridge and the bins are emptied", fr: "Votre nourriture est sortie du frigo et les poubelles sont vidées" },
+      { en: "Molly has dry food and fresh water, and her litter is scooped", fr: "Molly a des croquettes et de l'eau fraîche, et sa litière est ramassée" },
+      { en: "Windows closed and lights off", fr: "Fenêtres fermées et lumières éteintes" },
+      { en: "Door locked behind you", fr: "Porte verrouillée en partant" }
     ]
   },
 
@@ -1512,7 +1527,7 @@ const UI = {
     daysLong: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     today: "Today", tomorrow: "Tomorrow", and: " & ",
     dur: m => m < 60 ? `${m} min` : `${Math.floor(m / 60)}h ${String(m % 60).padStart(2, "0")}m`,
-    labels: { wifi: "Wi-Fi", explore: "Explore", around: "Getting around", plants: "Plants", garbage: "Garbage", cleaning: "Housekeeping", home: "Apartment", contacts: "Contacts" },
+    labels: { checkout: "Before you leave", wifi: "Wi-Fi", explore: "Explore", around: "Getting around", plants: "Plants", garbage: "Garbage", cleaning: "Housekeeping", home: "Apartment", contacts: "Contacts" },
     cats: { dine: "Restaurants", casual: "Quick bites", brunch: "Brunch & coffee", sweets: "Bakeries & sweets", drinks: "Drinks", see: "See", stroll: "Stroll" },
     onlyIn: { summer: "Summer only" }, walkTag: m => m > 30 ? `~${Math.round(m / 5) * 5} min walk · or metro / BIXI` : `~${m > 10 ? Math.round(m / 5) * 5 : m} min walk`, oursTitle: "Ismael's picks", oursSub: "Our favourite spots, sorted closest first once unlocked.", classicsTitle: "Montreal classics", openMap: "Map", tipsTitle: "Good to know in Montreal",
     nowTitle: "Right now", whereThings: "Where things are", idea: n => `Idea for today: ${n}`,
@@ -1521,12 +1536,12 @@ const UI = {
       wifi: "Tap to copy", molly: "Meals, daily routine and house rules",
       plants: d => `Blue days = watering days. Today is ${d}.`,
       garbage: "Put the bins out the evening before pickup", explore: "Our favourite spots and the Montreal classics", around: "Metro, bikes, the airport and local tips",
-      cleaning: "Where things are, and a few chores", home: "The practical stuff", contacts: "Call or message anytime"
+      cleaning: "Where things are, and a few chores", checkout: "Your check-out list: please do this before you go", home: "The practical stuff", contacts: "Call or message anytime"
     },
     network: "Network", password: "Password", copy: "Copy", copied: "Copied!", copyFail: "Couldn't copy, please type it in",
     feeding: "Feeding times", checklist: n => `${n}'s checklist for today`, whereHer: "Where her things are",
     dont: "Please don't", vet: "Vet:", next: d => `next · in ${d}`,
-    weekly: "Once a week", beforeGo: "Before you leave",
+    weekly: "Once a week", important: "Important",
     address: "Address", goodToKnow: "Good to know", call: "Call", emailBtn: "Email",
     qrCap: "Scan with another phone to join the Wi-Fi", lockedSub: "Locked: use the code we sent you", lockedTitle: "Private details",
     lockedText: "The Wi-Fi and the address are locked. Enter the code we sent you to see them.",
@@ -1556,7 +1571,7 @@ const UI = {
     daysLong: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
     today: "Aujourd'hui", tomorrow: "Demain", and: " et ",
     dur: m => m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")}`,
-    labels: { wifi: "Wi-Fi", explore: "Explorer", around: "Se déplacer", plants: "Plantes", garbage: "Poubelles", cleaning: "Entretien", home: "Appartement", contacts: "Contacts" },
+    labels: { checkout: "Avant de partir", wifi: "Wi-Fi", explore: "Explorer", around: "Se déplacer", plants: "Plantes", garbage: "Poubelles", cleaning: "Entretien", home: "Appartement", contacts: "Contacts" },
     cats: { dine: "Restos", casual: "Sur le pouce", brunch: "Brunch et café", sweets: "Pâtisseries et douceurs", drinks: "Prendre un verre", see: "Voir", stroll: "Flâner" },
     onlyIn: { summer: "L'été seulement" }, walkTag: m => m > 30 ? `~${Math.round(m / 5) * 5} min à pied · ou métro / BIXI` : `~${m > 10 ? Math.round(m / 5) * 5 : m} min à pied`, oursTitle: "Les adresses d'Ismael", oursSub: "Nos adresses préférées, de la plus proche à la plus loin une fois déverrouillé.", classicsTitle: "Les classiques de Montréal", openMap: "Carte", tipsTitle: "Bon à savoir à Montréal",
     nowTitle: "En ce moment", whereThings: "Où trouver les choses", idea: n => `Idée du jour : ${n}`,
@@ -1565,12 +1580,12 @@ const UI = {
       wifi: "Touchez pour copier", molly: "Repas, routine et règles de la maison",
       plants: d => `Jours en bleu = jours d'arrosage. Aujourd'hui, c'est ${d}.`,
       garbage: "Sortez les poubelles la veille au soir du ramassage", explore: "Nos adresses préférées et les classiques de Montréal", around: "Métro, vélos, aéroport et astuces locales",
-      cleaning: "Où trouver les choses, et quelques tâches", home: "Les infos pratiques", contacts: "Appelez ou écrivez-nous quand vous voulez"
+      cleaning: "Où trouver les choses, et quelques tâches", checkout: "Votre liste de départ : à faire avant de partir", home: "Les infos pratiques", contacts: "Appelez ou écrivez-nous quand vous voulez"
     },
     network: "Réseau", password: "Mot de passe", copy: "Copier", copied: "Copié !", copyFail: "Copie impossible, tapez-le à la main",
     feeding: "Heures des repas", checklist: n => `La liste de ${n} pour aujourd'hui`, whereHer: "Où sont ses affaires",
     dont: "À éviter", vet: "Vétérinaire :", next: d => `prochain · dans ${d}`,
-    weekly: "Une fois par semaine", beforeGo: "Avant de partir",
+    weekly: "Une fois par semaine", important: "Important",
     address: "Adresse", goodToKnow: "Bon à savoir", call: "Appeler", emailBtn: "Courriel",
     qrCap: "Scannez avec un autre téléphone pour rejoindre le Wi-Fi", lockedSub: "Verrouillé : utilisez le code qu'on vous a envoyé", lockedTitle: "Infos privées",
     lockedText: "Le Wi-Fi et l'adresse sont verrouillés. Entrez le code qu'on vous a envoyé pour les voir.",
@@ -1646,6 +1661,7 @@ const SECTIONS = [
   { id: "plants", icon: "plant", tone: "sage" },
   { id: "garbage", icon: "trash", tone: "plum" },
   { id: "cleaning", icon: "broom", tone: "mustard" },
+  { id: "checkout", icon: "suitcase", tone: "terracotta" },
   { id: "contacts", icon: "phone", tone: "sage" }
 ];
 const ic = (n, c = "") => `<svg class="ic ${c}" aria-hidden="true" focusable="false"><use href="#i-${n}"/></svg>`;
@@ -1688,8 +1704,8 @@ function render() {
   document.getElementById("signoff").innerHTML = `${esc(L(H.signoff))} ${ic("heart")}<br>${t(H.hosts)}`;
   document.querySelectorAll("#lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
   document.getElementById("nav").innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${ic(s.icon)} ${esc(label(s))}</a>`).join("");
-  document.getElementById("tiles").innerHTML = SECTIONS.map(s =>
-    `<a class="tile" href="#${s.id}"><span class="e">${ic(s.icon, "big")}</span><span>${esc(label(s))}</span></a>`).join("");
+  document.getElementById("tiles").innerHTML = [...SECTIONS.filter(s => s.id !== "checkout"), ...SECTIONS.filter(s => s.id === "checkout")].map(s =>
+    `<a class="tile${s.id === "checkout" ? " wide" : ""}" href="#${s.id}"><span class="e">${ic(s.icon, "big")}</span><span>${esc(label(s))}</span></a>`).join("");
 
   const today = new Date().getDay();
   const out = {}, M = H.montreal;
@@ -1756,8 +1772,11 @@ function render() {
     <div class="grid">${H.supplies.map(s => `<div class="mini row"><div class="e">${ic(s.icon, "big")}</div><div><b>${esc(L(s.name))}</b><p>${ic("pin")} ${t(s.where)}</p></div></div>`).join("")}</div>
     <h3>${h3("calendar", u.weekly)}</h3>
     <ul class="list">${H.cleaning.weekly.map(i => `<li>${t(i)}</li>`).join("")}</ul>
-    <h3>${h3("suitcase", u.beforeGo)}</h3>
-    ${renderChecklist("leave", H.cleaning.beforeYouGo)}`));
+    `));
+
+  out.checkout = sectionShell(S.checkout, u.sub.checkout, `
+    <div class="note warn important"><b>${ic("heart")} ${esc(u.important)}</b><br>${esc(L(H.checkout.intro))}</div>
+    ${renderChecklist("leave", H.checkout.items)}`);
 
   out.home = (sectionShell(S.home, u.sub.home, `
     <dl class="kv"><dt>${u.address}</dt><dd>${!SECRET ? `<a class="locked-note" href="#wifi">${ic("lock")} ${u.addrLocked}</a>` : /^TODO/.test(SECRET.address) ? t(SECRET.address) : `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SECRET.address)}" target="_blank" rel="noopener">${esc(SECRET.address)}</a>`}</dd>
