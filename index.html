@@ -263,10 +263,10 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 .mini b { display: block; margin-top: 2px; font-weight: 800; }
 .mini p { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
 .mini.row { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: center; }
-.chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
-.chip { font-size: 12px; font-weight: 800; padding: 2px 7px; border-radius: 999px; border: 2px solid var(--edge); background: var(--cream); color: #111; }
+.chips { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; margin-top: 12px; }
+.chip { font-size: 11px; font-weight: 800; padding: 6px 0; text-align: center; text-transform: uppercase; letter-spacing: .02em; border-radius: 8px; line-height: 1; border: 2px solid var(--edge); background: var(--cream); color: #111; }
 .chip.on { background: var(--blue); color: #fff; }
-.chip.today { box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--red); }
+.chip.is-today { outline: 3px solid var(--red); outline-offset: 1px; }
 
 /* garbage */
 .bins { display: grid; gap: 10px; }
@@ -601,38 +601,39 @@ const HOME = {
   hosts: "TODO: your names",
   title: { en: "Make yourself at home.", fr: "Faites comme chez vous." },
   intro: {
-    en: "Everything you need for your stay: Wi-Fi, Molly's routine, the plants and where things live. Tap a tile to jump to it.",
-    fr: "Tout ce qu'il vous faut pour votre séjour : le Wi-Fi, la routine de Molly, les plantes et où trouver les choses. Touchez une tuile pour y aller."
+    en: "Thank you so much for staying with us and looking after Molly! Everything in the apartment is yours to use. We hope you feel relaxed and comfortable during your stay in Montreal.",
+    fr: "Merci mille fois de rester chez nous et de veiller sur Molly ! Tout l'appartement est à votre disposition. On espère que vous vous sentirez bien et détendu·e pendant votre séjour à Montréal."
   },
   signoff: {
-    en: "Thank you for looking after our home (and Molly)!",
-    fr: "Merci de prendre soin de notre appartement (et de Molly) !"
+    en: "Thank you for taking such good care of our home (and Molly)! Send us photos of her anytime, we love seeing them.",
+    fr: "Merci de prendre si bien soin de notre appartement (et de Molly) ! Envoyez-nous des photos d'elle quand vous voulez, ça nous fait toujours plaisir."
   },
 
   wifi: {
     network: "TODO: network name",
     password: "TODO: password",
     note: {
-      en: "The router is TODO: where the router is. If the internet drops, unplug it for 10 seconds and plug it back in.",
-      fr: "Le routeur est TODO: où se trouve le routeur. Si internet coupe, débranchez-le 10 secondes puis rebranchez-le."
+      en: "Fast internet. If it drops, unplug the router for 10 seconds and plug it back in.",
+      fr: "Internet rapide. Si ça coupe, débranchez le routeur 10 secondes puis rebranchez-le."
     }
   },
 
   apartment: {
-    address: "TODO: street, number, apartment",
+    address: "TODO: street, number, apartment (Montreal)",
     details: [
-      [{ en: "Door / building", fr: "Porte / immeuble" }, { en: "TODO: code or how the keys work", fr: "TODO: code ou fonctionnement des clés" }],
-      [{ en: "Heating / AC", fr: "Chauffage / clim" }, { en: "TODO: how to use it", fr: "TODO: mode d'emploi" }],
-      [{ en: "Hot water", fr: "Eau chaude" }, { en: "TODO: boiler / instructions", fr: "TODO: chauffe-eau / instructions" }],
-      [{ en: "Fuse box", fr: "Tableau électrique" }, { en: "TODO: location", fr: "TODO: emplacement" }],
-      [{ en: "Water shut-off", fr: "Arrivée d'eau" }, { en: "TODO: location", fr: "TODO: emplacement" }]
+      [{ en: "Bedroom", fr: "Chambre" }, { en: "The primary bedroom is yours during your stay.", fr: "La chambre principale est à vous pendant votre séjour." }],
+      [{ en: "Bathroom", fr: "Salle de bain" }, { en: "Full bathroom with bathtub. Fresh towels are above the washer.", fr: "Salle de bain complète avec baignoire. Serviettes propres au-dessus de la laveuse." }],
+      [{ en: "Kitchen", fr: "Cuisine" }, { en: "Microwave, stove, dishwasher and coffee machine.", fr: "Micro-ondes, cuisinière, lave-vaisselle et machine à café." }],
+      [{ en: "TV", fr: "Télé" }, { en: "Fire TV with Netflix, Prime Video, Crave and more.", fr: "Fire TV avec Netflix, Prime Video, Crave et plus." }],
+      [{ en: "Laundry", fr: "Lessive" }, { en: "Washer, dryer and an ironing board.", fr: "Laveuse, sécheuse et planche à repasser." }],
+      [{ en: "Home office", fr: "Bureau" }, { en: "Feel free to use it! Plug your laptop into the screen for a bigger display.", fr: "Servez-vous-en ! Branchez votre ordi à l'écran pour un plus grand affichage." }],
+      [{ en: "Parking", fr: "Stationnement" }, { en: "Free street parking is often available on rue Coloniale. Check the signs for restrictions.", fr: "Stationnement gratuit souvent disponible sur la rue Coloniale. Vérifiez les panneaux." }],
+      [{ en: "Door / keys", fr: "Porte / clés" }, { en: "TODO: code or how the keys work", fr: "TODO: code ou fonctionnement des clés" }]
     ],
     tips: [
-      { en: "Please keep windows on the cat-safe setting (tilted or with the screen) so Molly can't get out.",
-        fr: "Merci de laisser les fenêtres en mode « sécurité chat » (entrouvertes en oscillo-battant ou avec la moustiquaire) pour que Molly ne sorte pas." },
-      { en: "Shoes off at the door, please", fr: "On enlève ses chaussures à l'entrée, s'il vous plaît" },
-      { en: "TODO: quiet hours / neighbor tips", fr: "TODO: heures calmes / infos voisins" },
-      { en: "TODO: anything else guests should know (washing machine, dishwasher, TV…)", fr: "TODO: autres infos utiles (lave-linge, lave-vaisselle, télé…)" }
+      { en: "Always lock the door when you leave.", fr: "Verrouillez toujours la porte en partant." },
+      { en: "Please be respectful to the neighbours (they know you're staying). No loud music.", fr: "Merci de respecter les voisins (ils savent que vous êtes là). Pas de musique forte." },
+      { en: "Molly is an indoor cat: keep the doors closed so she can't slip out.", fr: "Molly est une chatte d'intérieur : gardez les portes fermées pour qu'elle ne se faufile pas dehors." }
     ]
   },
 
@@ -640,101 +641,100 @@ const HOME = {
     name: "Molly",
     photo: "assets/molly.jpg",
     about: {
-      en: "TODO: a sentence about Molly, e.g. shy at first, loves chin scratches, hides under the bed when the doorbell rings.",
-      fr: "TODO: une phrase sur Molly, ex. timide au début, adore les grattouilles sous le menton, se cache sous le lit quand on sonne."
+      en: "Our gray and white girl: calm, independent and sweet. She knows her routine and will tell you when she needs something. She sometimes meows loudly, but stops quickly: she's just chatting! Very low-maintenance; she loves gentle pets when she comes to you.",
+      fr: "Notre minette grise et blanche : calme, indépendante et douce. Elle connaît sa routine et vous fera savoir quand elle a besoin de quelque chose. Elle miaule parfois fort, mais s'arrête vite : elle fait la conversation ! Très facile à vivre ; elle adore les caresses douces quand elle vient vers vous."
     },
     meals: [
-      { time: "07:30", label: { en: "Breakfast", fr: "Petit-déjeuner" }, what: { en: "TODO: food and amount (e.g. ½ pouch wet food)", fr: "TODO: nourriture et quantité (ex. ½ sachet de pâtée)" } },
-      { time: "13:00", label: { en: "Snack", fr: "Goûter" },             what: { en: "TODO: e.g. a small handful of dry food", fr: "TODO: ex. une petite poignée de croquettes" } },
-      { time: "19:30", label: { en: "Dinner", fr: "Dîner" },             what: { en: "TODO: food and amount", fr: "TODO: nourriture et quantité" } }
+      { time: "12:00", label: { en: "Noon wet food", fr: "Pâtée du midi" },
+        what: { en: "1 spoon of wet food mixed with a bit of water", fr: "1 cuillère de pâtée mélangée avec un peu d'eau" } },
+      { time: "22:00", label: { en: "Bedtime wet food", fr: "Pâtée du coucher" },
+        what: { en: "Same again, right before you go to bed", fr: "Pareil, juste avant d'aller vous coucher" } }
     ],
     daily: [
-      { en: "Breakfast", fr: "Petit-déjeuner" },
-      { en: "Fresh water in her bowl", fr: "Eau fraîche dans sa gamelle" },
-      { en: "Scoop the litter box", fr: "Nettoyer la litière" },
-      { en: "Playtime, 10 minutes with the wand toy", fr: "Jeu : 10 minutes avec la canne à plumes" },
-      { en: "Dinner", fr: "Dîner" }
+      { en: "Dry food bowl is full (keep it full all day)", fr: "Gamelle de croquettes pleine (toujours pleine)" },
+      { en: "Fresh water", fr: "Eau fraîche" },
+      { en: "Noon: 1 spoon of wet food + a bit of water", fr: "Midi : 1 cuillère de pâtée + un peu d'eau" },
+      { en: "Bedtime: 1 spoon of wet food + a bit of water", fr: "Coucher : 1 cuillère de pâtée + un peu d'eau" },
+      { en: "Litter box (scoop every 2 days)", fr: "Litière (à ramasser tous les 2 jours)" }
     ],
     where: [
-      [{ en: "Food", fr: "Nourriture" }, { en: "TODO: cupboard / shelf", fr: "TODO: placard / étagère" }],
-      [{ en: "Treats", fr: "Friandises" }, { en: "TODO: location (max 3 a day)", fr: "TODO: emplacement (3 max par jour)" }],
-      [{ en: "Litter & bags", fr: "Litière et sacs" }, { en: "TODO: location", fr: "TODO: emplacement" }],
-      [{ en: "Carrier", fr: "Caisse de transport" }, { en: "TODO: location", fr: "TODO: emplacement" }]
+      [{ en: "Dry food", fr: "Croquettes" }, { en: "In the bag under the drinks cart, with the measuring cup", fr: "Dans le sac sous le chariot à boissons, avec la tasse à mesurer" }],
+      [{ en: "Litter box", fr: "Litière" }, { en: "Hidden behind the dining table, under a plant", fr: "Cachée derrière la table à manger, sous une plante" }],
+      [{ en: "Extra litter", fr: "Litière en réserve" }, { en: "Near the kitchen", fr: "Près de la cuisine" }],
+      [{ en: "Poop bags", fr: "Sacs à crottes" }, { en: "TODO: location", fr: "TODO: emplacement" }]
     ],
     dont: [
-      { en: "No human food, especially onions, garlic, chocolate or milk.", fr: "Pas de nourriture humaine, surtout pas d'oignon, d'ail, de chocolat ni de lait." },
-      { en: "Don't let her out on the balcony or into the stairwell.", fr: "Ne la laissez pas sortir sur le balcon ni dans la cage d'escalier." },
-      { en: "TODO: anything else (toxic plants, closed doors…)", fr: "TODO: autre chose (plantes toxiques, portes fermées…)" }
+      { en: "She doesn't go outside, ever. She's perfectly happy indoors.", fr: "Elle ne sort jamais dehors. Elle est très heureuse à l'intérieur." },
+      { en: "Only her own food and treats, no human food.", fr: "Seulement sa nourriture et ses friandises, pas de nourriture humaine." }
     ],
-    vet: { name: "TODO: vet clinic name", phone: "TODO: +00 000 000 000", address: "TODO: vet address" }
+    vet: {
+      name: "Anima-Plus", phone: "(514) 277-0977", address: "1019 Laurier Ouest",
+      email: "jean-marc.bayard@anima-plus.com", site: "https://anima-plus.com",
+      note: {
+        en: "In any emergency with Molly, call Anima-Plus right away: they know her well. And don't hesitate to message us too!",
+        fr: "En cas d'urgence avec Molly, appelez Anima-Plus tout de suite : ils la connaissent bien. Et n'hésitez pas à nous écrire aussi !"
+      }
+    }
   },
 
   // water: which days of the week to water. 0=Sun … 6=Sat
   plants: [
-    { icon: "plant", name: "TODO: plant name (e.g. Monstera)", where: { en: "Living room", fr: "Salon" }, water: [3, 6],
-      tip: { en: "Water when the top 2 cm of soil is dry.", fr: "Arroser quand les 2 premiers cm de terre sont secs." } },
-    { icon: "cactus", name: "TODO: cactus / succulents", where: { en: "Window sill", fr: "Rebord de fenêtre" }, water: [0],
-      tip: { en: "Just a little, every week or two.", fr: "Juste un peu, toutes les une ou deux semaines." } },
-    { icon: "herb", name: { en: "TODO: herbs", fr: "TODO: herbes aromatiques" }, where: { en: "Kitchen", fr: "Cuisine" }, water: [1, 3, 5],
-      tip: { en: "They like a drink every other day.", fr: "Elles aiment être arrosées un jour sur deux." } }
+    { icon: "plant", name: { en: "All the indoor plants", fr: "Toutes les plantes d'intérieur" }, where: { en: "Around the apartment", fr: "Un peu partout" }, water: [0],
+      tip: { en: "Once a week, but only if the soil feels dry. They're pretty low-maintenance!", fr: "Une fois par semaine, seulement si la terre est sèche. Elles sont faciles à vivre !" } }
   ],
   plantsNote: {
-    en: "Molly sometimes chews leaves, so please keep plants where they already are.",
-    fr: "Molly mâchouille parfois les feuilles, merci de laisser les plantes là où elles sont."
+    en: "How to check: press a finger into the soil. If it's dry 2–5 cm (1–2 inches) down, it's time to water.",
+    fr: "Pour vérifier : enfoncez un doigt dans la terre. Si elle est sèche sur 2 à 5 cm, c'est le moment d'arroser."
   },
 
   supplies: [
-    { icon: "spray", name: { en: "Cleaning sprays", fr: "Produits ménagers" }, where: { en: "TODO: under the kitchen sink", fr: "TODO: sous l'évier de la cuisine" } },
-    { icon: "broom", name: { en: "Broom & mop", fr: "Balai et serpillière" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { icon: "spray", name: { en: "Cleaning products", fr: "Produits ménagers" }, where: { en: "Under the kitchen sink", fr: "Sous l'évier de la cuisine" } },
+    { icon: "towels", name: { en: "Fresh towels", fr: "Serviettes propres" }, where: { en: "Above the washer", fr: "Au-dessus de la laveuse" } },
+    { icon: "bag", name: { en: "Extra cat litter", fr: "Litière en réserve" }, where: { en: "Near the kitchen", fr: "Près de la cuisine" } },
+    { icon: "basket", name: { en: "Laundry: washer, dryer & iron", fr: "Lessive : laveuse, sécheuse et fer" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
+    { icon: "broom", name: { en: "Broom & mop", fr: "Balai et vadrouille" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
     { icon: "vacuum", name: { en: "Vacuum cleaner", fr: "Aspirateur" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
-    { icon: "roll", name: { en: "Toilet paper & paper towels", fr: "Papier toilette et essuie-tout" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
-    { icon: "towels", name: { en: "Fresh sheets & towels", fr: "Draps et serviettes propres" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
-    { icon: "bag", name: { en: "Garbage bags", fr: "Sacs poubelle" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
-    { icon: "basket", name: { en: "Laundry detergent", fr: "Lessive" }, where: { en: "TODO: location", fr: "TODO: emplacement" } },
-    { icon: "bulb", name: { en: "Light bulbs & batteries", fr: "Ampoules et piles" }, where: { en: "TODO: location", fr: "TODO: emplacement" } }
+    { icon: "roll", name: { en: "Toilet paper & paper towels", fr: "Papier toilette et essuie-tout" }, where: { en: "TODO: location", fr: "TODO: emplacement" } }
   ],
 
   cleaning: {
     weekly: [
       { en: "Vacuum the floors (Molly sheds, sorry!)", fr: "Passer l'aspirateur (Molly perd ses poils, désolés !)" },
-      { en: "Wipe kitchen counters and stove", fr: "Nettoyer le plan de travail et les plaques" },
-      { en: "Clean the bathroom sink and toilet", fr: "Nettoyer le lavabo et les toilettes" },
-      { en: "Take out recycling", fr: "Sortir le recyclage" }
+      { en: "Wipe the kitchen counters and stove", fr: "Nettoyer le comptoir et la cuisinière" },
+      { en: "Take out the bins on the right days", fr: "Sortir les poubelles les bons jours" }
     ],
     beforeYouGo: [
-      { en: "Strip the bed and put sheets in the laundry basket", fr: "Défaire le lit et mettre les draps dans le panier à linge" },
+      { en: "Strip the bed and put the sheets in the laundry", fr: "Défaire le lit et mettre les draps au lavage" },
       { en: "Run and empty the dishwasher", fr: "Lancer et vider le lave-vaisselle" },
       { en: "Empty all bins", fr: "Vider toutes les poubelles" },
-      { en: "Fill Molly's water and scoop the litter", fr: "Remplir l'eau de Molly et nettoyer la litière" },
-      { en: "Water any plants due that day", fr: "Arroser les plantes prévues ce jour-là" },
-      { en: "Close the windows and turn off lights & heating", fr: "Fermer les fenêtres, éteindre les lumières et le chauffage" },
-      { en: "TODO: leave the keys…", fr: "TODO: laisser les clés…" }
+      { en: "Fill Molly's dry food and water, and scoop the litter", fr: "Remplir les croquettes et l'eau de Molly, et ramasser la litière" },
+      { en: "Close the windows and turn off the lights", fr: "Fermer les fenêtres et éteindre les lumières" },
+      { en: "Lock the door", fr: "Verrouiller la porte" }
     ]
   },
 
-  // Bins: days = pickup days (0=Sun … 6=Sat). Put them out the evening before.
+  // Bins: days = pickup days (0=Sun … 6=Sat), collected in the morning, so put them out the evening before.
   garbage: {
     note: {
-      en: "TODO: where the building bins are, and what time to take them down.",
-      fr: "TODO: où sont les poubelles de l'immeuble et à quelle heure les descendre."
+      en: "Put the bins on the right side of the building, near the garden.",
+      fr: "Déposez les bacs du côté droit de l'immeuble, près du jardin."
     },
     bins: [
-      { icon: "trash", name: { en: "General waste", fr: "Ordures ménagères" }, color: "var(--pink)", days: [2, 5],
-        what: { en: "Everything that isn't recyclable", fr: "Tout ce qui ne se recycle pas" } },
+      { icon: "trash", name: { en: "Trash", fr: "Ordures" }, color: "var(--pink)", days: [5],
+        what: { en: "Regular garbage, Friday morning", fr: "Déchets ordinaires, vendredi matin" } },
       { icon: "recycle", name: { en: "Recycling", fr: "Recyclage" }, color: "var(--sun)", days: [3],
-        what: { en: "Plastic, cans, cartons", fr: "Plastique, canettes, briques" } },
-      { icon: "box", name: { en: "Paper", fr: "Papier" }, color: "var(--sky)", days: [1],
-        what: { en: "Flatten the boxes, please", fr: "Aplatissez les cartons, s'il vous plaît" } },
-      { icon: "leaf", name: { en: "Organic", fr: "Biodéchets" }, color: "var(--leaf)", days: [4],
-        what: { en: "Food scraps (not cat litter!)", fr: "Restes alimentaires (pas la litière !)" } }
+        what: { en: "Wednesday morning", fr: "Mercredi matin" } },
+      { icon: "leaf", name: { en: "Compost", fr: "Compost" }, color: "var(--leaf)", days: [3],
+        what: { en: "Food scraps, Wednesday morning (not cat litter!)", fr: "Restes de table, mercredi matin (pas la litière !)" } }
     ]
   },
 
   contacts: [
-    { name: "TODO: Host 1", role: { en: "Owner", fr: "Propriétaire" }, phone: "TODO: +00 000 000 000" },
-    { name: "TODO: Host 2", role: { en: "Owner", fr: "Propriétaire" }, phone: "TODO: +00 000 000 000" },
-    { name: { en: "TODO: neighbor / friend nearby", fr: "TODO: voisin·e / ami·e proche" }, role: { en: "Has a spare key", fr: "A un double des clés" }, phone: "TODO: +00 000 000 000" },
-    { name: { en: "Emergency", fr: "Urgences" }, role: { en: "Police, fire, ambulance", fr: "Police, pompiers, SAMU" }, phone: "112" }
+    { name: "TODO: Host 1", role: { en: "Owner", fr: "Propriétaire" }, phone: "TODO: +1 000 000 0000" },
+    { name: "TODO: Host 2", role: { en: "Owner", fr: "Propriétaire" }, phone: "TODO: +1 000 000 0000" },
+    { name: "Anima-Plus", role: { en: "Molly's vet · 1019 Laurier Ouest", fr: "Vétérinaire de Molly · 1019 Laurier Ouest" }, phone: "(514) 277-0977" },
+    { name: "Pharmaprix", role: { en: "Pharmacy · 1 Mont-Royal Ave E", fr: "Pharmacie · 1, av. du Mont-Royal Est" }, phone: "" },
+    { name: { en: "Emergency", fr: "Urgences" }, role: { en: "Police, fire, ambulance", fr: "Police, pompiers, ambulance" }, phone: "911" }
   ]
 };
 /* ===================== end of things to edit ===================== */
@@ -760,7 +760,7 @@ const UI = {
     catTitle: n => `${n} the cat`,
     sub: {
       wifi: "Tap to copy", molly: "Meals, daily routine and house rules",
-      plants: d => `Highlighted days = watering days. Today is ${d}.`,
+      plants: d => `Blue days = watering days. Today is ${d}.`,
       garbage: "Put the bins out the evening before pickup", supplies: "Where to find things",
       cleaning: "Keeping things cozy", home: "The practical stuff", contacts: "Call or message anytime"
     },
@@ -797,7 +797,7 @@ const UI = {
     catTitle: n => `${n}, notre minette`,
     sub: {
       wifi: "Touchez pour copier", molly: "Repas, routine et règles de la maison",
-      plants: d => `Jours en vert = jours d'arrosage. Aujourd'hui, c'est ${d}.`,
+      plants: d => `Jours en bleu = jours d'arrosage. Aujourd'hui, c'est ${d}.`,
       garbage: "Sortez les poubelles la veille au soir du ramassage", supplies: "Où trouver les choses",
       cleaning: "Pour que tout reste agréable", home: "Les infos pratiques", contacts: "Appelez ou écrivez-nous quand vous voulez"
     },
@@ -861,6 +861,7 @@ const SECTIONS = [
 ];
 const ic = (n, c = "") => `<svg class="ic ${c}" aria-hidden="true" focusable="false"><use href="#i-${n}"/></svg>`;
 const h3 = (n, txt) => `<span class="h3l">${ic(n)}${esc(txt)}</span>`;
+const telOf = ph => { const d = String(ph).replace(/[^\d+]/g, ""); return d.length === 10 ? `+1${d}` : d; };
 const label = s => s.id === "molly" ? HOME.cat.name : U().labels[s.id];
 
 function sectionShell(s, subtitle, body) {
@@ -930,12 +931,12 @@ function render() {
     <dl class="kv">${C.where.map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
     <h3>${h3("no", u.dont)}</h3>
     <ul class="list">${C.dont.map(d => `<li>${t(d)}</li>`).join("")}</ul>
-    <div class="note warn"><b>${ic("vet")} ${esc(u.vet)}</b> ${t(C.vet.name)} · ${t(C.vet.phone)}<br>${t(C.vet.address)}</div>`));
+    <div class="note warn"><b>${ic("vet")} ${esc(u.vet)}</b> <a href="${esc(C.vet.site)}" target="_blank" rel="noopener">${esc(C.vet.name)}</a> · <a href="tel:${telOf(C.vet.phone)}">${esc(C.vet.phone)}</a><br>${esc(C.vet.address)} · <a href="mailto:${esc(C.vet.email)}">${esc(C.vet.email)}</a><br><br>${t(C.vet.note)}</div>`));
 
   out.push(sectionShell(S.plants, u.sub.plants(u.daysLong[today]), `
     <div class="grid">${H.plants.map(p => `
       <div class="mini"><div class="e">${ic(p.icon, "big")}</div><b>${t(p.name)}</b><p>${ic("pin")} ${t(p.where)}</p><p>${t(p.tip)}</p>
-        <div class="chips">${[1,2,3,4,5,6,0].map(d => `<span class="chip ${p.water.includes(d) ? "on" : ""} ${d === today ? "today" : ""}">${u.days[d]}</span>`).join("")}</div>
+        <div class="chips">${[1,2,3,4,5,6,0].map(d => `<span class="chip ${p.water.includes(d) ? "on" : ""} ${d === today ? "is-today" : ""}">${u.days[d]}</span>`).join("")}</div>
       </div>`).join("")}</div>
     <p class="note">${t(H.plantsNote)}</p>`));
 
@@ -963,8 +964,8 @@ function render() {
     <ul class="list">${H.apartment.tips.map(i => `<li>${t(i)}</li>`).join("")}</ul>`));
 
   out.push(sectionShell(S.contacts, u.sub.contacts, H.contacts.map(c => {
-    const tel = /^TODO/.test(c.phone) ? "" : c.phone.replace(/[^\d+]/g, "");
-    return `<div class="contact"><div><b>${t(c.name)}</b><small>${esc(L(c.role))} · ${t(c.phone)}</small></div>
+    const tel = /^TODO/.test(c.phone) ? "" : telOf(c.phone);
+    return `<div class="contact"><div><b>${t(c.name)}</b><small>${esc(L(c.role))}${c.phone ? ` · ${t(c.phone)}` : ""}</small></div>
       ${tel ? `<a class="pillbtn" href="tel:${esc(tel)}">${u.call}</a>` : ""}</div>`;
   }).join("")));
 
