@@ -260,7 +260,7 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 
 /* animated Montreal badge */
 .mtl-scene { margin: 28px auto 6px; width: min(400px, 100%); }
-.mtl-btn { all: unset; display: block; cursor: pointer; border-radius: 50%; }
+.mtl-btn { all: unset; display: block; box-sizing: border-box; width: 100%; cursor: pointer; border-radius: 50%; -webkit-tap-highlight-color: transparent; }
 .mtl .badge-shadow { fill: #111; stroke: none !important; }
 .mtl-btn:focus-visible { outline: 3px dashed var(--blue); outline-offset: 6px; }
 .mtl { display: block; width: 100%; height: auto; overflow: visible; }
