@@ -176,9 +176,27 @@ button:active, .pillbtn:active { transform: translate(2px, 2px); box-shadow: 1px
 }
 .tile:nth-child(4n+1) { background: var(--sky); } .tile:nth-child(4n+2) { background: var(--pink); }
 .tile:nth-child(4n+3) { background: var(--leaf); } .tile:nth-child(4n+4) { background: var(--cream); }
-.tiles .tile.wide { grid-column: 1 / -1; }
-.tile.wide { background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; gap: 12px; }
-.tile.wide .e { display: inline; }
+/* "Before you leave" banner: striped like the awning */
+.leave-banner {
+  display: flex; align-items: center; gap: 14px; margin: 22px 0 6px; padding: 10px; text-decoration: none; color: #111;
+  border: 4px solid var(--edge); border-radius: 22px; box-shadow: 8px 8px 0 var(--edge);
+  background: repeating-linear-gradient(-45deg, var(--red) 0 14px, var(--cream) 14px 28px);
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.leave-banner:hover { transform: translate(-2px, -2px); box-shadow: 10px 10px 0 var(--edge); }
+.leave-banner:active { transform: translate(3px, 3px); box-shadow: 3px 3px 0 var(--edge); }
+.leave-banner:focus-visible { outline: 3px dashed var(--blue); outline-offset: 4px; }
+.leave-banner > span { background: var(--cream); border: 3px solid var(--edge); }
+.lb-icon { flex: none; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; }
+.lb-icon .ic.big { width: 36px; height: 36px; }
+.lb-text { flex: 1; min-width: 0; border-radius: 14px; padding: 8px 12px; }
+.lb-text b { display: block; font: 900 24px/1 "Phudu", sans-serif; text-transform: uppercase; color: var(--red); }
+.lb-text small { display: block; margin-top: 4px; font-size: 13px; font-weight: 700; }
+.lb-count { flex: none; min-width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; font: 900 18px/1 "Phudu", sans-serif; }
+.lb-count.done { background: var(--leaf); }
+.lb-count .ic { width: 26px; height: 26px; }
+.leave-banner > .lb-arrow { background: none; border: 0; font: 900 26px/1 "Phudu", sans-serif; color: #111; padding-right: 4px; }
+@media (max-width: 420px) { .leave-banner > .lb-arrow { display: none; } .lb-text b { font-size: 21px; } }
 .tile:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--edge); }
 .tile:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--edge); }
 .tile .e { font-size: 28px; display: block; }
@@ -1240,6 +1258,8 @@ footer button { margin-top: 16px; }
     <ul id="today-list"></ul>
   </div>
 
+  <a class="leave-banner" id="leave-banner" href="#checkout"></a>
+
   <div class="tiles" id="tiles"></div>
 
   <div id="sections"></div>
@@ -1563,7 +1583,7 @@ const UI = {
     network: "Network", password: "Password", copy: "Copy", copied: "Copied!", copyFail: "Couldn't copy, please type it in",
     feeding: "Feeding times", checklist: n => `${n}'s checklist for today`, whereHer: "Where her things are",
     dont: "Please don't", vet: "Vet:", next: d => `next · in ${d}`,
-    weekly: "Once a week", important: "Important",
+    weekly: "Once a week", important: "Important", leaveLine: n => `Check-out around noon · ${n} quick steps`,
     address: "Address", goodToKnow: "Good to know", call: "Call", emailBtn: "Email",
     qrCap: "Scan with another phone to join the Wi-Fi", lockedSub: "Locked: use the code we sent you", lockedTitle: "Private details",
     lockedText: "The Wi-Fi and the address are locked. Enter the code we sent you to see them.",
@@ -1608,7 +1628,7 @@ const UI = {
     network: "Réseau", password: "Mot de passe", copy: "Copier", copied: "Copié !", copyFail: "Copie impossible, tapez-le à la main",
     feeding: "Heures des repas", checklist: n => `La liste de ${n} pour aujourd'hui`, whereHer: "Où sont ses affaires",
     dont: "À éviter", vet: "Vétérinaire :", next: d => `prochain · dans ${d}`,
-    weekly: "Une fois par semaine", important: "Important",
+    weekly: "Une fois par semaine", important: "Important", leaveLine: n => `Départ vers midi · ${n} petites étapes`,
     address: "Adresse", goodToKnow: "Bon à savoir", call: "Appeler", emailBtn: "Courriel",
     qrCap: "Scannez avec un autre téléphone pour rejoindre le Wi-Fi", lockedSub: "Verrouillé : utilisez le code qu'on vous a envoyé", lockedTitle: "Infos privées",
     lockedText: "Le Wi-Fi et l'adresse sont verrouillés. Entrez le code qu'on vous a envoyé pour les voir.",
@@ -1727,8 +1747,8 @@ function render() {
   document.getElementById("signoff").innerHTML = `${esc(L(H.signoff))} ${ic("heart")}<br>${t(H.hosts)}`;
   document.querySelectorAll("#lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
   document.getElementById("nav").innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${ic(s.icon)} ${esc(label(s))}</a>`).join("");
-  document.getElementById("tiles").innerHTML = [...SECTIONS.filter(s => s.id !== "checkout"), ...SECTIONS.filter(s => s.id === "checkout")].map(s =>
-    `<a class="tile${s.id === "checkout" ? " wide" : ""}" href="#${s.id}"><span class="e">${ic(s.icon, "big")}</span><span>${esc(label(s))}</span></a>`).join("");
+  document.getElementById("tiles").innerHTML = SECTIONS.filter(s => s.id !== "checkout").map(s =>
+    `<a class="tile" href="#${s.id}"><span class="e">${ic(s.icon, "big")}</span><span>${esc(label(s))}</span></a>`).join("");
 
   const today = new Date().getDay();
   const out = {}, M = H.montreal;
@@ -1899,6 +1919,15 @@ function updateProgress(id) {
   const boxes = [...ul.querySelectorAll("input")], done = boxes.filter(b => b.checked).length;
   document.getElementById(`prog-${id}`).style.width = `${(done / boxes.length) * 100}%`;
   document.getElementById(`progt-${id}`).textContent = U().progress(done, boxes.length);
+  if (id === "leave") {
+    const u = U(), all = done === boxes.length;
+    document.getElementById("leave-banner").innerHTML = `
+      <span class="lb-icon">${ic("suitcase", "big")}</span>
+      <span class="lb-text"><b>${esc(u.labels.checkout)}</b><small>${esc(u.leaveLine(boxes.length))}</small></span>
+      <span class="lb-count${all ? " done" : ""}">${all ? ic("check") : `${done}/${boxes.length}`}</span>
+      <span class="lb-arrow" aria-hidden="true">→</span>`;
+    document.getElementById("leave-banner").setAttribute("aria-label", `${u.labels.checkout}: ${u.progress(done, boxes.length)}`);
+  }
 }
 
 // Things that depend on the clock: next meal, today panel
