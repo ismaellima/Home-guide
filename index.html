@@ -237,8 +237,12 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 
 /* Montreal */
 .hood { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
+.group-title { margin: 26px 0 -4px; padding: 10px 14px; background: var(--red); color: #fff; border: 3px solid var(--edge); border-radius: 14px; box-shadow: 4px 4px 0 var(--edge); transform: rotate(-.6deg); }
+.group-title b { display: block; font: 900 24px/1 "Phudu", sans-serif; text-transform: uppercase; color: var(--sun); text-shadow: 2px 2px 0 #111; }
+.group-title span { display: block; margin-top: 4px; font-size: 14px; font-weight: 600; }
 .mini.pick { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: start; }
 .mini.pick p { margin: 4px 0 0; }
+.mini.pick b, .mini.pick > div { min-width: 0; overflow-wrap: anywhere; hyphens: auto; }
 .pillbtn.small { padding: 7px 11px; font-size: 11px; margin-top: 10px; box-shadow: 2px 2px 0 var(--edge); }
 .pillbtn.small .ic { width: 15px; height: 15px; vertical-align: -3px; }
 @media (max-width: 599px) {
@@ -697,6 +701,55 @@ footer button { margin-top: 16px; }
   <symbol id="i-snow" viewBox="0 0 48 48">
     <path d="M24 4v40M6.7 14l34.6 20M6.7 34l34.6-20M18.5 7.5L24 12l5.5-4.5M18.5 40.5L24 36l5.5 4.5M6 21.5l6.5-2.5L11 12M42 26.5l-6.5 2.5L37 36M6 26.5l6.5 2.5L11 36M42 21.5l-6.5-2.5L37 12" stroke-width="5.5"/>
     <path d="M24 4v40M6.7 14l34.6 20M6.7 34l34.6-20M18.5 7.5L24 12l5.5-4.5M18.5 40.5L24 36l5.5 4.5M6 21.5l6.5-2.5L11 12M42 26.5l-6.5 2.5L37 36M6 26.5l6.5 2.5L11 36M42 21.5l-6.5-2.5L37 12" stroke="#9fd3e6" stroke-width="2.2"/>
+  </symbol>
+  <symbol id="i-cup" viewBox="0 0 48 48">
+    <path d="M15 11c-2-3 2-4 0-7M22 11c-2-3 2-4 0-7M29 11c-2-3 2-4 0-7" stroke-width="2.2"/>
+    <path d="M34 20h3a5 5 0 0 1 0 10h-3" stroke-width="3.2"/>
+    <path d="M8 15h26v14a11 11 0 0 1-11 11h-4A11 11 0 0 1 8 29z" fill="#fff1d0"/>
+    <path d="M9 22h24" stroke="#d7261e" stroke-width="3"/>
+    <path d="M4 44h36" stroke-width="3"/>
+  </symbol>
+  <symbol id="i-croissant" viewBox="0 0 48 48">
+    <path d="M5 31c1-11 9-18 19-18s18 7 19 18c-3 5-8 4-10 0-2 4-6 6-9 6s-7-2-9-6c-2 4-7 5-10 0z" fill="#e0a85e"/>
+    <path d="M15 18l4 16M24 13v21M33 18l-4 16" stroke-width="2.2"/>
+    <path d="M11 25c2-4 4-6 7-7" stroke="#fff3c4" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-icecream" viewBox="0 0 48 48">
+    <circle cx="17" cy="21" r="7.5" fill="#f4a6a0"/><circle cx="31" cy="21" r="7.5" fill="#a8d08d"/><circle cx="24" cy="12" r="7.5" fill="#fff1d0"/>
+    <path d="M14 25l10 20 10-20z" fill="#e0b07a"/>
+    <path d="M17 29l12 7M31 29l-12 7" stroke-width="1.8"/>
+    <circle cx="27" cy="4.5" r="2.5" fill="#d7261e" stroke-width="1.8"/>
+  </symbol>
+  <symbol id="i-donut" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="19" fill="#d9a066"/>
+    <path d="M24 9c8 0 15 6 15 14 0 3-2 4-4 3-2 3-5 3-7 1-2 2-5 2-7 0-2 2-5 1-6-1-2 2-5 1-6-2C9 15 16 9 24 9z" fill="#f4a6a0" stroke-width="2.2"/>
+    <circle cx="24" cy="24" r="5.5" fill="#fff1d0"/>
+    <path d="M16 15l2 2M30 13l-1 3M34 21l-3 1M13 22l3 0M21 12l1 2" stroke="#1e4fd8" stroke-width="2.2"/>
+  </symbol>
+  <symbol id="i-wine" viewBox="0 0 48 48">
+    <path d="M24 25v14M15 43h18" stroke-width="3.2"/>
+    <path d="M14 5h20c0 13-4 20-10 20S14 18 14 5z" fill="#fff1d0"/>
+    <path d="M14.6 12h18.8c-1 8-4.3 13-9.4 13s-8.4-5-9.4-13z" fill="#8b1e3f" stroke-width="2.2"/>
+    <path d="M18 15c.5 3 1.5 5 3 6" stroke="#fff" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-beer" viewBox="0 0 48 48">
+    <path d="M33 20h4a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-4" stroke-width="3.5"/>
+    <rect x="9" y="15" width="24" height="28" rx="3.5" fill="#ffd23f"/>
+    <path d="M8 18c-1-6 4-9 8-7 1-4 7-5 9-1 4-2 9 1 8 6v2H8z" fill="#fff"/>
+    <path d="M16 25v12M24 25v12" stroke="#fff" stroke-width="2.4"/>
+  </symbol>
+  <symbol id="i-pizza" viewBox="0 0 48 48">
+    <path d="M24 44L7 11c11-5 23-5 34 0z" fill="#ffd23f"/>
+    <path d="M7 11c11-5 23-5 34 0l-2.5 5c-10-4.5-19-4.5-29 0z" fill="#d9a066"/>
+    <circle cx="22" cy="21" r="3.6" fill="#d7261e" stroke-width="2"/><circle cx="29" cy="25" r="3" fill="#d7261e" stroke-width="2"/><circle cx="23" cy="32" r="2.6" fill="#d7261e" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-burger" viewBox="0 0 48 48">
+    <path d="M7 35h34v2a5 5 0 0 1-5 5H12a5 5 0 0 1-5-5z" fill="#e0a85e"/>
+    <rect x="6" y="27" width="36" height="7" rx="3.5" fill="#6b3510"/>
+    <path d="M8 27h32l-6 5-4-3-4 4-4-4-4 3-4-3z" fill="#ffd23f" stroke-width="1.8"/>
+    <path d="M6 25c3 2 6-2 9 0s6-2 9 0 6-2 9 0 6-2 9 0" stroke="#7fb36a" stroke-width="3.5"/>
+    <path d="M7 23c0-9 8-15 17-15s17 6 17 15z" fill="#e0a85e"/>
+    <path d="M17 14l1 1M24 12l1 1M30 15l1 1M21 18l1 1M28 19l1 1" stroke="#fff1d0" stroke-width="2.2"/>
   </symbol>
   <symbol id="i-pencil" viewBox="0 0 48 48">
     <path d="M9 39l3.5-11L33 7.5l7.5 7.5L20 35.5z" fill="#ffd23f"/>
@@ -1329,27 +1382,59 @@ const HOME = {
       en: "You're in Mile End: one of the most walkable, lively corners of the city. Cafés, bakeries, murals and bagels are all a few minutes away on foot.",
       fr: "Vous êtes dans le Mile End : un des coins les plus vivants et agréables à pied de la ville. Cafés, boulangeries, murales et bagels sont à quelques minutes."
     },
-    favs: [
-      { name: { en: "TODO: your favourite café", fr: "TODO: votre café préféré" }, desc: { en: "TODO: why you love it", fr: "TODO: pourquoi vous l'aimez" }, q: "" },
-      { name: { en: "TODO: your favourite restaurant", fr: "TODO: votre resto préféré" }, desc: { en: "TODO: what to order", fr: "TODO: quoi commander" }, q: "" }
-    ],
     picks: [
-      { cat: "eat", icon: "bagel", name: "St-Viateur Bagel", q: "St-Viateur Bagel, 263 Rue Saint-Viateur O, Montréal",
-        desc: { en: "Wood-fired Montreal bagels, open around the clock. Get a sesame one, still warm.", fr: "Bagels cuits au feu de bois, ouvert jour et nuit. Prenez-en un au sésame, encore chaud." } },
-      { cat: "eat", icon: "bagel", name: "Fairmount Bagel", q: "Fairmount Bagel, 74 Av Fairmount O, Montréal",
-        desc: { en: "The other legendary bagel shop, also open 24/7. Locals pick a side!", fr: "L'autre bagel légendaire, ouvert 24 h sur 24. Les Montréalais ont leur camp !" } },
-      { cat: "eat", icon: "bowl", name: "Schwartz's", q: "Schwartz's Deli, 3895 Boul Saint-Laurent, Montréal",
-        desc: { en: "The classic Montreal smoked meat sandwich, on Saint-Laurent. Expect a line.", fr: "Le sandwich au smoked meat classique, sur Saint-Laurent. Il y a souvent la file." } },
-      { cat: "eat", icon: "bowl", name: "La Banquise", q: "La Banquise, 994 Rue Rachel E, Montréal",
-        desc: { en: "Poutine in dozens of versions, open 24/7, next to Parc La Fontaine.", fr: "La poutine en dizaines de versions, ouvert 24 h sur 24, près du parc La Fontaine." } },
-      { cat: "eat", icon: "basket", name: { en: "Jean-Talon Market", fr: "Marché Jean-Talon" }, q: "Marché Jean-Talon, Montréal",
-        desc: { en: "A huge open-air market in Little Italy: produce, cheese, and maple everything.", fr: "Un immense marché dans la Petite-Italie : fruits, fromages et érable sous toutes ses formes." } },
+      // ——— Ismael's picks ———
+      { cat: "dine", icon: "star", name: "Le Violon", q: "Le Violon, Montréal",
+        desc: { en: "One of the best fine-dining spots in the city.", fr: "Une des meilleures tables gastronomiques de la ville." } },
+      { cat: "dine", icon: "bowl", name: "Pichai", q: "Pichai, Montréal",
+        desc: { en: "Thai food with a cool vibe and delicious wines.", fr: "Cuisine thaïe, ambiance cool et très bons vins." } },
+      { cat: "dine", icon: "pizza", name: "Mano Cornuto", q: "Mano Cornuto, Montréal",
+        desc: { en: "A bit hyped, but the sandwiches and plates are very good. Try the tiramisu ;)", fr: "Un peu à la mode, mais les sandwichs et les assiettes sont très bons. Goûtez le tiramisu ;)" } },
+      { cat: "dine", icon: "heart", name: "Café chez Téta", q: "Café chez Téta, Montréal",
+        desc: { en: "Lebanese. The owners and staff are so friendly, and everything you eat is just #chefskiss.", fr: "Libanais. Les proprios et l'équipe sont adorables, et tout ce que vous mangez est #chefskiss." } },
+      { cat: "dine", icon: "bowl", name: "Épicerie Pumpui", q: "Épicerie Pumpui, Montréal",
+        desc: { en: "Delicious Thai food.", fr: "Délicieuse cuisine thaïe." } },
+      { cat: "casual", icon: "burger", name: "Casse-Croûte MangeDansMonHood", q: "Casse-Croûte MangeDansMonHood, Montréal",
+        desc: { en: "Best smash burgers in town.", fr: "Les meilleurs smash burgers en ville." } },
+      { cat: "casual", icon: "pizza", name: "Pizza Toni", q: "Pizza Toni Saint-Viateur, Montréal",
+        desc: { en: "On Saint-Viateur. Second-best pizza in town (Bouquet is better!).", fr: "Sur Saint-Viateur. La deuxième meilleure pizza en ville (Bouquet est meilleure !)." } },
+      { cat: "casual", icon: "bagel", name: "Fairmount Bagel", q: "Fairmount Bagel, 74 Av Fairmount O, Montréal",
+        desc: { en: "Best bagels in town, in my opinion :P", fr: "Les meilleurs bagels en ville, selon moi :P" } },
+      { cat: "casual", icon: "burger", name: "Kahwa Café", q: "Kahwa Café, Montréal",
+        desc: { en: "Their chicken sandwich is the best.", fr: "Leur sandwich au poulet est le meilleur." } },
+      { cat: "casual", icon: "bowl", name: "Ohayo", q: "Ohayo, Montréal",
+        desc: { en: "Japanese: fried chicken sandwiches, curry and ramen.", fr: "Japonais : sandwichs au poulet frit, cari et ramen." } },
+      { cat: "brunch", icon: "cup", name: "Le Saint Louis café", q: "Le Saint Louis café, Montréal",
+        desc: { en: "The white chocolate brioche is the highlight.", fr: "La brioche au chocolat blanc est la vedette." } },
+      { cat: "brunch", icon: "cup", name: "Café Éclair", q: "Café Éclair, Montréal",
+        desc: { en: "Slow-paced café with small-batch roasted coffee.", fr: "Café tranquille, café torréfié en petits lots." } },
+      { cat: "brunch", icon: "bowl", name: "Pub Bishop & Bagg", q: "Pub Bishop & Bagg, Montréal",
+        desc: { en: "Very good options for brunch.", fr: "Très bonnes options pour le brunch." } },
+      { cat: "brunch", icon: "cup", name: "Larry's", q: "Larry's, Montréal",
+        desc: { en: "Good any time of the day.", fr: "Bon à toute heure de la journée." } },
+      { cat: "sweets", icon: "croissant", name: "Pâtisserie Mélilot", q: "Pâtisserie Mélilot, Montréal",
+        desc: { en: "High-end pastry shop, worth a try.", fr: "Pâtisserie haut de gamme, à essayer." } },
+      { cat: "sweets", icon: "croissant", name: "Kouign Amann", q: "Kouign Amann, Avenue du Mont-Royal Est, Montréal",
+        desc: { en: "The best kouign-amann in town.", fr: "Le meilleur kouign-amann en ville." } },
+      { cat: "sweets", icon: "donut", name: "Beigne Habitude", q: "Beigne Habitude, Montréal",
+        desc: { en: "Baked daily, and much better than Bernie Beignes :)", fr: "Cuits chaque jour, et bien meilleurs que Bernie Beignes :)" } },
+      { cat: "sweets", icon: "icecream", name: "Kem CoBa", q: "Kem CoBa, Montréal",
+        desc: { en: "One of the best ice creams in town. Cash only!", fr: "Une des meilleures crèmes glacées en ville. Argent comptant seulement !" } },
+      { cat: "drinks", icon: "wine", name: "Mamie", q: "Mamie bar à vin, Montréal",
+        desc: { en: "Honest prices, great cheese boards and wines.", fr: "Prix honnêtes, super planches de fromages et bons vins." } },
+      { cat: "drinks", icon: "pizza", name: "Bar Star Bar", q: "Bar Star Bar, Montréal",
+        desc: { en: "From the owners of Pizza Bouquet: try the potato or Cherry Bomb pizza. Pickup available.", fr: "Par les proprios de Pizza Bouquet : goûtez la pizza aux patates ou la Cherry Bomb. Pour emporter aussi." } },
+      { cat: "drinks", icon: "beer", name: "Brasserie Dieu du Ciel!", q: "Dieu du Ciel!, Montréal",
+        desc: { en: "Delicious craft beer, and good food too.", fr: "Délicieuses bières de microbrasserie, et bonne bouffe aussi." } },
+      // ——— Montreal classics ———
       { cat: "see", icon: "mountain", name: { en: "Mount Royal lookout", fr: "Belvédère du mont Royal" }, q: "Belvédère Kondiaronk, Montréal",
         desc: { en: "Walk up the mountain to the Kondiaronk lookout for the classic skyline view.", fr: "Montez jusqu'au belvédère Kondiaronk pour la vue classique sur le centre-ville." } },
       { cat: "see", icon: "star", name: { en: "Old Montreal", fr: "Vieux-Montréal" }, q: "Vieux-Montréal",
         desc: { en: "Cobblestone streets, Notre-Dame Basilica and the Old Port by the river.", fr: "Rues pavées, basilique Notre-Dame et Vieux-Port au bord du fleuve." } },
       { cat: "see", icon: "leaf", name: "Parc La Fontaine", q: "Parc La Fontaine, Montréal",
         desc: { en: "Big trees, a pond and picnic lawns, with skating on the pond in winter.", fr: "Grands arbres, étang et pelouses, avec patinage sur l'étang en hiver." } },
+      { cat: "see", icon: "basket", name: { en: "Jean-Talon Market", fr: "Marché Jean-Talon" }, q: "Marché Jean-Talon, Montréal",
+        desc: { en: "A huge market in Little Italy: produce, cheese, and maple everything.", fr: "Un immense marché dans la Petite-Italie : fruits, fromages et érable sous toutes ses formes." } },
       { cat: "stroll", icon: "map", name: "Mile End", q: "Rue Saint-Viateur, Montréal",
         desc: { en: "Your neighbourhood: cafés, vintage shops and murals around rue Saint-Viateur and rue Bernard.", fr: "Votre quartier : cafés, friperies et murales autour des rues Saint-Viateur et Bernard." } },
       { cat: "stroll", icon: "map", name: { en: "Boulevard Saint-Laurent", fr: "Boulevard Saint-Laurent" }, q: "Boulevard Saint-Laurent, Montréal",
@@ -1415,13 +1500,14 @@ const UI = {
     today: "Today", tomorrow: "Tomorrow", and: " & ",
     dur: m => m < 60 ? `${m} min` : `${Math.floor(m / 60)}h ${String(m % 60).padStart(2, "0")}m`,
     labels: { wifi: "Wi-Fi", explore: "Explore", around: "Getting around", plants: "Plants", garbage: "Garbage", cleaning: "Housekeeping", home: "Apartment", contacts: "Contacts" },
-    cats: { eat: "Eat", see: "See", stroll: "Stroll" }, ours: "Our favourites", openMap: "Map", tipsTitle: "Good to know in Montreal",
+    cats: { dine: "Restaurants", casual: "Quick bites", brunch: "Brunch & coffee", sweets: "Bakeries & sweets", drinks: "Drinks", see: "See", stroll: "Stroll" },
+    oursTitle: "Ismael's picks", oursSub: "Our favourite spots, most of them a short walk from home.", classicsTitle: "Montreal classics", openMap: "Map", tipsTitle: "Good to know in Montreal",
     nowTitle: "Right now", whereThings: "Where things are", idea: n => `Idea for today: ${n}`,
     catTitle: n => `${n} the cat`,
     sub: {
       wifi: "Tap to copy", molly: "Meals, daily routine and house rules",
       plants: d => `Blue days = watering days. Today is ${d}.`,
-      garbage: "Put the bins out the evening before pickup", explore: "Our neighbourhood and the Montreal classics", around: "Metro, bikes, the airport and local tips",
+      garbage: "Put the bins out the evening before pickup", explore: "Our favourite spots and the Montreal classics", around: "Metro, bikes, the airport and local tips",
       cleaning: "Where things are, and a few chores", home: "The practical stuff", contacts: "Call or message anytime"
     },
     network: "Network", password: "Password", copy: "Copy", copied: "Copied!", copyFail: "Couldn't copy, please type it in",
@@ -1458,13 +1544,14 @@ const UI = {
     today: "Aujourd'hui", tomorrow: "Demain", and: " et ",
     dur: m => m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")}`,
     labels: { wifi: "Wi-Fi", explore: "Explorer", around: "Se déplacer", plants: "Plantes", garbage: "Poubelles", cleaning: "Entretien", home: "Appartement", contacts: "Contacts" },
-    cats: { eat: "Manger", see: "Voir", stroll: "Flâner" }, ours: "Nos coups de cœur", openMap: "Carte", tipsTitle: "Bon à savoir à Montréal",
+    cats: { dine: "Restos", casual: "Sur le pouce", brunch: "Brunch et café", sweets: "Pâtisseries et douceurs", drinks: "Prendre un verre", see: "Voir", stroll: "Flâner" },
+    oursTitle: "Les adresses d'Ismael", oursSub: "Nos adresses préférées, la plupart à quelques pas de la maison.", classicsTitle: "Les classiques de Montréal", openMap: "Carte", tipsTitle: "Bon à savoir à Montréal",
     nowTitle: "En ce moment", whereThings: "Où trouver les choses", idea: n => `Idée du jour : ${n}`,
     catTitle: n => `${n}, notre minette`,
     sub: {
       wifi: "Touchez pour copier", molly: "Repas, routine et règles de la maison",
       plants: d => `Jours en bleu = jours d'arrosage. Aujourd'hui, c'est ${d}.`,
-      garbage: "Sortez les poubelles la veille au soir du ramassage", explore: "Notre quartier et les classiques de Montréal", around: "Métro, vélos, aéroport et astuces locales",
+      garbage: "Sortez les poubelles la veille au soir du ramassage", explore: "Nos adresses préférées et les classiques de Montréal", around: "Métro, vélos, aéroport et astuces locales",
       cleaning: "Où trouver les choses, et quelques tâches", home: "Les infos pratiques", contacts: "Appelez ou écrivez-nous quand vous voulez"
     },
     network: "Réseau", password: "Mot de passe", copy: "Copier", copied: "Copié !", copyFail: "Copie impossible, tapez-le à la main",
@@ -1668,13 +1755,14 @@ function render() {
   const mapUrl = q => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
   const pickCard = p => `<div class="mini pick"><div class="e">${ic(p.icon || "star", "big")}</div><div><b>${t(p.name)}</b><p>${t(p.desc)}</p>
     ${p.q ? `<a class="pillbtn small" href="${mapUrl(p.q)}" target="_blank" rel="noopener">${ic("pin")} ${u.openMap}</a>` : ""}</div></div>`;
-  const catIcon = { eat: "bagel", see: "mountain", stroll: "map" };
+  const catIcon = { dine: "star", casual: "burger", brunch: "cup", sweets: "croissant", drinks: "wine", see: "mountain", stroll: "map" };
+  const group = (title, sub, cats) => `<div class="group-title"><b>${esc(title)}</b>${sub ? `<span>${esc(sub)}</span>` : ""}</div>
+    ${cats.map(c => `<h3>${h3(catIcon[c], u.cats[c])}</h3>
+      <div class="grid swipe">${M.picks.filter(p => p.cat === c).map(pickCard).join("")}</div>`).join("")}`;
   out.explore = sectionShell(S.explore, u.sub.explore, `
     <p class="hood">${t(M.hood)}</p>
-    ${["eat", "see", "stroll"].map(c => `<h3>${h3(catIcon[c], u.cats[c])}</h3>
-      <div class="grid swipe">${M.picks.filter(p => p.cat === c).map(pickCard).join("")}</div>`).join("")}
-    <h3>${h3("heart", u.ours)}</h3>
-    <div class="grid swipe">${M.favs.map(pickCard).join("")}</div>`);
+    ${group(u.oursTitle, u.oursSub, ["dine", "casual", "brunch", "sweets", "drinks"])}
+    ${group(u.classicsTitle, "", ["see", "stroll"])}`);
 
   const season = M.seasons[seasonOf(new Date().getMonth())];
   out.around = sectionShell(S.around, u.sub.around, `
