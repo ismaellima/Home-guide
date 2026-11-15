@@ -269,6 +269,17 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 .acts-row .pillbtn.small { margin-top: 0; }
 .muted-line { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
 
+/* apartment facts with icons */
+.facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.fact { display: grid; grid-template-columns: 48px 1fr; gap: 12px; align-items: start; border: 3px solid var(--edge); border-radius: 16px; padding: 10px 12px; background: var(--card); }
+.fact .fi { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--cream); border: 2.5px solid var(--edge); }
+.fact:nth-child(4n+1) .fi { background: var(--sky); } .fact:nth-child(4n+2) .fi { background: var(--pink); }
+.fact:nth-child(4n+3) .fi { background: var(--leaf); } .fact:nth-child(4n+4) .fi { background: var(--sun); }
+.fact .fi .ic { width: 30px; height: 30px; }
+.fact > div { min-width: 0; }
+.fact b { display: block; font: 900 17px/1.1 "Phudu", sans-serif; text-transform: uppercase; letter-spacing: .02em; margin-top: 3px; }
+.fact span:not(.fi) { display: block; margin-top: 3px; font-size: 15px; overflow-wrap: anywhere; }
+
 /* Montreal */
 .hood { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
 .tag { display: inline-block; margin-top: 4px; padding: 2px 8px; border: 2px solid var(--edge); border-radius: 999px; background: var(--sun); color: #111; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
@@ -789,6 +800,54 @@ footer button { margin-top: 16px; }
     <path d="M7 23c0-9 8-15 17-15s17 6 17 15z" fill="#e0a85e"/>
     <path d="M17 14l1 1M24 12l1 1M30 15l1 1M21 18l1 1M28 19l1 1" stroke="#fff1d0" stroke-width="2.2"/>
   </symbol>
+  <symbol id="i-bed" viewBox="0 0 48 48">
+    <path d="M6 12v30M42 26v16"/>
+    <rect x="6" y="26" width="36" height="9" rx="2" fill="#9fd3e6"/>
+    <rect x="9" y="19" width="12" height="7" rx="3" fill="#fff1d0"/>
+    <path d="M20 26c2-4 6-6 22-4v4z" fill="#f4a6a0"/>
+    <path d="M6 42h36" stroke-width="3.2"/>
+  </symbol>
+  <symbol id="i-ladder" viewBox="0 0 48 48">
+    <path d="M5 13h38" stroke-width="3.2"/>
+    <rect x="22" y="5" width="18" height="8" rx="2" fill="#f4a6a0"/>
+    <path d="M14 13v31M30 13v31" stroke-width="3.5"/>
+    <path d="M14 20h16M14 27h16M14 34h16M14 41h16" stroke="#c98f55" stroke-width="3"/>
+    <path d="M14 20h16M14 27h16M14 34h16M14 41h16" stroke-width="1" />
+  </symbol>
+  <symbol id="i-bath" viewBox="0 0 48 48">
+    <path d="M10 24V10a4 4 0 0 1 8 0v1"/>
+    <path d="M15 13h6" stroke-width="3"/>
+    <path d="M5 24h38v4a12 12 0 0 1-12 12H17A12 12 0 0 1 5 28z" fill="#fff1d0"/>
+    <path d="M13 40l-2 4M35 40l2 4"/>
+    <circle cx="27" cy="18" r="3" fill="#9fd3e6" stroke-width="2"/><circle cx="34" cy="14" r="2.2" fill="#9fd3e6" stroke-width="2"/>
+    <path d="M9 30c1 3 3 5 6 5.5" stroke="#9fd3e6" stroke-width="2.5"/>
+  </symbol>
+  <symbol id="i-tv" viewBox="0 0 48 48">
+    <path d="M17 6l7 7 7-7"/>
+    <rect x="4" y="13" width="40" height="26" rx="4" fill="#1e4fd8"/>
+    <rect x="8.5" y="17" width="31" height="18" rx="2" fill="#9fd3e6" stroke-width="2"/>
+    <path d="M18 21l9 5-9 5z" fill="#d7261e" stroke-width="2"/>
+    <path d="M14 43h20"/>
+  </symbol>
+  <symbol id="i-laptop" viewBox="0 0 48 48">
+    <rect x="9" y="9" width="30" height="21" rx="2.5" fill="#a7a2a6"/>
+    <rect x="12.5" y="12.5" width="23" height="14" rx="1" fill="#9fd3e6" stroke-width="2"/>
+    <path d="M3 34h42l-3 6H6z" fill="#fff1d0"/>
+    <path d="M20 37h8" stroke-width="2.4"/>
+    <path d="M15 16l4-1" stroke="#fff" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-car" viewBox="0 0 48 48">
+    <path d="M6 30l3-10c1-3 3-5 6-5h18c3 0 5 2 6 5l3 10v7H6z" fill="#d7261e"/>
+    <path d="M12 21l2-4h20l2 4z" fill="#9fd3e6" stroke-width="2"/>
+    <circle cx="14" cy="37" r="4.5" fill="#a7a2a6"/><circle cx="34" cy="37" r="4.5" fill="#a7a2a6"/>
+    <rect x="8.5" y="27" width="6" height="4" rx="1" fill="#ffd23f" stroke-width="2"/><rect x="33.5" y="27" width="6" height="4" rx="1" fill="#ffd23f" stroke-width="2"/>
+  </symbol>
+  <symbol id="i-thermo" viewBox="0 0 48 48">
+    <path d="M19 30V9a5 5 0 0 1 10 0v21a9 9 0 1 1-10 0z" fill="#fff1d0"/>
+    <path d="M24 34V17" stroke="#d7261e" stroke-width="4"/>
+    <circle cx="24" cy="36" r="5" fill="#d7261e" stroke-width="2"/>
+    <path d="M32 12h5M32 18h4M32 24h5" stroke-width="2.5"/>
+  </symbol>
   <symbol id="i-pencil" viewBox="0 0 48 48">
     <path d="M9 39l3.5-11L33 7.5l7.5 7.5L20 35.5z" fill="#ffd23f"/>
     <path d="M33 7.5l3-3a2.5 2.5 0 0 1 3.5 0l4 4a2.5 2.5 0 0 1 0 3.5l-3 3z" fill="#f4a6a0"/>
@@ -1308,19 +1367,19 @@ const HOME = {
   apartment: {
     // Address is private too (encrypted, see above).
     details: [
-      [{ en: "Bedroom", fr: "Chambre" }, { en: "The primary bedroom is yours during your stay.", fr: "La chambre principale est à vous pendant votre séjour." }],
-      [{ en: "Mezzanine", fr: "Mezzanine" }, { en: "There's also a double bed up in the mezzanine. The ceiling is low up there, so watch your head!", fr: "Il y a aussi un lit double en mezzanine. Le plafond est bas là-haut : attention à votre tête !" }],
-      [{ en: "Bathroom", fr: "Salle de bain" }, { en: "Full bathroom with bathtub. Fresh towels are above the washer.", fr: "Salle de bain complète avec baignoire. Serviettes propres au-dessus de la laveuse." }],
-      [{ en: "Kitchen", fr: "Cuisine" }, { en: "Microwave, stove, dishwasher and coffee machine.", fr: "Micro-ondes, cuisinière, lave-vaisselle et machine à café." }],
-      [{ en: "TV", fr: "Télé" }, { en: "Fire TV with Netflix, Prime Video, Crave and more.", fr: "Fire TV avec Netflix, Prime Video, Crave et plus." }],
-      [{ en: "Laundry", fr: "Lessive" }, { en: "Washer and dryer, inside the bathroom.", fr: "Laveuse et sécheuse, dans la salle de bain." }],
-      [{ en: "Home office", fr: "Bureau" }, { en: "Feel free to use it! Plug your laptop into the screen for a bigger display.", fr: "Servez-vous-en ! Branchez votre ordi à l'écran pour un plus grand affichage." }],
-      [{ en: "Parking", fr: "Stationnement" }, { en: "Free street parking is often available on rue Coloniale. Check the signs for restrictions.", fr: "Stationnement gratuit souvent disponible sur la rue Coloniale. Vérifiez les panneaux." }],
-      [{ en: "Door / keys", fr: "Porte / clés" }, { en: "We'll send you the door and key details before you arrive.", fr: "On vous enverra les infos pour la porte et les clés avant votre arrivée." }],
-      [{ en: "Heating", fr: "Chauffage" }, { en: "Pre-programmed. You can adjust it with the thermostat on the wall of each room.", fr: "Préprogrammé. Vous pouvez l'ajuster avec le thermostat au mur de chaque pièce." }],
-      [{ en: "Lights", fr: "Lumières" }, { en: "Smart lights that turn on and off on a schedule. To change them, use the Apple home display in the living room: tap the lights on its screen, or just ask Siri.", fr: "Lumières intelligentes qui s'allument et s'éteignent selon un horaire. Pour les changer, utilisez l'écran Apple Maison du salon : touchez les lumières à l'écran, ou demandez simplement à Siri." }],
-      [{ en: "Hot water", fr: "Eau chaude" }, { en: "Always available, no need to do anything.", fr: "Toujours disponible, rien à faire." }],
-      [{ en: "Help yourself", fr: "Servez-vous" }, { en: "Coffee is in the cabinet above the microwave, spices are above the oven.", fr: "Le café est dans l'armoire au-dessus du micro-ondes, les épices au-dessus du four." }]
+      [{ en: "Bedroom", fr: "Chambre" }, { en: "The primary bedroom is yours during your stay.", fr: "La chambre principale est à vous pendant votre séjour." }, "bed"],
+      [{ en: "Mezzanine", fr: "Mezzanine" }, { en: "There's also a double bed up in the mezzanine. The ceiling is low up there, so watch your head!", fr: "Il y a aussi un lit double en mezzanine. Le plafond est bas là-haut : attention à votre tête !" }, "ladder"],
+      [{ en: "Bathroom", fr: "Salle de bain" }, { en: "Full bathroom with bathtub. Fresh towels are above the washer.", fr: "Salle de bain complète avec baignoire. Serviettes propres au-dessus de la laveuse." }, "bath"],
+      [{ en: "Kitchen", fr: "Cuisine" }, { en: "Microwave, stove, dishwasher and coffee machine.", fr: "Micro-ondes, cuisinière, lave-vaisselle et machine à café." }, "bowl"],
+      [{ en: "TV", fr: "Télé" }, { en: "Fire TV with Netflix, Prime Video, Crave and more.", fr: "Fire TV avec Netflix, Prime Video, Crave et plus." }, "tv"],
+      [{ en: "Laundry", fr: "Lessive" }, { en: "Washer and dryer, inside the bathroom.", fr: "Laveuse et sécheuse, dans la salle de bain." }, "basket"],
+      [{ en: "Home office", fr: "Bureau" }, { en: "Feel free to use it! Plug your laptop into the screen for a bigger display.", fr: "Servez-vous-en ! Branchez votre ordi à l'écran pour un plus grand affichage." }, "laptop"],
+      [{ en: "Parking", fr: "Stationnement" }, { en: "Free street parking is often available on rue Coloniale. Check the signs for restrictions.", fr: "Stationnement gratuit souvent disponible sur la rue Coloniale. Vérifiez les panneaux." }, "car"],
+      [{ en: "Door / keys", fr: "Porte / clés" }, { en: "We'll send you the door and key details before you arrive.", fr: "On vous enverra les infos pour la porte et les clés avant votre arrivée." }, "key"],
+      [{ en: "Heating", fr: "Chauffage" }, { en: "Pre-programmed. You can adjust it with the thermostat on the wall of each room.", fr: "Préprogrammé. Vous pouvez l'ajuster avec le thermostat au mur de chaque pièce." }, "thermo"],
+      [{ en: "Lights", fr: "Lumières" }, { en: "Smart lights that turn on and off on a schedule. To change them, use the Apple home display in the living room: tap the lights on its screen, or just ask Siri.", fr: "Lumières intelligentes qui s'allument et s'éteignent selon un horaire. Pour les changer, utilisez l'écran Apple Maison du salon : touchez les lumières à l'écran, ou demandez simplement à Siri." }, "bulb"],
+      [{ en: "Hot water", fr: "Eau chaude" }, { en: "Always available, no need to do anything.", fr: "Toujours disponible, rien à faire." }, "drop"],
+      [{ en: "Help yourself", fr: "Servez-vous" }, { en: "Coffee is in the cabinet above the microwave, spices are above the oven.", fr: "Le café est dans l'armoire au-dessus du micro-ondes, les épices au-dessus du four." }, "cup"]
     ],
     // Arrival & departure (the key spot itself is private: see .secrets, "keySpot")
     arrival: {
@@ -1821,8 +1880,8 @@ function render() {
     ${renderChecklist("leave", H.checkout.items.map(i => i === "KEY" ? (SECRET && SECRET.keySpot ? SECRET.keySpot : u.keyLocked) : i))}`);
 
   out.home = (sectionShell(S.home, u.sub.home, `
-    <dl class="kv"><dt>${u.address}</dt><dd>${!SECRET ? `<a class="locked-note" href="#wifi">${ic("lock")} ${u.addrLocked}</a>` : /^TODO/.test(SECRET.address) ? t(SECRET.address) : `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SECRET.address)}" target="_blank" rel="noopener">${esc(SECRET.address)}</a>`}</dd>
-      ${H.apartment.details.map(([k, v]) => `<dt>${esc(L(k))}</dt><dd>${t(v)}</dd>`).join("")}</dl>
+    <div class="facts"><div class="fact"><span class="fi">${ic("pin")}</span><div><b>${u.address}</b><span>${!SECRET ? `<a class="locked-note" href="#wifi">${ic("lock")} ${u.addrLocked}</a>` : /^TODO/.test(SECRET.address) ? t(SECRET.address) : `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SECRET.address)}" target="_blank" rel="noopener">${esc(SECRET.address)}</a>`}</span></div></div>
+      ${H.apartment.details.map(([k, v, icon]) => `<div class="fact"><span class="fi">${ic(icon || "home")}</span><div><b>${esc(L(k))}</b><span>${t(v)}</span></div></div>`).join("")}</div>
     <h3>${h3("suitcase", u.arrDep)}</h3>
     <ul class="tips">
       <li>${ic("chat")}<span>${esc(L(H.apartment.arrival))}</span></li>
