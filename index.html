@@ -250,6 +250,62 @@ h3 { font-size: 21px; margin: 22px 0 10px; display: flex; align-items: center; g
 .tips li { display: flex; gap: 12px; align-items: flex-start; }
 .tips li .ic { width: 28px; height: 28px; margin-top: -2px; }
 
+/* animated Montreal scene */
+.mtl-scene { margin: 26px 0 4px; }
+.mtl-btn { all: unset; display: block; cursor: pointer; border: 4px solid var(--edge); border-radius: 22px; overflow: hidden; box-shadow: 8px 8px 0 var(--edge); background: #9fd3e6; }
+.mtl-btn:focus-visible { outline: 3px dashed var(--blue); outline-offset: 4px; }
+.mtl { display: block; width: 100%; height: auto; }
+.mtl-scene figcaption { margin-top: 12px; text-align: center; font-size: 13px; font-weight: 700; color: var(--muted); }
+.mtl * { transition: fill .8s ease, stroke .8s ease, opacity .8s ease; }
+.mtl path, .mtl rect, .mtl circle, .mtl ellipse { stroke: #111; stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; }
+.mtl .sky { fill: #9fd3e6; stroke: none; }
+.mtl .star { fill: #fff6b0; stroke: none; opacity: 0; }
+.mtl .sun circle { fill: #ffd23f; } .mtl .rays path { stroke-width: 3; fill: none; }
+.mtl .rays { transform-origin: 345px 42px; animation: spin 24s linear infinite; }
+.mtl .moon { fill: #fff1d0; opacity: 0; }
+.mtl .cloud path { fill: #fff; }
+.mtl .c1 { animation: drift 46s linear infinite; } .mtl .c2 { animation: drift 70s linear infinite -30s; }
+.mtl .mtn { fill: #7fb36a; } .mtl .tree { fill: #5f9a4f; }
+.mtl .cross-out { fill: none; stroke-width: 6.5; } .mtl .cross { fill: none; stroke: #fff1d0; stroke-width: 2.6; }
+.mtl .bA { fill: #1e4fd8; } .mtl .bB { fill: #fff1d0; } .mtl .bC { fill: #f4a6a0; } .mtl .bD { fill: #a7a2a6; }
+.mtl .winline { fill: none; stroke: #cfe9f4; stroke-width: 3; stroke-dasharray: 4 4; stroke-linecap: butt; }
+.mtl .stad { fill: #fff1d0; } .mtl .towertop { fill: #d7261e; } .mtl .cable { fill: none; stroke-width: 1.3; }
+.mtl .h1 { fill: #c4553d; } .mtl .h2 { fill: #f0d9a8; } .mtl .h3 { fill: #8cc7c0; } .mtl .h4 { fill: #e98a7a; }
+.mtl .corn { fill: #fff1d0; } .mtl .dent { fill: none; stroke-width: 3; stroke-dasharray: 2 4; stroke-linecap: butt; }
+.mtl .win { fill: #cfe9f4; stroke-width: 2.2; } .mtl .door { fill: #1e4fd8; }
+.mtl .h2 ~ .door, .mtl .h4 ~ .door { fill: #d7261e; }
+.mtl .rail { fill: none; stroke-width: 2.4; } .mtl .spindles { fill: none; stroke-width: 9; stroke-dasharray: 1.3 4; stroke-linecap: butt; }
+.mtl .stairs { fill: none; stroke-width: 2.6; } .mtl .stairs.thin { stroke-width: 1.6; }
+.mtl .m-fur { fill: #a7a2a6; stroke-width: 1.6; } .mtl .m-white { fill: #fff8ec; stroke: none; } .mtl .m-eye { fill: #111; stroke: none; }
+.mtl .m-tail-out { fill: none; stroke-width: 5; } .mtl .m-tail { fill: none; stroke: #a7a2a6; stroke-width: 2.8; }
+.mtl .m-tail, .mtl .m-tail-out { transform-origin: 125px 184px; animation: tailwag 2.2s ease-in-out infinite; }
+.mtl .walk { fill: #e8dcc0; } .mtl .road { fill: #6f6a6f; } .mtl .laneline { fill: none; stroke: #fff1d0; stroke-width: 2; stroke-dasharray: 10 10; }
+.mtl .rider { animation: ride 16s linear infinite; }
+.mtl .wheel circle { fill: #fff1d0; stroke-width: 2.4; } .mtl .wheel path { fill: none; stroke-width: 1.4; }
+.mtl .wheel { transform-box: fill-box; transform-origin: center; animation: spin .9s linear infinite; }
+.mtl .bike { fill: none; stroke: #d7261e; stroke-width: 3; } .mtl .body, .mtl .leg { fill: none; stroke: #1e4fd8; stroke-width: 3.2; }
+.mtl .head { fill: #f2c9a8; stroke-width: 1.8; } .mtl .helmet { fill: #ffd23f; stroke-width: 1.6; }
+.mtl .flake { fill: #fff; stroke-width: 1.2; } .mtl .leafy { stroke-width: 1.2; }
+.mtl .flake, .mtl .leafy { animation: fall linear infinite; }
+/* night */
+.mtl.night .sky { fill: #1b2650; } .mtl.night .star { animation: twinkle 2.6s ease-in-out infinite; }
+.mtl.night .sun { opacity: 0; } .mtl.night .moon { opacity: 1; } .mtl.night .cloud path { fill: #59648f; }
+.mtl.night .mtn { fill: #3f6b45; } .mtl.night .tree { fill: #2f5536; }
+.mtl.night .cross { stroke: #fff6b0; filter: drop-shadow(0 0 3px #ffe680) drop-shadow(0 0 7px #ffd23f); }
+.mtl.night .bA { fill: #18337f; } .mtl.night .bB { fill: #8f8a7e; } .mtl.night .bC { fill: #8a5a63; } .mtl.night .bD { fill: #5d5a63; }
+.mtl.night .winline { stroke: #ffd23f; } .mtl.night .win { fill: #ffd23f; }
+.mtl.night .stad { fill: #9c968a; }
+.mtl.night .h1 { fill: #7a3528; } .mtl.night .h2 { fill: #8f816a; } .mtl.night .h3 { fill: #4b6f6b; } .mtl.night .h4 { fill: #87504a; }
+.mtl.night .corn { fill: #b5ab99; } .mtl.night .walk { fill: #8a826f; } .mtl.night .road { fill: #3b3940; }
+.mtl.night .rider .head { fill: #c9a385; }
+@keyframes drift { from { transform: translateX(-90px); } to { transform: translateX(470px); } }
+@keyframes ride { from { transform: translateX(-50px); } to { transform: translateX(450px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes tailwag { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(18deg); } }
+@keyframes twinkle { 0%,100% { opacity: .25; } 50% { opacity: 1; } }
+@keyframes fall { from { transform: translate(0, -20px) rotate(0deg); } to { transform: translate(14px, 250px) rotate(200deg); } }
+@media (prefers-reduced-motion: reduce) { .mtl *, .mtl .rider, .mtl .c1, .mtl .c2 { animation: none !important; } .mtl.night .star { opacity: .8; } }
+
 /* lock */
 .lock-card { background: var(--sun); color: #111; border: 3px solid var(--edge); border-radius: 18px; padding: 16px; box-shadow: 4px 4px 0 var(--edge); }
 .lock-head { display: flex; gap: 12px; align-items: center; }
@@ -675,6 +731,112 @@ footer button { margin-top: 16px; }
     </div>
   </div>
 
+  <figure class="mtl-scene">
+    <button type="button" class="mtl-btn" id="mtl-btn" aria-label="Switch day / night">
+<svg class="mtl" id="mtl" viewBox="0 0 400 260" role="img" aria-labelledby="mtl-title">
+<title id="mtl-title">Montreal: Mount Royal and its cross, the skyline, the Olympic Stadium and Plateau houses, with Molly in a window</title>
+<rect class="sky" width="400" height="260"/>
+<path class="star" style="animation-delay:0s" d="M30 26l1.2 2.8 2.8 1.2-2.8 1.2-1.2 2.8-1.2-2.8-2.8-1.2 2.8-1.2z"/>
+<path class="star" style="animation-delay:1.2s" d="M70 54l1.2 2.8 2.8 1.2-2.8 1.2-1.2 2.8-1.2-2.8-2.8-1.2 2.8-1.2z"/>
+<path class="star" style="animation-delay:0.6s" d="M150 18l1.2 2.8 2.8 1.2-2.8 1.2-1.2 2.8-1.2-2.8-2.8-1.2 2.8-1.2z"/>
+<path class="star" style="animation-delay:1.8s" d="M210 44l1.2 2.8 2.8 1.2-2.8 1.2-1.2 2.8-1.2-2.8-2.8-1.2 2.8-1.2z"/>
+<path class="star" style="animation-delay:0.9s" d="M265 22l1.2 2.8 2.8 1.2-2.8 1.2-1.2 2.8-1.2-2.8-2.8-1.2 2.8-1.2z"/>
+<path class="star" style="animation-delay:2.2s" d="M300 56l1.2 2.8 2.8 1.2-2.8 1.2-1.2 2.8-1.2-2.8-2.8-1.2 2.8-1.2z"/>
+<path class="star" style="animation-delay:1.5s" d="M120 48l1.2 2.8 2.8 1.2-2.8 1.2-1.2 2.8-1.2-2.8-2.8-1.2 2.8-1.2z"/>
+<g class="sun"><g class="rays"><path d="M345 14v8M345 62v8M317 42h8M365 42h8M325 22l5.5 5.5M359.5 56.5l5.5 5.5M325 62l5.5-5.5M359.5 27.5l5.5-5.5"/></g><circle cx="345" cy="42" r="15"/></g>
+<path class="moon" d="M352 26a17 17 0 1 0 9 26a14 14 0 0 1-9-26z"/>
+<g class="cloud c1"><path d="M0 24a11 11 0 0 1 10-13a15 15 0 0 1 28-4a11 11 0 0 1 15 13a7 7 0 0 1-1 4z" transform="translate(0 26)"/></g>
+<g class="cloud c2"><path d="M0 24a11 11 0 0 1 10-13a15 15 0 0 1 28-4a11 11 0 0 1 15 13a7 7 0 0 1-1 4z" transform="translate(0 58) scale(.7)"/></g>
+<path class="mtn" d="M-6 170C28 122 92 94 150 108c32 8 52 32 66 62z"/>
+<circle class="tree" cx="40" cy="128" r="9"/>
+<circle class="tree" cx="58" cy="116" r="9"/>
+<circle class="tree" cx="128" cy="104" r="8"/>
+<circle class="tree" cx="150" cy="110" r="8"/>
+<circle class="tree" cx="170" cy="120" r="8"/>
+<circle class="tree" cx="22" cy="142" r="9"/>
+<path class="mtn" d="M-6 170C28 122 92 94 150 108c32 8 52 32 66 62z" style="fill:none"/>
+<path class="cross-out" d="M100 98V68M90.5 77.5h19"/><path class="cross" d="M100 98V68M90.5 77.5h19"/>
+<rect class="bA" x="158" y="112" width="26" height="58"/>
+<path class="winline" d="M163 119V164 M170 119V164"/>
+<rect class="bB" x="186" y="86" width="22" height="84"/>
+<path class="winline" d="M191 93V164 M198 93V164"/>
+<rect class="bC" x="210" y="104" width="28" height="66"/>
+<path class="winline" d="M215 111V164 M222 111V164 M229 111V164"/>
+<path class="bD" d="M240 170V96L251.0 72L262 96V170z"/><path d="M251.0 72V62"/>
+<path class="winline" d="M245 102V164 M252 102V164"/>
+<rect class="bA" x="264" y="118" width="22" height="52"/>
+<path class="winline" d="M269 125V164 M276 125V164"/>
+<path class="stad" d="M290 170c8-26 98-30 112-6v6z"/>
+<path class="stad" d="M336 168l22-92 13 4-18 88z"/>
+<path class="towertop" d="M356 74l17 4.5-2.5 9-17-4.5z"/>
+<path class="cable" d="M364 84L392 152M364 84L381 154M364 84L398 158"/>
+<path d="M300 162c20-10 70-12 96-4" class="cable"/>
+<rect class="h1" x="0" y="158" width="100" height="82"/>
+<rect class="corn" x="3" y="150" width="94" height="10" rx="2"/>
+<path class="dent" d="M8 155h84"/>
+<rect class="win" x="12" y="167" width="16" height="17" rx="1.5"/>
+<rect class="win" x="72" y="167" width="16" height="17" rx="1.5"/>
+<rect class="win" x="12" y="191" width="16" height="17" rx="1.5"/>
+<rect class="win" x="72" y="191" width="16" height="17" rx="1.5"/>
+<rect class="win" x="12" y="216" width="16" height="17" rx="1.5"/>
+<rect class="door" x="43.0" y="214" width="15" height="25" rx="1.5"/>
+<path class="rail" d="M5 211h90"/><path class="spindles" d="M6 206h88"/>
+<path class="stairs" d="M88 240C104 232 104 222 84 219C66 216 68 211 78 210"/><path class="stairs thin" d="M88 240C104 232 104 222 84 219C66 216 68 211 78 210" transform="translate(-5 -3)"/>
+<rect class="h2" x="100" y="158" width="96" height="82"/>
+<rect class="corn" x="103" y="150" width="90" height="10" rx="2"/>
+<path class="dent" d="M108 155h80"/>
+<rect class="win" x="112" y="167" width="16" height="17" rx="1.5"/>
+<rect class="win" x="168" y="167" width="16" height="17" rx="1.5"/>
+<rect class="win" x="112" y="191" width="16" height="17" rx="1.5"/>
+<rect class="win" x="168" y="191" width="16" height="17" rx="1.5"/>
+<rect class="win" x="112" y="216" width="16" height="17" rx="1.5"/>
+<rect class="door" x="141.0" y="214" width="15" height="25" rx="1.5"/>
+<path class="rail" d="M105 211h86"/><path class="spindles" d="M106 206h84"/>
+<rect class="h3" x="196" y="158" width="104" height="82"/>
+<rect class="corn" x="199" y="150" width="98" height="10" rx="2"/>
+<path class="dent" d="M204 155h88"/>
+<rect class="win" x="208" y="167" width="16" height="17" rx="1.5"/>
+<rect class="win" x="272" y="167" width="16" height="17" rx="1.5"/>
+<rect class="win" x="208" y="191" width="16" height="17" rx="1.5"/>
+<rect class="win" x="272" y="191" width="16" height="17" rx="1.5"/>
+<rect class="win" x="208" y="216" width="16" height="17" rx="1.5"/>
+<rect class="door" x="241.0" y="214" width="15" height="25" rx="1.5"/>
+<path class="rail" d="M201 211h94"/><path class="spindles" d="M202 206h92"/>
+<path class="stairs" d="M288 240C304 232 304 222 284 219C266 216 268 211 278 210"/><path class="stairs thin" d="M288 240C304 232 304 222 284 219C266 216 268 211 278 210" transform="translate(-5 -3)"/>
+<rect class="h4" x="300" y="158" width="100" height="82"/>
+<rect class="corn" x="303" y="150" width="94" height="10" rx="2"/>
+<path class="dent" d="M308 155h84"/>
+<rect class="win" x="312" y="167" width="16" height="17" rx="1.5"/>
+<rect class="win" x="372" y="167" width="16" height="17" rx="1.5"/>
+<rect class="win" x="312" y="191" width="16" height="17" rx="1.5"/>
+<rect class="win" x="372" y="191" width="16" height="17" rx="1.5"/>
+<rect class="win" x="312" y="216" width="16" height="17" rx="1.5"/>
+<rect class="door" x="343.0" y="214" width="15" height="25" rx="1.5"/>
+<path class="rail" d="M305 211h90"/><path class="spindles" d="M306 206h88"/>
+<g class="molly">
+<path class="m-tail-out" d="M125 184c5 4 3 11-1 14"/><path class="m-tail" d="M125 184c5 4 3 11-1 14"/>
+<ellipse class="m-fur" cx="120" cy="182" rx="6" ry="3.2"/>
+<path class="m-fur" d="M115.2 177l-.5-6 4 3.5zM124.8 177l.5-6-4 3.5z"/>
+<circle class="m-fur" cx="120" cy="177.5" r="4.8"/>
+<path class="m-white" d="M120 176.5c-1.5 2-3 2.6-2.6 4 .6 1.4 4.6 1.4 5.2 0 .4-1.4-1.1-2-2.6-4z"/>
+<circle class="m-eye" cx="118.2" cy="176.6" r=".9"/><circle class="m-eye" cx="121.8" cy="176.6" r=".9"/>
+</g>
+<rect class="walk" y="240" width="400" height="7"/><rect class="road" y="247" width="400" height="13"/>
+<path class="laneline" d="M0 254h400"/>
+<g class="rider">
+<g class="wheel"><circle cx="0" cy="252" r="6.5"/><path d="M-6.5 252h13M0 245.5v13"/></g>
+<g class="wheel w2"><circle cx="25" cy="252" r="6.5"/><path d="M18.5 252h13M25 245.5v13"/></g>
+<path class="bike" d="M0 252l9-12h12l4 12M9 240l3 12h-12M21 240l-1.5-5h-3.5M9 240l-1.5-4h-4"/>
+<path class="body" d="M9 238l5-11 6 9"/><circle class="head" cx="15" cy="221" r="4.6"/>
+<path class="helmet" d="M10.4 220a4.6 4.6 0 0 1 9.2 0z"/>
+<path class="leg" d="M9 238l4 10"/>
+</g>
+<g id="mtl-weather"></g>
+</svg>
+    </button>
+    <figcaption id="mtl-cap"></figcaption>
+  </figure>
+
   <header class="hero">
     <div>
       <h1 id="title"></h1>
@@ -996,7 +1158,7 @@ const UI = {
   en: {
     locale: "en-GB",
     greet: ["Good morning & welcome!", "Good afternoon & welcome!", "Good evening & welcome!"],
-    todayTitle: "Today in Montreal",
+    todayTitle: "Today in Montreal", sceneCap: "Tap the city to switch between day and night", sceneLabel: "Switch day / night",
     theme: "Light / dark", inWord: "in",
     photoCap: "Chief Napping Officer", photoBadge: "100% cat", photoAlt: "Molly, a grey and white tabby, sitting on the green sofa with her pink heart tag",
     stamp: "home exchange", signTop: "Welcome to the Plateau!", kicker: "Chez Ismael & Molly · Home exchange",
@@ -1039,7 +1201,7 @@ const UI = {
   fr: {
     locale: "fr-FR",
     greet: ["Bonjour et bienvenue !", "Bon après-midi et bienvenue !", "Bonsoir et bienvenue !"],
-    todayTitle: "Aujourd'hui à Montréal",
+    todayTitle: "Aujourd'hui à Montréal", sceneCap: "Touchez la ville pour passer du jour à la nuit", sceneLabel: "Passer du jour à la nuit",
     theme: "Clair / sombre", inWord: "dans",
     photoCap: "Directrice des siestes", photoBadge: "100 % chat", photoAlt: "Molly, une chatte tigrée grise et blanche, assise sur le canapé vert avec sa médaille cœur rose",
     stamp: "échange de maison", signTop: "Bienvenue sur le Plateau !", kicker: "Chez Ismael & Molly · Échange de maison",
@@ -1178,6 +1340,7 @@ function render() {
   set("scroll-btn", u.scroll); document.getElementById("pet-btn").innerHTML = `${esc(u.pet)} ${ic("paw")}`; set("foot-big", u.footBig); set("foot-small", u.footSmall);
   set("pet-count", u.petted(store.get(`pets:${todayKey()}`) || 0));
   document.getElementById("cat-btn").setAttribute("aria-label", u.petLabel);
+  set("mtl-cap", u.sceneCap); document.getElementById("mtl-btn").setAttribute("aria-label", u.sceneLabel);
   document.getElementById("signoff").innerHTML = `${esc(L(H.signoff))} ${ic("heart")}<br>${t(H.hosts)}`;
   document.querySelectorAll("#lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
   document.getElementById("nav").innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${ic(s.icon)} ${esc(label(s))}</a>`).join("");
@@ -1307,6 +1470,33 @@ function drawWifiQR() {
   qrLib.then(draw).catch(() => box.closest("figure")?.remove());
 }
 
+// Animated Montreal scene: day/night follows the clock (tap to switch), weather follows the season
+function setupScene() {
+  const svg = document.getElementById("mtl"), wx = document.getElementById("mtl-weather");
+  const h = new Date().getHours();
+  svg.classList.toggle("night", h >= 18 || h < 7);
+  const season = seasonOf(new Date().getMonth());
+  const NS = "http://www.w3.org/2000/svg";
+  if (season === "winter" || season === "shoulder" || season === "fall") {
+    const n = season === "winter" ? 22 : 14;
+    for (let i = 0; i < n; i++) {
+      const el = document.createElementNS(NS, season === "fall" ? "path" : "circle");
+      const x = Math.round(Math.random() * 400), dur = 6 + Math.random() * 7, delay = -Math.random() * dur;
+      if (season === "fall") {
+        el.setAttribute("d", `M${x} 0c4-4 9-2 8 3-5 4-9 2-8-3z`);
+        el.setAttribute("class", "leafy");
+        el.style.fill = ["#e8892b", "#d7261e", "#ffd23f"][i % 3];
+      } else {
+        el.setAttribute("cx", x); el.setAttribute("cy", 0); el.setAttribute("r", (1.6 + Math.random() * 1.6).toFixed(1));
+        el.setAttribute("class", "flake");
+      }
+      el.style.animationDuration = dur.toFixed(1) + "s"; el.style.animationDelay = delay.toFixed(1) + "s";
+      wx.appendChild(el);
+    }
+  }
+  document.getElementById("mtl-btn").addEventListener("click", () => svg.classList.toggle("night"));
+}
+
 function updateProgress(id) {
   const ul = document.querySelector(`.check[data-id="${id}"]`);
   if (!ul) return;
@@ -1428,6 +1618,7 @@ themeBtn.addEventListener("click", () => {
   if (fromLink) await tryCode(fromLink);
   else if (remembered) await tryCode(remembered, true);
   render();
+  setupScene();
   setInterval(updateLive, 60 * 1000);
 })();
 </script>
